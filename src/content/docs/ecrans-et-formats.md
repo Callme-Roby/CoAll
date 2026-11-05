@@ -29,7 +29,7 @@ Un même écran existe souvent en plusieurs formats : ordinateur, tablette, mobi
 
 Un nouveau format est créé directement, sans passer par une hypothèse, puisqu'il ne remplace rien.
 
-> **Astuce** — Pendant la préparation, la future page apparaît en pointillés violets, à la largeur du format, à côté de l'écran. Voir [Travailler avec l'IA](/docs/travailler-avec-l-ia).
+> **Astuce** Pendant la préparation, la future page apparaît en pointillés violets, à la largeur du format, à côté de l'écran. Voir [Travailler avec l'IA](/docs/travailler-avec-l-ia).
 
 ## Une section par écran
 

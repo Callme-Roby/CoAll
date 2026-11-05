@@ -37,7 +37,7 @@ Votre **prénom** et votre **couleur** vous identifient partout dans Coall :
 - dans les commentaires ;
 - dans la timeline, à côté de chaque étape.
 
-> **À savoir** — Il n'y a pas encore de connexion par e-mail ni de compte au sens habituel : votre identité est liée à votre navigateur. [à mettre à jour au lancement]
+> **À savoir** Il n'y a pas encore de connexion par e-mail ni de compte au sens habituel : votre identité est liée à votre navigateur. [à mettre à jour au lancement]
 
 ## Plan et facturation
 
@@ -59,7 +59,7 @@ La langue choisie s'applique aussi :
 - aux réponses et aux résumés de l'IA ;
 - aux textes de la timeline, aux messages d'erreur et à l'état de l'écoute.
 
-> **À savoir** — Le contenu des maquettes n'est pas traduit quand vous changez de langue.
+> **À savoir** Le contenu des maquettes n'est pas traduit quand vous changez de langue.
 
 ### Micro et caméra par défaut
 

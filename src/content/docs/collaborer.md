@@ -26,7 +26,7 @@ Le lien est **à usage unique** et **valable 12 heures**. Créez un lien par per
 
 <div class="capture">Capture : fenêtre Inviter, avec le lien d'invitation, les droits des invités et la liste des participants</div>
 
-> **À savoir** — Tant que Coall n'est pas hébergé en ligne, un lien d'invitation ne s'ouvre que sur l'ordinateur où Coall tourne (dans un autre navigateur ou une fenêtre privée). Inviter quelqu'un à distance demandera la version en ligne. [à mettre à jour au lancement]
+> **À savoir** Tant que Coall n'est pas hébergé en ligne, un lien d'invitation ne s'ouvre que sur l'ordinateur où Coall tourne (dans un autre navigateur ou une fenêtre privée). Inviter quelqu'un à distance demandera la version en ligne. [à mettre à jour au lancement]
 
 ### Retirer un invité
 
@@ -70,7 +70,7 @@ L'hôte voit la demande au-dessus de sa barre de demande et répond d'un clic :
 
 Un invité qui n'a pas le droit de valider peut quand même pousser une hypothèse : **Proposer cette version**. Une personne autorisée la confirme ensuite. Lorsqu'une proposition de l'IA attend une validation qu'il ne peut pas donner, l'invité voit **En attente de l'hôte** [à confirmer].
 
-> **À savoir** — La voix ne dépend pas des droits. Chacun active l'écoute de l'IA pour lui-même, en donnant son accord à l'entrée de l'appel. Ce que l'IA propose à partir de la voix suit les mêmes règles : une hypothèse sur un écran officiel, une décision à valider. Voir [Appel, écoute de l'IA et transcription](/docs/appel-et-ecoute).
+> **À savoir** La voix ne dépend pas des droits. Chacun active l'écoute de l'IA pour lui-même, en donnant son accord à l'entrée de l'appel. Ce que l'IA propose à partir de la voix suit les mêmes règles : une hypothèse sur un écran officiel, une décision à valider. Voir [Appel, écoute de l'IA et transcription](/docs/appel-et-ecoute).
 
 ## Présence en temps réel
 
@@ -104,7 +104,7 @@ Pendant un appel, vous pouvez inviter les autres à suivre votre vue, pour prés
 
 Chacun peut se détacher à tout moment. Un rappel **… présente · Suivre** permet d'y revenir.
 
-> **Astuce** — Pour une revue avec un client, combinez **Faire suivre** et le [mode Play](/docs/mode-play) : tout le monde parcourt le prototype en même temps que vous.
+> **Astuce** Pour une revue avec un client, combinez **Faire suivre** et le [mode Play](/docs/mode-play) : tout le monde parcourt le prototype en même temps que vous.
 
 ## Commentaires
 

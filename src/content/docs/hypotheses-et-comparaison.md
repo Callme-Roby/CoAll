@@ -95,13 +95,13 @@ Sans le droit **valider**, un invité ne peut pas promouvoir. Il peut en revanch
 
 De même, sans le droit de valider, le bouton d'officialisation d'une section envoie une proposition au lieu d'appliquer la décision.
 
-> **À savoir** — Les droits **modifier**, **valider** et **modifier l'officiel** sont accordés par l'hôte. Voir [Collaborer](/docs/collaborer).
+> **À savoir** Les droits **modifier**, **valider** et **modifier l'officiel** sont accordés par l'hôte. Voir [Collaborer](/docs/collaborer).
 
 ## Les désaccords
 
 Pendant un appel, quand deux personnes veulent des versions différentes, l'IA crée une hypothèse par personne, tout de suite : « Version Jean », « Version Arthur ». Il ne reste qu'à les comparer et à choisir.
 
-> **Astuce** — Pour départager deux versions devant un client, ouvrez-les en [Mode Play](/docs/mode-play) l'une après l'autre, en partage d'écran.
+> **Astuce** Pour départager deux versions devant un client, ouvrez-les en [Mode Play](/docs/mode-play) l'une après l'autre, en partage d'écran.
 
 ## Retrouver une ancienne officielle
 

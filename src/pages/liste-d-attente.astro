@@ -14,9 +14,9 @@ import Waitlist from "../components/Waitlist.astro";
   <section class="section">
     <div class="wrap">
       <div class="steps3">
-        <div class="card s"><span class="label t-ai">01</span><h2 class="h3">Vous vous inscrivez</h2><p>Une adresse e-mail, et votre métier pour que nous comprenions vos besoins.</p></div>
-        <div class="card s"><span class="label t-hypothesis">02</span><h2 class="h3">Nous ouvrons l'accès</h2><p>Par vagues, au fil de la mise en ligne. Vous recevez un e-mail avec votre accès.</p></div>
-        <div class="card s"><span class="label t-official">03</span><h2 class="h3">Votre première réunion</h2><p>Importez une maquette ou partez d'une frame blanche, invitez l'équipe, démarrez l'appel.</p></div>
+        <div class="card s"><span class="label">1.</span><h2 class="h3">Vous vous inscrivez</h2><p>Une adresse e-mail, et votre métier pour que nous comprenions vos besoins.</p></div>
+        <div class="card s"><span class="label">2.</span><h2 class="h3">Nous ouvrons l'accès</h2><p>Par vagues, au fil de la mise en ligne. Vous recevez un e-mail avec votre accès.</p></div>
+        <div class="card s"><span class="label">3.</span><h2 class="h3">Votre première réunion</h2><p>Importez une maquette ou partez d'une frame blanche, invitez l'équipe, démarrez l'appel.</p></div>
       </div>
       <p class="dim more">En attendant, la <a href="/docs/prise-en-main">prise en main en 5 minutes</a> montre tout le parcours.</p>
     </div>
@@ -27,6 +27,6 @@ import Waitlist from "../components/Waitlist.astro";
   .s { padding: 24px; display: grid; gap: 10px; align-content: start; }
   .s p { margin: 0; color: var(--muted); font-size: 15px; }
   .more { margin-top: 32px; }
-  .more a { color: var(--official-ink); text-decoration: underline; text-underline-offset: 3px; }
+  .more a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
   @media (max-width: 800px) { .steps3 { grid-template-columns: 1fr; } }
 </style>

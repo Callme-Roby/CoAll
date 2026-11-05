@@ -15,7 +15,7 @@ const endpoint = SITE.waitlistEndpoint;
       <option value="agence">Agence</option>
       <option value="autre">Autre</option>
     </select>
-    <button class="btn btn-primary" type="submit">Rejoindre la liste d'attente <span class="arrow">→</span></button>
+    <button class="btn btn-primary" type="submit">Rejoindre la liste d'attente</button>
   </div>
   <p class="wl-note" data-note>Coall n'est pas encore en ligne. Nous vous écrivons à l'ouverture, rien d'autre.</p>
 </form>
@@ -53,10 +53,10 @@ const endpoint = SITE.waitlistEndpoint;
   .wl-row {
     display: flex;
     gap: 8px;
-    padding: 6px;
-    border-radius: 999px;
+    padding: 5px;
+    border-radius: 10px;
     border: 1px solid var(--line-2);
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--bg-2);
   }
   input,
   select {
@@ -85,7 +85,7 @@ const endpoint = SITE.waitlistEndpoint;
     color: var(--ink);
   }
   .wl-row:focus-within {
-    border-color: color-mix(in srgb, var(--official) 60%, transparent);
+    border-color: rgba(255, 255, 255, 0.22);
   }
   .wl-note {
     margin: 12px 0 0;
@@ -98,8 +98,8 @@ const endpoint = SITE.waitlistEndpoint;
   @media (max-width: 600px) {
     .wl-row {
       flex-direction: column;
-      border-radius: 18px;
-      padding: 8px;
+      border-radius: 10px;
+      padding: 6px;
     }
     input,
     select {

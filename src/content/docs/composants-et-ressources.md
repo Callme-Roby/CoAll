@@ -36,7 +36,7 @@ Un composant peut avoir des variantes, écrites dans la syntaxe de Figma : « Ty
 - Dans le panneau **Design**, sous le nom du composant, le champ **Variante** se lit et se modifie.
 - La liste propose les variantes existantes.
 
-> **Astuce** — Choisissez le nom du composant et de la variante dans la liste proposée plutôt que de les retaper : une faute de frappe crée un nouveau composant ou une nouvelle variante.
+> **Astuce** Choisissez le nom du composant et de la variante dans la liste proposée plutôt que de les retaper : une faute de frappe crée un nouveau composant ou une nouvelle variante.
 
 ## L'onglet Ressources
 
@@ -90,7 +90,7 @@ Les pages créées ensuite (« crée une page Tarifs ») reprennent ces composan
 
 Avec le plugin Figma connecté, les composants arrivent sur une page **Composants** de votre fichier Figma. Un composant à variantes devient un jeu de composants, tiré de la planche **Composants** si elle existe. Dans les écrans, chaque occurrence devient une instance de sa variante, avec son propre texte. Les variables arrivent liées aux calques. Voir [Plugin Figma](/docs/plugin-figma).
 
-> **À savoir** — La charte d'un skill (ses couleurs et polices) n'est pas encore transformée automatiquement en variables dans Figma. Ce sont les variables lues dans vos frames officielles qui partent.
+> **À savoir** La charte d'un skill (ses couleurs et polices) n'est pas encore transformée automatiquement en variables dans Figma. Ce sont les variables lues dans vos frames officielles qui partent.
 
 ## Voir aussi
 

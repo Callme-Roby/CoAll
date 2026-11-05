@@ -30,7 +30,7 @@ La fenêtre d'entrée vous demande deux accords, distincts :
 
 Vous pouvez accepter l'écoute sans accepter la conservation. Si l'hôte a désactivé la conservation de la transcription, la fenêtre d'entrée l'annonce.
 
-> **À savoir** — Votre micro et votre caméra par défaut se règlent dans **Préférences** (voir [Compte et réglages](/docs/compte-et-reglages)).
+> **À savoir** Votre micro et votre caméra par défaut se règlent dans **Préférences** (voir [Compte et réglages](/docs/compte-et-reglages)).
 
 ## Le panneau d'appel
 
@@ -61,7 +61,7 @@ Pendant l'appel, tout tient dans un panneau à droite du canvas.
 
 Une petite flèche à côté des boutons micro et caméra ouvre la liste des micros, des haut-parleurs et des caméras. Le choix s'applique tout de suite et est retenu pour les prochains appels.
 
-> **À savoir** — Le choix du haut-parleur dépend du navigateur. Chrome et Edge le permettent.
+> **À savoir** Le choix du haut-parleur dépend du navigateur. Chrome et Edge le permettent.
 
 ### Faire suivre votre vue
 
@@ -112,9 +112,9 @@ Vous n'avez pas besoin de vous adresser à elle. L'IA suit la discussion et réa
 
 La modification arrive quelques secondes après la fin de la phrase. Une idée évoquée plusieurs fois sans apparaître sur le canvas finit par être créée ; une version qui existe déjà n'est pas recréée.
 
-> **À savoir** — À la voix comme à l'écrit, l'IA ne modifie jamais directement un écran officiel existant. Et ce qu'elle propose à partir de la voix (ranger le canvas, choisir une hypothèse) attend toujours une validation.
+> **À savoir** À la voix comme à l'écrit, l'IA ne modifie jamais directement un écran officiel existant. Et ce qu'elle propose à partir de la voix (ranger le canvas, choisir une hypothèse) attend toujours une validation.
 
-> **Astuce** — Les skills et règles du projet s'appliquent aussi aux demandes faites à la voix. Voir [Skills et règles](/docs/skills-et-regles).
+> **Astuce** Les skills et règles du projet s'appliquent aussi aux demandes faites à la voix. Voir [Skills et règles](/docs/skills-et-regles).
 
 ## La transcription
 

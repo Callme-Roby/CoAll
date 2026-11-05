@@ -10,7 +10,7 @@ interface Props {
   wide?: boolean;
 }
 const { title, description = SITE.description, noindex = false } = Astro.props;
-const fullTitle = title ? `${title} · Coall` : "Coall — Parlez. Coall dessine.";
+const fullTitle = title ? `${title} · Coall` : "Coall · Parlez, Coall dessine";
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 const isActive = (href: string) => path === href || path.startsWith(href + "/");
 ---
@@ -31,7 +31,7 @@ const isActive = (href: string) => path === href || path.startsWith(href + "/");
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;550;600&family=Inter+Tight:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <slot name="head" />
@@ -75,7 +75,7 @@ const isActive = (href: string) => path === href || path.startsWith(href + "/");
         <div class="footer-top">
           <div class="footer-brand">
             <a href="/" class="brand"><BrandMark size={22} /><span>Coall</span></a>
-            <p class="dim">Concevoir ensemble, à voix haute.<br />« Co » pour coopérer, « all » pour tous. Ensemble, on entend <em>call</em>.</p>
+            <p class="dim">« Co » pour coopérer, « all » pour tous. Ensemble, on entend <em>call</em>.</p>
           </div>
           <div class="footer-cols">
             <div>
@@ -103,11 +103,7 @@ const isActive = (href: string) => path === href || path.startsWith(href + "/");
         </div>
         <div class="footer-bottom">
           <span class="dim">© {new Date().getFullYear()} Coall</span>
-          <span class="dim footer-legend">
-            <i style="--c: var(--official)"></i>Officielle
-            <i style="--c: var(--hypothesis)"></i>Hypothèse
-            <i style="--c: var(--ai)"></i>IA
-          </span>
+          <span class="dim">Conception collaborative, à voix haute.</span>
         </div>
       </div>
     </footer>
@@ -184,10 +180,9 @@ const isActive = (href: string) => path === href || path.startsWith(href + "/");
         display: inline-flex;
         align-items: center;
         gap: 9px;
-        font-family: var(--font-display);
-        font-weight: 650;
-        font-size: 18px;
-        letter-spacing: -0.03em;
+        font-weight: 590;
+        font-size: 16px;
+        letter-spacing: -0.015em;
       }
       .nav-links {
         display: flex;
@@ -197,10 +192,9 @@ const isActive = (href: string) => path === href || path.startsWith(href + "/");
       .nav-links a,
       .nav-plain {
         font-size: 14px;
-        font-weight: 500;
+        font-weight: 450;
         color: var(--muted);
-        padding: 6px 12px;
-        border-radius: 999px;
+        padding: 6px 10px;
         transition:
           color 0.15s,
           background 0.15s;
@@ -210,9 +204,7 @@ const isActive = (href: string) => path === href || path.startsWith(href + "/");
       .nav-links a.active {
         color: var(--ink);
       }
-      .nav-links a.active {
-        background: rgba(255, 255, 255, 0.06);
-      }
+
       .nav-cta {
         display: flex;
         align-items: center;
@@ -224,7 +216,7 @@ const isActive = (href: string) => path === href || path.startsWith(href + "/");
         height: 40px;
         border: 1px solid var(--line-2);
         background: transparent;
-        border-radius: 999px;
+        border-radius: 8px;
         cursor: pointer;
         position: relative;
       }
@@ -308,11 +300,12 @@ const isActive = (href: string) => path === href || path.startsWith(href + "/");
       }
       .footer-cols .label {
         margin: 0 0 6px;
-        font-size: 11px;
+        font-size: 13px;
+        color: var(--ink);
       }
       .footer-cols a {
         font-size: 14px;
-        color: var(--ink-2);
+        color: var(--muted);
       }
       .footer-cols a:hover {
         color: var(--ink);
@@ -326,18 +319,6 @@ const isActive = (href: string) => path === href || path.startsWith(href + "/");
         gap: 16px;
         flex-wrap: wrap;
         font-size: 13px;
-      }
-      .footer-legend {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-      }
-      .footer-legend i {
-        width: 8px;
-        height: 8px;
-        border-radius: 2px;
-        background: var(--c);
-        margin-left: 10px;
       }
       @media (max-width: 760px) {
         .footer-top {

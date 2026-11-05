@@ -3,12 +3,12 @@ import { getCollection } from "astro:content";
 import Docs from "../../layouts/Docs.astro";
 
 const GROUPS = [
-  { g: "Démarrer", c: "var(--official)", d: "Le vocabulaire de base et un premier projet en cinq minutes." },
-  { g: "Concevoir", c: "var(--hypothesis)", d: "Canvas, édition à la main, hypothèses, formats, mode Play, composants." },
-  { g: "IA et voix", c: "var(--ai)", d: "La barre de demande, l'appel, l'écoute de l'IA, les skills et les règles." },
-  { g: "Collaborer", c: "#ff7a45", d: "Invitations, droits, présence, commentaires et historique." },
-  { g: "Aller plus loin", c: "var(--warn)", d: "Import et export, plugin Figma, réglages, mobile, confidentialité." },
-  { g: "Référence", c: "var(--muted)", d: "Raccourcis, glossaire, FAQ, limites connues et nouveautés." },
+  { g: "Démarrer", c: "", d: "Le vocabulaire de base et un premier projet en cinq minutes." },
+  { g: "Concevoir", c: "", d: "Canvas, édition à la main, hypothèses, formats, mode Play, composants." },
+  { g: "IA et voix", c: "", d: "La barre de demande, l'appel, l'écoute de l'IA, les skills et les règles." },
+  { g: "Collaborer", c: "", d: "Invitations, droits, présence, commentaires et historique." },
+  { g: "Aller plus loin", c: "", d: "Import et export, plugin Figma, réglages, mobile, confidentialité." },
+  { g: "Référence", c: "", d: "Raccourcis, glossaire, FAQ, limites connues et nouveautés." },
 ] as const;
 const docs = (await getCollection("docs")).sort((a, b) => a.data.order - b.data.order);
 ---
@@ -21,7 +21,7 @@ const docs = (await getCollection("docs")).sort((a, b) => a.data.order - b.data.
   <div class="groups not-prose">
     {GROUPS.map(({ g, c, d }) => (
       <section class="grp card" style={`--c:${c}`}>
-        <h2 class="gh"><i></i>{g}</h2>
+        <h2 class="gh">{g}</h2>
         <p class="gd">{d}</p>
         <ul>
           {docs.filter((x) => x.data.group === g).map((x) => (
@@ -45,16 +45,11 @@ const docs = (await getCollection("docs")).sort((a, b) => a.data.order - b.data.
   }
   .grp .gh {
     margin: 0 0 6px !important;
-    font-size: 18px !important;
+    font-size: 17px !important;
+    font-weight: 510 !important;
     display: flex;
     align-items: center;
     gap: 10px;
-  }
-  .gh i {
-    width: 9px;
-    height: 9px;
-    border-radius: 2px;
-    background: var(--c);
   }
   .gd {
     font-size: 14px;

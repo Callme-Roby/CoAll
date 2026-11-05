@@ -76,19 +76,19 @@ const md = (s: string) => s.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
     <section class="section case" id={c.id}>
       <div class="wrap case-grid">
         <div class="case-head reveal">
-          <span class="label" style={`color:${c.c}`}>0{i + 1} · {c.tag}</span>
+          <span class="label">{c.tag}</span>
           <h2 class="h2">{c.t}</h2>
           <div class="pain">
-            <span class="label">Aujourd'hui</span>
+            <span class="pain-t">Aujourd'hui</span>
             <p>{c.pain}</p>
           </div>
         </div>
         <div class="case-body reveal">
-          <span class="label">Avec Coall</span>
+          <span class="with-t">Avec Coall</span>
           <ol class="steps">
             {c.steps.map((s) => <li set:html={md(s)} />)}
           </ol>
-          <a href={c.doc[0]} class="doc-link">{c.doc[1]} <span class="arrow">→</span></a>
+          <a href={c.doc[0]} class="btn-link">{c.doc[1]} <span class="arrow">→</span></a>
         </div>
       </div>
     </section>
@@ -120,8 +120,10 @@ const md = (s: string) => s.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
   .pain {
     margin-top: 8px;
     padding: 18px 20px;
-    border-radius: 14px;
-    border: 1px dashed var(--line-2);
+    border-radius: 0;
+    border: 0;
+    border-left: 2px solid var(--line-2);
+    padding: 2px 0 2px 18px;
     display: grid;
     gap: 8px;
   }
@@ -129,18 +131,18 @@ const md = (s: string) => s.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
     margin: 0;
     color: var(--muted);
   }
-  .pain .label {
-    font-size: 10.5px;
-    color: var(--faint);
+  .pain-t,
+  .with-t {
+    font-size: 13.5px;
+    font-weight: 510;
+    color: var(--ink);
   }
   .case-body {
     display: grid;
     gap: 16px;
     align-content: start;
   }
-  .case-body > .label {
-    font-size: 11px;
-  }
+
   .steps {
     list-style: none;
     margin: 0;
@@ -151,17 +153,15 @@ const md = (s: string) => s.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
   .steps li {
     counter-increment: s;
     position: relative;
-    padding: 16px 0 16px 48px;
+    padding: 14px 0 14px 32px;
     border-top: 1px solid var(--line);
     color: var(--ink-2);
   }
   .steps li::before {
-    content: counter(s, decimal-leading-zero);
+    content: counter(s) ".";
     position: absolute;
     left: 0;
-    top: 16px;
-    font-family: var(--font-mono);
-    font-size: 12px;
+    top: 14px;
     color: var(--faint);
   }
   .steps :global(strong) {
@@ -188,7 +188,6 @@ const md = (s: string) => s.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
   .cta-inner {
     display: grid;
     gap: 20px;
-    justify-items: center;
-    text-align: center;
+    justify-items: start;
   }
 </style>

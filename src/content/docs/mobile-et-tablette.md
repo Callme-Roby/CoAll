@@ -7,7 +7,7 @@ group: "Aller plus loin"
 
 Coall s'utilise d'abord sur ordinateur. Sur téléphone, l'interface s'adapte pour l'essentiel : **consulter, commenter, suivre l'appel et écrire à l'IA**. La modification fine des pages reste à faire sur ordinateur.
 
-> **À savoir** — Tant que Coall n'est pas hébergé en ligne, un vrai téléphone ne peut pas encore joindre l'application. Ce sera possible avec la version en ligne. [à mettre à jour au lancement]
+> **À savoir** Tant que Coall n'est pas hébergé en ligne, un vrai téléphone ne peut pas encore joindre l'application. Ce sera possible avec la version en ligne. [à mettre à jour au lancement]
 
 ## Sur téléphone
 
@@ -34,7 +34,7 @@ La barre latérale devient un **menu** (icône **☰** en haut à gauche), qui s
 
 La **modification fine des éléments** : entrer dans une frame par double-clic, sélectionner un élément, utiliser les poignées de redimensionnement. Pour ces retouches, utilisez un ordinateur, ou demandez-les à l'IA depuis la barre de demande.
 
-> **Astuce** — Sur téléphone, la barre de demande reste le moyen le plus simple de faire évoluer une page : écrivez « passe le titre en vert » et l'IA s'en charge, en hypothèse sur un écran officiel.
+> **Astuce** Sur téléphone, la barre de demande reste le moyen le plus simple de faire évoluer une page : écrivez « passe le titre en vert » et l'IA s'en charge, en hypothèse sur un écran officiel.
 
 ## Sur tablette ou dans une fenêtre étroite
 

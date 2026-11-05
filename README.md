@@ -28,8 +28,8 @@ La recherche de la documentation n'existe qu'après `npm run build` (index gén�
 ## Conventions de la documentation
 
 - `<div class="capture">Capture : …</div>` : emplacement d'une capture à fournir.
-- `[à confirmer]`, `[à mettre à jour au lancement]`, `[URL de l'app]` : affichés en pastille ambre, à résoudre avant publication.
-- `> **Astuce** — …` (encadré bleu) et `> **À savoir** — …` (encadré ambre).
+- `[à confirmer]`, `[à mettre à jour au lancement]`, `[URL de l'app]` : soulignés en pointillés, à résoudre avant publication.
+- `> **Astuce** …` et `> **À savoir** …` : encadré sobre, le mot en gras devient son titre.
 
 ## Avant publication
 

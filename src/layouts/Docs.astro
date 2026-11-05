@@ -18,7 +18,7 @@ const next = idx >= 0 && idx < docs.length - 1 ? docs[idx + 1] : null;
 const current = idx >= 0 ? docs[idx] : null;
 const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
 ---
-<Base title={`${title} — Documentation`} description={description}>
+<Base title={`${title} · Documentation`} description={description}>
   <link slot="head" href="/pagefind/pagefind-ui.css" rel="stylesheet" />
   <div class="wrap docs">
     <aside class="side" aria-label="Sommaire de la documentation">
@@ -29,7 +29,7 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
           <a href="/docs" class:list={["side-home", { active: !slug }]}>Vue d'ensemble</a>
           {GROUPS.map((g) => (
             <div class="grp">
-              <p class="label">{g}</p>
+              <p class="grp-t">{g}</p>
               {docs.filter((d) => d.data.group === g).map((d) => (
                 <a href={`/docs/${d.id}`} class:list={[{ active: d.id === slug }]}>{d.data.title}</a>
               ))}
@@ -40,8 +40,8 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
     </aside>
 
     <article class="content" data-pagefind-body>
-      <p class="crumbs label">
-        <a href="/docs">Documentation</a>{current && <> <span>/</span> {current.data.group}</>}
+      <p class="crumbs">
+        <a href="/docs">Documentation</a>{current && <><span>›</span>{current.data.group}</>}
       </p>
       <h1 class="h1 doc-title">{title}</h1>
       <p class="lead doc-lead">{description}</p>
@@ -50,8 +50,8 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
       </div>
       {(prev || next) && (
         <nav class="pager" aria-label="Chapitres voisins" data-pagefind-ignore>
-          {prev ? <a href={`/docs/${prev.id}`} class="card"><span class="label">← Précédent</span>{prev.data.title}</a> : <span></span>}
-          {next ? <a href={`/docs/${next.id}`} class="card nx"><span class="label">Suivant →</span>{next.data.title}</a> : <span></span>}
+          {prev ? <a href={`/docs/${prev.id}`} class="card"><span class="pg">Précédent</span>{prev.data.title}</a> : <span></span>}
+          {next ? <a href={`/docs/${next.id}`} class="card nx"><span class="pg">Suivant</span>{next.data.title}</a> : <span></span>}
         </nav>
       )}
     </article>
@@ -59,7 +59,7 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
     <aside class="toc" aria-label="Sur cette page" data-pagefind-ignore>
       {toc.length > 0 && (
         <>
-          <p class="label">Sur cette page</p>
+          <p class="toc-t">Sur cette page</p>
           {toc.map((h) => <a href={`#${h.slug}`} class={`d${h.depth}`}>{h.text}</a>)}
         </>
       )}
@@ -118,8 +118,8 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
     }
     .side a {
       display: block;
-      padding: 6px 10px;
-      border-radius: 8px;
+      padding: 5px 10px;
+      border-radius: 6px;
       font-size: 14px;
       color: var(--muted);
     }
@@ -129,21 +129,21 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
     }
     .side a.active {
       color: var(--ink);
-      background: var(--official-soft);
-      box-shadow: inset 2px 0 0 var(--official);
+      background: rgba(255, 255, 255, 0.05);
     }
     .grp {
       margin-top: 18px;
     }
-    .grp .label {
-      font-size: 10.5px;
-      margin: 0 0 6px 10px;
-      color: var(--faint);
+    .grp-t {
+      font-size: 13px;
+      font-weight: 510;
+      margin: 0 0 4px 10px;
+      color: var(--ink);
     }
     .search {
       margin-bottom: 18px;
       --pagefind-ui-scale: 0.78;
-      --pagefind-ui-primary: var(--official-ink);
+      --pagefind-ui-primary: var(--ink);
       --pagefind-ui-text: var(--ink);
       --pagefind-ui-background: var(--surface);
       --pagefind-ui-border: var(--line-2);
@@ -151,6 +151,9 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
       --pagefind-ui-border-width: 1px;
       --pagefind-ui-border-radius: 10px;
       --pagefind-ui-font: var(--font-sans);
+    }
+    .search :global(.pagefind-ui__search-input) {
+      font-weight: 400;
     }
     .search :global(.search-off) {
       font-size: 12.5px;
@@ -162,18 +165,20 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
       max-width: 760px;
     }
     .crumbs {
-      margin: 0 0 18px;
-      font-size: 11px;
+      margin: 0 0 16px;
+      font-size: 14px;
+      color: var(--muted);
+      display: flex;
+      gap: 8px;
     }
     .crumbs a:hover {
       color: var(--ink);
     }
     .crumbs span {
-      margin: 0 6px;
       color: var(--faint);
     }
     .doc-title {
-      font-size: clamp(34px, 4.4vw, 52px);
+      font-size: clamp(32px, 3.6vw, 44px);
     }
     .doc-lead {
       margin-top: 16px;
@@ -189,8 +194,9 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
       max-height: calc(100vh - 110px);
       overflow-y: auto;
     }
-    .toc .label {
-      font-size: 10.5px;
+    .toc-t {
+      font-size: 13px;
+      font-weight: 510;
       margin: 0 0 8px;
     }
     .toc a {
@@ -217,7 +223,7 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
       display: grid;
       gap: 6px;
       padding: 18px 20px;
-      font-weight: 550;
+      font-weight: 510;
       transition: border-color 0.2s;
     }
     .pager a:hover {
@@ -226,8 +232,10 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
     .pager .nx {
       text-align: right;
     }
-    .pager .label {
-      font-size: 10.5px;
+    .pager .pg {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--muted);
     }
     @media (max-width: 1180px) {
       .docs {
@@ -278,21 +286,19 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
       line-height: 1.7;
     }
     .prose :global(h2) {
-      font-family: var(--font-display);
-      font-size: 26px;
-      letter-spacing: -0.025em;
-      line-height: 1.2;
+      font-size: 24px;
+      letter-spacing: -0.018em;
+      line-height: 1.25;
       color: var(--ink);
       margin: 56px 0 14px;
-      font-weight: 600;
+      font-weight: 510;
     }
     .prose :global(h3) {
-      font-family: var(--font-display);
-      font-size: 19px;
-      letter-spacing: -0.015em;
+      font-size: 18px;
+      letter-spacing: -0.01em;
       color: var(--ink);
       margin: 36px 0 10px;
-      font-weight: 600;
+      font-weight: 510;
     }
     .prose :global(h4) {
       color: var(--ink);
@@ -303,9 +309,9 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
       margin: 0 0 16px;
     }
     .prose :global(a) {
-      color: var(--official-ink);
+      color: var(--ink);
       text-decoration: underline;
-      text-decoration-color: color-mix(in srgb, var(--official) 40%, transparent);
+      text-decoration-color: rgba(255, 255, 255, 0.25);
       text-underline-offset: 3px;
     }
     .prose :global(a:hover) {
@@ -313,7 +319,7 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
     }
     .prose :global(strong) {
       color: var(--ink);
-      font-weight: 600;
+      font-weight: 510;
     }
     .prose :global(ul),
     .prose :global(ol) {
@@ -327,9 +333,7 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
       color: var(--faint);
     }
     .prose :global(ol > li::marker) {
-      font-family: var(--font-mono);
-      font-size: 0.85em;
-      color: var(--official-ink);
+      color: var(--muted);
     }
     .prose :global(code) {
       font-family: var(--font-mono);
@@ -364,19 +368,23 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
       border-bottom-width: 2px;
     }
     .prose :global(blockquote) {
-      margin: 20px 0;
+      margin: 24px 0;
       padding: 14px 18px;
-      border-radius: 12px;
-      border: 1px solid color-mix(in srgb, var(--official) 30%, transparent);
-      background: var(--official-soft);
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--bg-2);
       color: var(--ink-2);
+      font-size: 15px;
     }
     .prose :global(blockquote p:last-child) {
       margin-bottom: 0;
     }
-    .prose :global(blockquote.warn) {
-      border-color: color-mix(in srgb, var(--warn) 35%, transparent);
-      background: color-mix(in srgb, var(--warn) 10%, transparent);
+    .prose :global(.note-t) {
+      display: block;
+      margin: 0 0 4px;
+      color: var(--ink);
+      font-weight: 510;
+      font-size: 14px;
     }
     .prose :global(table) {
       width: 100%;
@@ -405,13 +413,9 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
       margin: 40px 0;
     }
     .prose :global(.todo) {
-      font-family: var(--font-mono);
-      font-size: 0.78em;
-      padding: 1px 6px;
-      border-radius: 5px;
-      color: var(--warn-ink);
-      background: color-mix(in srgb, var(--warn) 12%, transparent);
-      border: 1px dashed color-mix(in srgb, var(--warn) 45%, transparent);
+      font-size: 0.9em;
+      color: var(--muted);
+      border-bottom: 1px dashed var(--faint);
       overflow-wrap: anywhere;
     }
   </style>

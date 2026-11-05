@@ -39,7 +39,7 @@ La demande s'applique à la cible affichée au-dessus de la barre :
 
 Vous pouvez aussi désigner des pages par leur nom dans la demande (« la page contact »), même en abrégé (« la page doc » pour « Documentation »), ou une section par son nom (« la section de Jean »).
 
-> **Astuce** — Une demande générale, comme « les pages en bleu », s'applique à toutes les pages concernées. Une couleur imprécise est choisie dans le style existant.
+> **Astuce** Une demande générale, comme « les pages en bleu », s'applique à toutes les pages concernées. Une couleur imprécise est choisie dans le style existant.
 
 ## Les modes
 
@@ -51,7 +51,7 @@ Un sélecteur dans la barre de demande fixe ce que l'IA a le droit de faire.
 | **Officielle** | L'IA modifie directement l'écran officiel. C'est un choix explicite. |
 | **Hypothèse** | L'IA travaille toujours sur une copie, placée à côté. |
 
-> **À savoir** — Sans le droit **modifier l'officiel**, la barre n'affiche que le mode **Hypothèse**. Sans le droit **modifier**, la barre est remplacée par un bouton **Demander l'accès**. Voir [Collaborer](/docs/collaborer).
+> **À savoir** Sans le droit **modifier l'officiel**, la barre n'affiche que le mode **Hypothèse**. Sans le droit **modifier**, la barre est remplacée par un bouton **Demander l'accès**. Voir [Collaborer](/docs/collaborer).
 
 ### La règle de base : une hypothèse d'abord
 
@@ -141,7 +141,7 @@ Certaines actions ne s'appliquent pas d'office :
 
 À la place, une carte « L'IA propose : … » apparaît au-dessus de la barre de demande, avec **Valider** et **Annuler**. Survolez la carte pour voir l'aperçu sur le canvas : emplacements en pointillés violets, ou version qui deviendrait officielle.
 
-> **À savoir** — Valider une proposition demande le droit **valider**. Sans lui, la carte indique « En attente de l'hôte ».
+> **À savoir** Valider une proposition demande le droit **valider**. Sans lui, la carte indique « En attente de l'hôte ».
 
 <div class="capture">Capture : carte « L'IA propose : ranger les pages par familles » au-dessus de la barre de demande, avec les boutons Valider et Annuler, et l'aperçu des emplacements en pointillés violets sur le canvas</div>
 

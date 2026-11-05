@@ -277,7 +277,7 @@ const people = [
       subs.innerHTML =
         '<p><b style="color:#ff7a45">Jean</b> <span>« La lumière qui vous suit », ce serait plus direct.</span></p><p><b style="color:#f5b700">Marc</b> <span>Et en vert, ça passerait peut-être mieux.</span></p>';
       capSubs.innerHTML = "<b>Marc</b> Et en vert, ça passerait peut-être mieux.";
-      setUnd("Compris : titre plus court, en vert → hypothèse", true);
+      setUnd("Compris : titre plus court, en vert, en hypothèse", true);
     };
 
     const play = async () => {
@@ -292,7 +292,7 @@ const people = [
           move("marc", 330, 210);
           await say({ who: "marc", text: "Et en vert, ça passerait peut-être mieux." }, gen);
           await wait(300, gen);
-          setUnd("Compris : titre plus court, en vert → hypothèse", true);
+          setUnd("Compris : titre plus court, en vert, en hypothèse", true);
           stage.dataset.step = "1"; // fantôme + balayage
           for (let i = 1; i <= 8; i++) {
             timer.textContent = `0:0${Math.min(i, 9)}`;
@@ -307,7 +307,7 @@ const people = [
           await wait(2600, gen);
           move("alice", 520, 470);
           await say({ who: "alice", text: "Ok, on garde ça." }, gen);
-          setUnd("Compris : décision → proposition à valider", true);
+          setUnd("Compris : décision, proposition à valider", true);
           stage.dataset.step = "4"; // proposition
           await wait(900, gen);
           move("alice", 640, 568);
@@ -356,13 +356,12 @@ const people = [
     position: relative;
     width: 100%;
     overflow: hidden;
-    border-radius: 14px;
+    border-radius: 12px;
     border: 1px solid var(--line-2);
     background: #121213;
     box-shadow:
-      0 0 0 1px rgba(0, 0, 0, 0.6),
-      0 40px 120px -20px rgba(0, 0, 0, 0.8),
-      0 0 120px -30px color-mix(in srgb, var(--ai) 40%, transparent);
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 50px 100px -40px rgba(0, 0, 0, 0.9);
   }
   .stage {
     position: absolute;
@@ -1209,9 +1208,9 @@ const people = [
     gap: 10px;
     align-items: flex-start;
     padding: 12px 14px;
-    border-radius: 12px;
+    border-radius: 10px;
     border: 1px solid var(--line);
-    background: var(--surface);
+    background: var(--bg-2);
     font-size: 14px;
   }
   .demo-caption .live-dot {

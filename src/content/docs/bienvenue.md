@@ -66,7 +66,7 @@ La **timeline** est le journal de tout ce qui s'est passé dans le projet. Les *
 
 L'**hôte** est la personne qui possède le projet. Les **invités** sont les personnes qu'il invite (voir [Collaborer](/docs/collaborer)).
 
-> **À savoir** — Coall n'est pas encore hébergé en ligne. L'accès à l'application se fera depuis `[URL de l'app]` [à confirmer].
+> **À savoir** Coall n'est pas encore hébergé en ligne. L'accès à l'application se fera depuis `[URL de l'app]` [à confirmer].
 
 ## Et ensuite
 

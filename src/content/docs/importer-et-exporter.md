@@ -53,7 +53,7 @@ Coall explique pourquoi :
 
 Les `.zip` créés sous Windows, avec des noms de fichiers accentués, sont lus correctement.
 
-> **À savoir** — Chaque import crée une version et une étape dans la timeline. Vous pouvez donc revenir à l'état d'avant. Voir [Historique](/docs/historique).
+> **À savoir** Chaque import crée une version et une étape dans la timeline. Vous pouvez donc revenir à l'état d'avant. Voir [Historique](/docs/historique).
 
 ## Exporter les frames
 
@@ -95,7 +95,7 @@ L'option **Au pixel près, pour Figma** (HTML/CSS) est cochée d'office avec une
 
 Les frames élargies ou rétrécies gardent leurs écarts, sections comprises.
 
-> **Astuce** — Pour envoyer vos écrans dans Figma, la [connexion directe du plugin](/docs/plugin-figma) évite de passer par un `.zip`. L'export HTML/CSS reste utile pour un transfert ponctuel ou au pixel près.
+> **Astuce** Pour envoyer vos écrans dans Figma, la [connexion directe du plugin](/docs/plugin-figma) évite de passer par un `.zip`. L'export HTML/CSS reste utile pour un transfert ponctuel ou au pixel près.
 
 ## Exporter le compte rendu
 

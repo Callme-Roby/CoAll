@@ -52,7 +52,7 @@ Le dossier peut contenir d'autres fichiers **texte**, joints au skill : par exem
 
 [à confirmer : publier ou non ces limites chiffrées]
 
-> **À savoir** — Les images et les polices placées dans le dossier d'un skill sont laissées de côté. Coall le signale à l'ajout.
+> **À savoir** Les images et les polices placées dans le dossier d'un skill sont laissées de côté. Coall le signale à l'ajout.
 
 ### Ajouter un skill
 
@@ -84,7 +84,7 @@ Chaque skill et chaque règle s'applique :
 
 Ils s'appliquent à **toutes les demandes** faites à l'IA dans ces projets, celles de vos invités comprises, à l'écrit comme à la voix.
 
-> **À savoir** — La bibliothèque appartient à votre compte. Dans un projet, ce sont les skills et règles de l'hôte qui s'appliquent, et seul l'hôte choisit ce qui s'applique à son projet.
+> **À savoir** La bibliothèque appartient à votre compte. Dans un projet, ce sont les skills et règles de l'hôte qui s'appliquent, et seul l'hôte choisit ce qui s'applique à son projet.
 
 ## L'ordre des priorités
 
@@ -128,9 +128,9 @@ L'assistant construit un skill avec vous, par la conversation, à partir de vos 
 
 [à confirmer : publier ou non ces limites chiffrées]
 
-> **À savoir** — Un skill ne peut pas contredire les règles de base de l'outil. Dans ce cas, l'assistant le dit et propose une alternative.
+> **À savoir** Un skill ne peut pas contredire les règles de base de l'outil. Dans ce cas, l'assistant le dit et propose une alternative.
 
-> **À savoir** — Chaque message à l'assistant et chaque essai est un appel à l'IA. Un essai en fait deux, puisqu'il génère deux pages. [à confirmer : décompte dans l'usage de l'IA du mois]
+> **À savoir** Chaque message à l'assistant et chaque essai est un appel à l'IA. Un essai en fait deux, puisqu'il génère deux pages. [à confirmer : décompte dans l'usage de l'IA du mois]
 
 ## Vérifier qu'un skill s'applique
 

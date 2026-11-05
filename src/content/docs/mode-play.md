@@ -36,7 +36,7 @@ Un lien vers une ancre (`#section`) fait défiler la page jusqu'à la partie vis
 
 À l'import d'un site à plusieurs pages, les liens entre les pages sont reliés automatiquement aux écrans importés.
 
-> **Astuce** — Pour qu'un lien de votre accueil mène quelque part, nommez simplement une page comme le lien (par exemple « Tarifs »).
+> **Astuce** Pour qu'un lien de votre accueil mène quelque part, nommez simplement une page comme le lien (par exemple « Tarifs »).
 
 ### Repérer ce qui est cliquable
 
@@ -69,7 +69,7 @@ Le prototype montre le canvas actuel, en lecture seule. Rien n'est modifié, et 
 
 Le mode Play sert à **parcourir un parcours en réunion ou avec un client**, en partage d'écran pendant l'appel. La conception se fait dans Coall, la finition dans Figma : le mode Play reste volontairement léger.
 
-> **À savoir** — Le mode Play n'est pas un outil de prototypage avancé. Il ne gère ni transitions, ni interactions programmées.
+> **À savoir** Le mode Play n'est pas un outil de prototypage avancé. Il ne gère ni transitions, ni interactions programmées.
 
 ## Voir aussi
 

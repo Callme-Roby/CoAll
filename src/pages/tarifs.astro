@@ -76,8 +76,8 @@ const credits = [
 
   <section class="section credits">
     <div class="wrap cr-grid">
-      <div class="section-head" style="margin:0">
-        <span class="label label-dot t-ai">Crédits d'IA</span>
+      <div class="section-head stack" style="margin:0">
+        <span class="label">Crédits d'IA</span>
         <h2 class="h2">Ce que coûte une demande.</h2>
         <p class="lead">Ce qui coûte, ce n'est pas le nombre de personnes : c'est l'IA. Les crédits suivent l'effort réel de chaque demande.</p>
       </div>
@@ -105,27 +105,28 @@ const credits = [
 
 <style>
   .banner {
-    background: color-mix(in srgb, var(--warn) 14%, var(--bg));
-    border-bottom: 1px solid color-mix(in srgb, var(--warn) 35%, transparent);
-    color: var(--ink-2);
+    background: var(--bg-2);
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
     font-size: 14px;
     padding: 10px 0;
   }
   .banner b {
-    color: var(--warn-ink);
+    color: var(--ink);
+    font-weight: 510;
   }
   .period {
     display: inline-flex;
     padding: 4px;
-    border-radius: 999px;
+    border-radius: 8px;
     border: 1px solid var(--line-2);
     margin-top: 8px;
   }
   .period button {
     border: 0;
     background: transparent;
-    padding: 6px 16px;
-    border-radius: 999px;
+    padding: 5px 14px;
+    border-radius: 6px;
     cursor: pointer;
     color: var(--muted);
     font-weight: 550;
@@ -147,8 +148,8 @@ const credits = [
     gap: 10px;
   }
   .plan.hi {
-    border-color: color-mix(in srgb, var(--official) 55%, transparent);
-    background: linear-gradient(180deg, var(--official-soft), transparent 60%);
+    border-color: rgba(255, 255, 255, 0.2);
+    background: var(--surface);
     position: relative;
   }
   .pd {
@@ -159,10 +160,9 @@ const credits = [
   }
   .price {
     margin: 12px 0 0;
-    font-family: var(--font-display);
-    font-size: 40px;
-    font-weight: 600;
-    letter-spacing: -0.04em;
+    font-size: 36px;
+    font-weight: 510;
+    letter-spacing: -0.03em;
     line-height: 1.05;
     display: grid;
   }
@@ -202,8 +202,8 @@ const credits = [
     vertical-align: top;
   }
   .tbl thead th {
-    font-family: var(--font-display);
-    font-size: 16px;
+    font-size: 15px;
+    font-weight: 510;
   }
   .tbl tbody th {
     font-weight: 500;
@@ -250,8 +250,7 @@ const credits = [
   }
   .cr dd {
     margin: 0;
-    font-family: var(--font-mono);
-    color: var(--ai-ink);
+    color: var(--ink);
     white-space: nowrap;
   }
   @media (max-width: 860px) {

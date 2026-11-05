@@ -18,7 +18,7 @@ Une frame sélectionnée se manipule en bloc. Pour travailler sur ses éléments
 
 <div class="capture">Capture : une frame ouverte en édition, un bouton survolé mis en évidence et un titre sélectionné, avec le panneau Design de l'élément à droite</div>
 
-> **À savoir** — Sans le droit **modifier l'officiel**, les frames officielles ne se modifient pas à la main. Vous pouvez toujours en créer une hypothèse et travailler sur la copie. Voir [Collaborer](/docs/collaborer).
+> **À savoir** Sans le droit **modifier l'officiel**, les frames officielles ne se modifient pas à la main. Vous pouvez toujours en créer une hypothèse et travailler sur la copie. Voir [Collaborer](/docs/collaborer).
 
 ## Modifier un texte
 
@@ -53,7 +53,7 @@ Dans les champs numériques (taille, marges, largeur…) :
 
 Le champ garde le focus : l'élément ne se déplace pas. Les valeurs sans unité (graisse, opacité, interligne, X/Y) restent sans « px ».
 
-> **Astuce** — En haut du panneau **Design** d'un élément, **Faire un composant** le marque comme composant réutilisable. Voir [Composants et ressources](/docs/composants-et-ressources).
+> **Astuce** En haut du panneau **Design** d'un élément, **Faire un composant** le marque comme composant réutilisable. Voir [Composants et ressources](/docs/composants-et-ressources).
 
 ## Insérer, déplacer, dupliquer, supprimer
 

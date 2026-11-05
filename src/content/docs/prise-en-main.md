@@ -29,7 +29,7 @@ En ouvrant Coall, vous arrivez sur la page d'accueil. Une barre latérale donne 
 - **Tri** : changez l'ordre d'affichage de la liste.
 - **Miniature** : chaque projet montre un aperçu de son canvas (pages officielles en bleu, hypothèses en vert), avec le nombre de pages et de membres.
 
-> **À savoir** — Sur téléphone, la barre latérale devient un menu (icône ☰ en haut à gauche) qui s'ouvre en tiroir. Voir [Sur téléphone et tablette](/docs/mobile-et-tablette).
+> **À savoir** Sur téléphone, la barre latérale devient un menu (icône ☰ en haut à gauche) qui s'ouvre en tiroir. Voir [Sur téléphone et tablette](/docs/mobile-et-tablette).
 
 ### Créer et renommer un projet
 
@@ -83,7 +83,7 @@ Vous avez trois façons de démarrer.
 
 Votre frame est officielle : l'IA ne la modifie pas directement. Elle crée à côté une **hypothèse**, une copie verte qui contient la modification. Vous gardez la main sur la décision.
 
-> **Astuce** — Le bouton **Annuler** affiché avec le résultat revient en arrière en un clic.
+> **Astuce** Le bouton **Annuler** affiché avec le résultat revient en arrière en un clic.
 
 ### 4. Créer une hypothèse à la main
 

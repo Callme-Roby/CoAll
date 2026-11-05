@@ -26,7 +26,7 @@ Un projet ouvert se compose de quatre zones :
 - Maintenez **Espace** et glissez, quel que soit l'outil actif.
 - Utilisez la molette, ou glissez avec le bouton du milieu de la souris.
 
-> **À savoir** — Avec l'outil **Sélection**, glisser sur le fond trace un rectangle de sélection : il ne déplace pas la vue.
+> **À savoir** Avec l'outil **Sélection**, glisser sur le fond trace un rectangle de sélection : il ne déplace pas la vue.
 
 ### Zoomer
 
@@ -78,7 +78,7 @@ Une frame est une page web montrée en entier, de l'en-tête au pied de page. Sa
 | **Archiver** | Suppr ou Retour arrière, ou **Archiver** dans le panneau **Design**. |
 | **Désarchiver** | Cochez **Archives** dans le panneau de gauche pour afficher les frames archivées, puis cliquez sur **Désarchiver**. |
 
-> **À savoir** — Une frame n'est jamais supprimée. Supprimer, couper ou archiver une frame la range dans les archives, d'où vous pouvez toujours la récupérer.
+> **À savoir** Une frame n'est jamais supprimée. Supprimer, couper ou archiver une frame la range dans les archives, d'où vous pouvez toujours la récupérer.
 
 <div class="capture">Capture : panneau de gauche avec la case « Archives » cochée, une frame archivée en pointillés gris sur le canvas et le bouton « Désarchiver »</div>
 
@@ -116,7 +116,7 @@ Une section est un cadre nommé qui regroupe des frames.
 
 Dans le panneau de gauche, la liste des frames les montre regroupées sous leur section.
 
-> **Astuce** — Une section sélectionnée devient la cible de la barre de demande (« Sur la section … »). L'IA connaît aussi les noms des sections : vous pouvez parler de « la section de Jean ».
+> **Astuce** Une section sélectionnée devient la cible de la barre de demande (« Sur la section … »). L'IA connaît aussi les noms des sections : vous pouvez parler de « la section de Jean ».
 
 Certaines sections sont créées automatiquement : les sections d'hypothèses sur plusieurs pages (voir [Hypothèses, comparaison et décisions](/docs/hypotheses-et-comparaison)) et les sections d'écran qui regroupent les formats ordinateur, tablette et mobile (voir [Écrans et formats](/docs/ecrans-et-formats)).
 
@@ -178,7 +178,7 @@ Les deux panneaux se replient pour laisser toute la place au canvas :
 
 Replié, un panneau laisse un bouton flottant au bord du canvas pour le rouvrir : **Écrans** à gauche (frames et calques), **Design · Timeline** à droite. La disposition est mémorisée.
 
-> **À savoir** — Sur tablette, ou dans une fenêtre de moins de 1 200 px de large, les panneaux sont repliés à l'ouverture d'un projet.
+> **À savoir** Sur tablette, ou dans une fenêtre de moins de 1 200 px de large, les panneaux sont repliés à l'ouverture d'un projet.
 
 ## L'état de la connexion
 
@@ -190,7 +190,7 @@ Quand tout va bien, rien ne s'affiche. Un badge apparaît dans l'en-tête seulem
 | **Reconnexion…** | La connexion a été coupée ; Coall la rétablit. |
 | **Hors ligne** (en rouge) | Le serveur ne répond plus. |
 
-> **À savoir** — Hors ligne, vos modifications restent dans l'onglet du navigateur et partent au retour de la connexion. Ne fermez pas l'onglet tant que le badge est affiché.
+> **À savoir** Hors ligne, vos modifications restent dans l'onglet du navigateur et partent au retour de la connexion. Ne fermez pas l'onglet tant que le badge est affiché.
 
 ## Voir aussi
 

@@ -116,19 +116,15 @@ const more = [
     title="Tout ce qui se dit en réunion<br /><span class='dim'>arrive sur le canvas.</span>"
     lead="Une visio intégrée à un canvas infini, une IA qui écoute avec l'accord de chacun, et des maquettes qui sont de vraies pages HTML/CSS."
   >
-    <nav class="jump" aria-label="Aller à une fonctionnalité">
-      {features.map((f) => <a href={`#${f.id}`} class="chip">{f.k} · {f.t}</a>)}
-    </nav>
   </PageHead>
 
   {features.map((f, i) => (
     <section class="section feat" id={f.id}>
       <div class:list={["wrap feat-grid", { alt: i % 2 === 1 }]}>
         <div class="feat-copy reveal">
-          <span class="label" style={`color:${f.c}`}>{f.k}</span>
-          <h2 class="h2">{f.t}</h2>
+                    <h2 class="h2">{f.t}</h2>
           <p class="lead">{f.l}</p>
-          <a href={f.doc} class="doc-link">Lire la documentation <span class="arrow">→</span></a>
+          <a href={f.doc} class="btn-link">Lire la documentation <span class="arrow">→</span></a>
         </div>
         <div class="feat-body reveal">
           <div class="capture">{f.cap}</div>
@@ -146,12 +142,12 @@ const more = [
   <section class="section more">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="label label-dot">Et aussi</span>
+        <span class="label">Et aussi</span>
         <h2 class="h2">Les outils d'un éditeur, sans détour.</h2>
       </div>
       <div class="more-grid">
         {more.map(([t, d, h]) => (
-          <a href={h} class="card mg reveal"><h3 class="h3">{t}</h3><p>{d}</p><span class="arrow">→</span></a>
+          <a href={h} class="mg reveal"><h3 class="h3">{t}</h3><p>{d}</p></a>
         ))}
       </div>
     </div>
@@ -213,7 +209,7 @@ const more = [
     border-top: 1px solid var(--line);
   }
   .pts dt {
-    font-weight: 600;
+    font-weight: 510;
     color: var(--ink);
     font-size: 15px;
   }
@@ -226,9 +222,9 @@ const more = [
     margin: 12px 0 0;
     padding: 12px 14px;
     border-radius: 10px;
-    border: 1px solid color-mix(in srgb, var(--warn) 35%, transparent);
-    background: color-mix(in srgb, var(--warn) 9%, transparent);
-    color: var(--ink-2);
+    border: 1px solid var(--line);
+    background: var(--bg-2);
+    color: var(--muted);
     font-size: 14px;
   }
   @media (max-width: 900px) {
@@ -256,14 +252,19 @@ const more = [
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
   }
-  .mg {
-    padding: 24px;
-    display: grid;
-    gap: 10px;
-    transition: border-color 0.2s;
+  .more-grid {
+    border-top: 1px solid var(--line);
   }
-  .mg:hover {
-    border-color: var(--line-2);
+  .mg {
+    padding: 24px 24px 0 0;
+    display: grid;
+    gap: 8px;
+    align-content: start;
+  }
+  .mg:hover h3 {
+    text-decoration: underline;
+    text-decoration-color: var(--faint);
+    text-underline-offset: 4px;
   }
   .mg p {
     margin: 0;

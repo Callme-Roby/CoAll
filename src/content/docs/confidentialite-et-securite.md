@@ -45,4 +45,4 @@ La transcription dans le navigateur (Chrome, Edge) passe par le service de recon
 
 L'hôte décide de ce que chacun peut faire : modifier, valider, modifier l'officiel. Le détail est dans [Collaborer](/docs/collaborer). Les décisions et modifications de chacun restent visibles dans la [timeline](/docs/historique), avec leur auteur et l'heure.
 
-> **À savoir** — Il n'y a pas encore de connexion par e-mail, de comptes ni de SSO. Ces points seront complétés avec la version en ligne. [à mettre à jour au lancement]
+> **À savoir** Il n'y a pas encore de connexion par e-mail, de comptes ni de SSO. Ces points seront complétés avec la version en ligne. [à mettre à jour au lancement]

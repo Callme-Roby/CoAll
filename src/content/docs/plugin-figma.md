@@ -62,7 +62,7 @@ Pour chaque différence, vous choisissez **Coall remplace** ou **Garder Figma**.
 - Une page **Composants** reçoit les composants (voir plus bas).
 - Une page **Archives Coall** reçoit les frames remplacées ou archivées, avec la date.
 
-> **À savoir** — **Rien n'est supprimé dans Figma.** Une frame remplacée part dans la page « Archives Coall ». Une retouche faite dans Figma est gardée par défaut.
+> **À savoir** **Rien n'est supprimé dans Figma.** Une frame remplacée part dans la page « Archives Coall ». Une retouche faite dans Figma est gardée par défaut.
 
 ### Variables
 
@@ -146,4 +146,4 @@ Vers Coall :
 - les prototypes Figma (interactions, animations) ne sont pas exportés ;
 - les contraintes de redimensionnement ne sont pas reprises : la page a la taille de la frame.
 
-> **À savoir** — La transformation automatique de la charte d'un skill en variables Figma n'existe pas encore. Les variables envoyées viennent des frames officielles du projet.
+> **À savoir** La transformation automatique de la charte d'un skill en variables Figma n'existe pas encore. Les variables envoyées viennent des frames officielles du projet.
