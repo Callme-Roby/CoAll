@@ -23,12 +23,7 @@ if (!Comp) throw new Error(`DocShot : visuel inconnu « ${k} »`);
     padding: 28px;
     border: 1px solid var(--line);
     border-radius: 12px;
-    /* Reflet discret des trois couleurs sous le visuel. */
-    background:
-      radial-gradient(60% 45% at 22% 100%, rgba(13, 153, 255, 0.07), transparent),
-      radial-gradient(60% 45% at 50% 100%, rgba(169, 121, 255, 0.09), transparent),
-      radial-gradient(60% 45% at 78% 100%, rgba(20, 174, 92, 0.06), transparent),
-      var(--bg-2);
+    background: var(--bg-2);
   }
   .docshot-v > :global(*) {
     width: 100%;
