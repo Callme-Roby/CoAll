@@ -5,7 +5,7 @@ import Flow from "../components/Flow.astro";
 import Waitlist from "../components/Waitlist.astro";
 
 const cursor = (color: string) =>
-  `<svg viewBox="0 0 18 18"><path d="M2 1.5l13 6.2-5.6 1.6L6.9 15z" fill="${color}" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/></svg>`;
+  `<svg viewBox="0 0 18 18"><path d="M2 1.5 L15.5 8.2 L9.2 9.6 L6.4 15.8 Z" fill="${color}" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/></svg>`;
 ---
 <Base>
   <!-- ============ HERO ============ -->
@@ -14,10 +14,10 @@ const cursor = (color: string) =>
 
     <!-- Curseurs des participants (comme sur le canvas de l'outil) ; le vôtre suit la souris. -->
     <div class="cursor amb" data-alice aria-hidden="true">
-      <Fragment set:html={cursor("#e255a1")} /><span class="name" style="background:#e255a1">Alice</span>
+      <Fragment set:html={cursor("#9334e6")} /><span class="name" style="background:#9334e6">Alice</span>
     </div>
     <div class="cursor amb amb-2" aria-hidden="true">
-      <Fragment set:html={cursor("#ff7a45")} /><span class="name" style="background:#ff7a45">Jean</span>
+      <Fragment set:html={cursor("#c25100")} /><span class="name" style="background:#c25100">Jean</span>
     </div>
     <div class="cursor you" data-you aria-hidden="true">
       <Fragment set:html={cursor("#0d99ff")} /><span class="name" style="background:#0d99ff">Vous</span>
