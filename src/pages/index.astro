@@ -14,6 +14,7 @@ const cursor = (color: string) =>
 <Base>
   <!-- ============ HERO ============ -->
   <section class="hero" data-hero data-you-zone>
+    <div class="aura" aria-hidden="true"></div>
     <div class="hero-bg dotgrid" aria-hidden="true"></div>
 
     <!-- Curseurs des participants (comme sur le canvas de l'outil) ; le vôtre suit la souris. -->
@@ -38,7 +39,7 @@ const cursor = (color: string) =>
         <a href="#comment" class="btn btn-ghost">Voir comment ça marche</a>
       </div>
     </div>
-    <div class="wrap hero-demo">
+    <div class="wrap hero-demo halo">
       <HeroDemo />
     </div>
   </section>
@@ -215,7 +216,7 @@ const cursor = (color: string) =>
           <b>Toujours</b> ou <b>Jamais</b>. Les deux s'appliquent à toutes les demandes de vos projets, celles des invités comprises.
         </p>
       </div>
-      <div class="reveal sk-vis"><SkillAssistant /></div>
+      <div class="reveal sk-vis halo"><SkillAssistant /></div>
       <ul class="lines three reveal">
         <li>L'assistant pose ses questions, lit votre charte en PDF et vos captures, puis propose le skill.</li>
         <li><b>Essayer (sans et avec)</b> génère la même page côte à côte, avant d'adopter le skill.</li>
@@ -236,7 +237,7 @@ const cursor = (color: string) =>
         </p>
         <p class="note">Le mode Play montre le canvas actuel, en lecture. Il ne fait ni transitions ni interactions programmées : la finition se fait dans Figma.</p>
       </div>
-      <div class="reveal"><PlayV /></div>
+      <div class="reveal halo"><PlayV /></div>
     </div>
   </section>
 
@@ -248,7 +249,7 @@ const cursor = (color: string) =>
         <h2 class="h2">Concevoir et décider dans Coall.<br /><span class="dim">Finir dans Figma.</span></h2>
         <p class="lead">À la fin de la réunion, le plugin Coall ⇄ Figma envoie les écrans validés, leurs variables, leurs composants et leurs variantes.</p>
       </div>
-      <div class="reveal"><FigmaHandoff /></div>
+      <div class="reveal halo"><FigmaHandoff /></div>
       <p class="jr-note reveal">Le plugin requiert l'application Figma pour ordinateur. Il s'installe pour l'instant en mode développement et n'est pas encore publié dans la communauté Figma.</p>
     </div>
   </section>
@@ -261,7 +262,7 @@ const cursor = (color: string) =>
         <h2 class="h2">L'IA écoute quand vous le décidez.</h2>
         <p class="lead">Ces engagements sont tenus par l'outil lui-même. <a href="/docs/confidentialite-et-securite" class="inl">Les lire en détail</a>.</p>
       </div>
-      <div class="reveal pj-wrap"><PreJoin /></div>
+      <div class="reveal pj-wrap halo"><PreJoin /></div>
       <div class="trust reveal">
         <div><h3 class="h3">Un indicateur visible</h3><p>L'IA n'écoute que lorsque « L'IA écoute » est allumé, et seulement les personnes qui ont donné leur accord.</p></div>
         <div><h3 class="h3">Pause pour tous</h3><p>N'importe qui la met en pause, au bouton ou à la voix. La reprise se fait au bouton.</p></div>
@@ -273,6 +274,7 @@ const cursor = (color: string) =>
 
   <!-- ============ CTA ============ -->
   <section class="section final">
+    <div class="aura final-aura" aria-hidden="true"></div>
     <div class="wrap final-inner reveal">
       <h2 class="h1">Votre prochaine réunion<br /><span class="dim">peut produire les écrans.</span></h2>
       <p class="lead">Coall n'est pas encore en ligne. Inscrivez-vous pour l'essayer parmi les premiers.</p>
@@ -1327,7 +1329,16 @@ const cursor = (color: string) =>
 
   /* ---------- CTA ---------- */
   .final {
+    position: relative;
+    overflow: hidden;
     border-top: 1px solid var(--line);
+  }
+  .final-aura {
+    opacity: 0.6;
+    top: 10%;
+  }
+  .final-inner {
+    position: relative;
   }
   .final-inner {
     display: grid;

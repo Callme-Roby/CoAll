@@ -86,9 +86,9 @@ const md = (s: string) => s.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
             <span class="pain-t">Aujourd'hui</span>
             <p>{c.pain}</p>
           </div>
-          {c.id === "atelier" && <div class="cv narrow"><Timeline /></div>}
-          {c.id === "client" && <div class="cv"><PlayV /></div>}
-          {c.id === "agence" && <div class="cv"><SkillAssistant /></div>}
+          {c.id === "atelier" && <div class="cv narrow halo"><Timeline /></div>}
+          {c.id === "client" && <div class="cv halo"><PlayV /></div>}
+          {c.id === "agence" && <div class="cv halo"><SkillAssistant /></div>}
         </div>
         <div class="case-body reveal">
           <span class="with-t">Avec Coall</span>
@@ -98,7 +98,7 @@ const md = (s: string) => s.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
           <a href={c.doc[0]} class="btn-link">{c.doc[1]} <span class="arrow">→</span></a>
         </div>
       </div>
-      {c.id === "design-system" && <div class="wrap reveal" style="margin-top:56px"><FigmaHandoff /></div>}
+      {c.id === "design-system" && <div class="wrap reveal halo" style="margin-top:56px"><FigmaHandoff /></div>}
     </section>
   ))}
 

@@ -133,11 +133,11 @@ const more = [
           <a href={f.doc} class="btn-link">Lire la documentation <span class="arrow">→</span></a>
         </div>
         <div class="feat-body reveal">
-          {f.id === "voix" && <div class="vis"><PreJoin /></div>}
-          {f.id === "non-destructif" && <div class="vis narrow"><Timeline /></div>}
-          {f.id === "comparer" && <div class="vis"><CompareV /></div>}
-          {f.id === "skills" && <div class="vis"><SkillAssistant /></div>}
-          {f.id === "collaborer" && <div class="vis narrow"><Invite /></div>}
+          {f.id === "voix" && <div class="vis halo"><PreJoin /></div>}
+          {f.id === "non-destructif" && <div class="vis narrow halo"><Timeline /></div>}
+          {f.id === "comparer" && <div class="vis halo"><CompareV /></div>}
+          {f.id === "skills" && <div class="vis halo"><SkillAssistant /></div>}
+          {f.id === "collaborer" && <div class="vis narrow halo"><Invite /></div>}
           <dl class="pts">
             {f.pts.map(([a, b]) => (
               <div><dt>{a}</dt><dd>{b}</dd></div>
@@ -146,7 +146,7 @@ const more = [
           {f.note && <p class="fnote">{f.note}</p>}
         </div>
       </div>
-      {f.id === "figma" && <div class="wrap fig-wide reveal"><FigmaHandoff /></div>}
+      {f.id === "figma" && <div class="wrap fig-wide reveal halo"><FigmaHandoff /></div>}
     </section>
   ))}
 

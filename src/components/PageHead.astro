@@ -3,6 +3,7 @@ interface Props { eyebrow: string; title: string; lead?: string; color?: string 
 const { eyebrow, title, lead } = Astro.props;
 ---
 <header class="ph">
+  <div class="aura ph-aura" aria-hidden="true"></div>
   <div class="wrap ph-inner">
     <span class="label">{eyebrow}</span>
     <h1 class="h1" set:html={title} />
@@ -17,6 +18,11 @@ const { eyebrow, title, lead } = Astro.props;
     padding: clamp(72px, 10vw, 136px) 0 clamp(56px, 7vw, 96px);
     overflow: hidden;
     border-bottom: 1px solid var(--line);
+  }
+  /* Plus léger que l'accueil, décalé vers la droite (le texte est à gauche). */
+  .ph-aura {
+    opacity: 0.7;
+    left: 10%;
   }
   .ph-inner {
     position: relative;

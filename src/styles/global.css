@@ -665,3 +665,43 @@ a:hover > .brandmark .bm-dot {
     animation: none;
   }
 }
+
+/* ===== Touches de couleur : officiel (bleu), IA (violet), hypothèse (vert) =====
+   Toujours en fond, floues et discrètes : jamais dans les textes. */
+
+/* Halo coloré derrière un panneau de l'outil, comme une ombre portée. */
+.halo {
+  position: relative;
+  isolation: isolate;
+}
+.halo::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 18% 0 -7%;
+  border-radius: 40%;
+  background:
+    radial-gradient(closest-side at 22% 60%, rgba(13, 153, 255, 0.55), transparent),
+    radial-gradient(closest-side at 50% 72%, rgba(169, 121, 255, 0.7), transparent),
+    radial-gradient(closest-side at 78% 60%, rgba(20, 174, 92, 0.5), transparent);
+  filter: blur(64px);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Lueur d'ambiance en haut d'une section : bleu à gauche, violet au centre, vert à droite. */
+.aura {
+  position: absolute;
+  inset: -10% -10% auto;
+  height: 640px;
+  pointer-events: none;
+  background:
+    radial-gradient(closest-side at 18% 40%, rgba(13, 153, 255, 0.16), transparent),
+    radial-gradient(closest-side at 50% 18%, rgba(169, 121, 255, 0.2), transparent),
+    radial-gradient(closest-side at 82% 40%, rgba(20, 174, 92, 0.13), transparent);
+  filter: blur(40px);
+}
+/* La démo du hero porte une ombre noire marquée : son halo est un peu plus présent. */
+.hero-demo.halo::before {
+  opacity: 0.85;
+}
