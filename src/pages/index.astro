@@ -13,7 +13,7 @@ const cursor = (color: string) =>
 ---
 <Base>
   <!-- ============ HERO ============ -->
-  <section class="hero" data-hero>
+  <section class="hero" data-hero data-you-zone>
     <div class="hero-bg dotgrid" aria-hidden="true"></div>
 
     <!-- Curseurs des participants (comme sur le canvas de l'outil) ; le vôtre suit la souris. -->
@@ -22,9 +22,6 @@ const cursor = (color: string) =>
     </div>
     <div class="cursor amb amb-2" aria-hidden="true">
       <Fragment set:html={cursor("#c25100")} /><span class="name" style="background:#c25100">Jean</span>
-    </div>
-    <div class="cursor you" data-you aria-hidden="true">
-      <Fragment set:html={cursor("#0d99ff")} /><span class="name" style="background:#0d99ff">Vous</span>
     </div>
 
     <div class="wrap hero-inner">
@@ -289,7 +286,6 @@ const cursor = (color: string) =>
   const sel = document.querySelector<HTMLElement>("[data-sel]");
   const hov = document.querySelector<HTMLElement>("[data-hov]");
   const alice = document.querySelector<HTMLElement>("[data-alice]");
-  const you = document.querySelector<HTMLElement>("[data-you]");
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   if (hero && sel && alice) {
@@ -333,18 +329,9 @@ const cursor = (color: string) =>
     document.fonts?.ready.then(run) ?? run();
   }
 
-  // Votre curseur « Vous » suit la souris dans le hero ; survoler le titre le surligne, comme sur le canvas.
-  if (hero && you && matchMedia("(pointer: fine)").matches) {
-    hero.addEventListener("pointermove", (e) => {
-      const r = hero.getBoundingClientRect();
-      you.style.opacity = "1";
-      // La pointe de la flèche (2, 1.5 dans son repère de 18 px) se place exactement sous la souris.
-      you.style.transform = `translate(${e.clientX - r.left - 2}px, ${e.clientY - r.top - 1.5}px)`;
-    });
-    hero.addEventListener("pointerleave", () => (you.style.opacity = "0"));
-    hov?.addEventListener("pointerenter", () => hov.classList.add("on"));
-    hov?.addEventListener("pointerleave", () => hov.classList.remove("on"));
-  }
+  // Survoler le titre le surligne, comme sur le canvas.
+  hov?.addEventListener("pointerenter", () => hov.classList.add("on"));
+  hov?.addEventListener("pointerleave", () => hov.classList.remove("on"));
 </script>
 
 <style>
@@ -471,21 +458,6 @@ const cursor = (color: string) =>
     0%, 100% { transform: translate(0, 0); }
     33% { transform: translate(36px, -22px); }
     66% { transform: translate(-18px, 26px); }
-  }
-  /* Dans le hero, la flèche système laisse la place au curseur « Vous ». */
-  @media (pointer: fine) {
-    .hero,
-    .hero :global(*) {
-      cursor: none !important;
-    }
-  }
-  .you {
-    left: 0;
-    top: 0;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s;
-    z-index: 4;
   }
   @media (max-width: 900px) {
     .amb-2 { display: none; }

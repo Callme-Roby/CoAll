@@ -565,3 +565,84 @@ a:hover .arrow {
   animation: pulse-dot 1.8s ease-in-out infinite;
   flex: none;
 }
+
+/* ---------- Curseur unique du site ----------
+   Une seule flèche (celle du canvas de Coall) suit la souris partout : blanche à contour noir,
+   elle devient le curseur bleu « Vous » dans le hero, par un fondu de couleur et d'étiquette.
+   Sans JavaScript ou sur écran tactile, le curseur système (plus haut) reste en place. */
+@media (pointer: fine) {
+  html.cc-on,
+  html.cc-on * {
+    cursor: none !important;
+  }
+  html.cc-on input,
+  html.cc-on textarea {
+    cursor: text !important;
+  }
+}
+.cc {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  will-change: transform;
+}
+.cc.show {
+  opacity: 1;
+}
+.cc.off {
+  opacity: 0;
+}
+.cc svg {
+  width: 20px;
+  height: 20px;
+  overflow: visible;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+  transform-origin: 2px 1.5px;
+  transition: transform 0.15s var(--ease);
+}
+.cc path {
+  fill: #fff;
+  stroke: #000;
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+  transition:
+    fill 0.3s var(--ease),
+    stroke 0.3s var(--ease);
+}
+.cc .cc-n {
+  position: absolute;
+  left: 15px;
+  top: 17px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--official);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(-4px, -4px) scale(0.6);
+  transform-origin: 0 0;
+  transition:
+    opacity 0.25s var(--ease),
+    transform 0.3s var(--ease);
+}
+.cc.you path {
+  fill: var(--official);
+  stroke: #fff;
+}
+.cc.you .cc-n {
+  opacity: 1;
+  transform: none;
+}
+.cc.link svg {
+  transform: scale(0.88);
+}
+.cc.down svg {
+  transform: scale(0.8);
+}

@@ -67,6 +67,11 @@ const isActive = (href: string) => path === href || path.startsWith(href + "/");
       </div>
     </header>
 
+    <div class="cc" data-cc aria-hidden="true">
+      <svg viewBox="0 0 18 18"><path d="M2 1.5 L15.5 8.2 L9.2 9.6 L6.4 15.8 Z" /></svg>
+      <span class="cc-n">Vous</span>
+    </div>
+
     <main id="main">
       <slot />
     </main>
@@ -125,6 +130,38 @@ const isActive = (href: string) => path === href || path.startsWith(href + "/");
         if (menu) menu.hidden = open;
         nav?.classList.toggle("menu-open", !open);
       });
+
+      // Curseur unique : suit la souris sans retard ; bleu « Vous » dans les zones [data-you-zone].
+      const cc = document.querySelector<HTMLElement>("[data-cc]");
+      if (cc && matchMedia("(pointer: fine)").matches) {
+        document.documentElement.classList.add("cc-on");
+        let x = -100;
+        let y = -100;
+        let raf = 0;
+        const draw = () => {
+          raf = 0;
+          // La pointe de la flèche (2, 1.5 dans un repère de 18 px, affichée à 20 px) tombe sous la souris.
+          cc.style.transform = `translate3d(${x - 2.2}px, ${y - 1.7}px, 0)`;
+        };
+        addEventListener(
+          "pointermove",
+          (e) => {
+            x = e.clientX;
+            y = e.clientY;
+            if (!raf) raf = requestAnimationFrame(draw);
+            const t = e.target as Element | null;
+            cc.classList.add("show");
+            cc.classList.toggle("you", !!t?.closest?.("[data-you-zone]"));
+            cc.classList.toggle("link", !!t?.closest?.("a, button, summary, label, select, [role=button]"));
+            cc.classList.toggle("off", !!t?.closest?.("input, textarea"));
+          },
+          { passive: true },
+        );
+        addEventListener("pointerdown", () => cc.classList.add("down"));
+        addEventListener("pointerup", () => cc.classList.remove("down"));
+        document.documentElement.addEventListener("pointerleave", () => cc.classList.remove("show"));
+        addEventListener("blur", () => cc.classList.remove("show"));
+      }
 
       // Apparition des blocs au défilement.
       const io = new IntersectionObserver(

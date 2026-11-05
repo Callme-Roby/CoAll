@@ -141,8 +141,8 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
       color: var(--ink);
     }
     .search {
-      margin-bottom: 18px;
-      --pagefind-ui-scale: 0.78;
+      margin-bottom: 14px;
+      --pagefind-ui-scale: 0.7;
       --pagefind-ui-primary: var(--ink);
       --pagefind-ui-text: var(--ink);
       --pagefind-ui-background: var(--surface);
@@ -153,7 +153,37 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
       --pagefind-ui-font: var(--font-sans);
     }
     .search :global(.pagefind-ui__search-input) {
+      height: 34px;
+      padding: 0 30px 0 32px;
+      font-size: 13.5px;
       font-weight: 400;
+      border-radius: 8px;
+      background: var(--bg-2);
+      border-color: var(--line);
+    }
+    .search :global(.pagefind-ui__search-input::placeholder) {
+      color: var(--faint);
+      opacity: 1;
+    }
+    .search :global(.pagefind-ui__search-input:focus) {
+      border-color: rgba(255, 255, 255, 0.22);
+      outline: none;
+    }
+    .search :global(.pagefind-ui__form::before) {
+      top: 11px;
+      left: 11px;
+      width: 12px;
+      height: 12px;
+      opacity: 0.45;
+    }
+    .search :global(.pagefind-ui__search-clear) {
+      top: 5px;
+      right: 4px;
+      height: 24px;
+      padding: 0 8px;
+      font-size: 12px;
+      background: transparent;
+      color: var(--muted);
     }
     .search :global(.search-off) {
       font-size: 12.5px;
