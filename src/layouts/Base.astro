@@ -11,7 +11,7 @@ interface Props {
   wide?: boolean;
 }
 const { title, description = SITE.description, noindex = false } = Astro.props;
-const fullTitle = title ? `${title} · Coall` : "Coall · Parlez, Coall dessine";
+const fullTitle = title ? `${title} · Coall` : "Coall · Exprimez-vous, Coall met en forme";
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 const isActive = (href: string) => path === href || path.startsWith(href + "/");
 ---

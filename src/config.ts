@@ -1,7 +1,7 @@
 /** Réglages du site. Tout ce qui est marqué [à confirmer] attend une décision. */
 export const SITE = {
   name: "Coall",
-  tagline: "Parlez. Coall dessine.",
+  tagline: "Exprimez-vous. Coall met en forme.",
   description:
     "Coall est une application web de conception collaborative pilotée par la voix : une visio intégrée à un canvas infini, où une IA applique les idées de la réunion sur la maquette.",
   /** [à confirmer] URL de l'application — Coall n'est pas encore hébergé. */
