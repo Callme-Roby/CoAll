@@ -1,0 +1,148 @@
+---
+/** Fenêtre « Inviter des participants » (components/editor/InviteDialog.tsx). */
+import Scaled from "../Scaled.astro";
+import Icon from "../Icon.astro";
+const rights = [
+  ["Tout le monde peut modifier", "Barre de prompt et édition directe des frames", true],
+  ["Tout le monde peut modifier l'officiel", "Sinon, leurs demandes et leurs éditions créent des hypothèses, que l'hôte valide", false],
+  ["Tout le monde peut valider", "Actions proposées par l'IA, choix d'une hypothèse", false],
+] as const;
+---
+<Scaled w={520} h={560} label="Inviter : un lien personnel, à usage unique, valable 12 heures, sans compte ; l'hôte choisit les droits des invités.">
+  <div class="tui-win inv">
+    <div class="hd"><b>Inviter des participants</b><Icon name="X" size={18} /></div>
+    <p class="intro">Chaque lien est personnel, à usage unique et valable 12 heures. Aucun compte n'est nécessaire.</p>
+    <div class="form"><span class="in ph mail">claire@client.fr</span><span class="b lg primary"><Icon name="Mail" size={14} />Inviter</span></div>
+    <p class="nolink"><Icon name="Link2" size={14} />Créer un lien d'invitation sans e-mail</p>
+    <div class="sent">Invitation envoyée à claire@client.fr.</div>
+    <p class="sh">Droits des invités</p>
+    {rights.map(([t, h, on]) => (
+      <div class="rr"><div><p class="rt">{t}</p><p class="rh">{h}</p></div><span class:list={["sw", { on }]}><i></i></span></div>
+    ))}
+    <p class="sh">Participants</p>
+    <div class="pp"><span class="avt pa" style="background:#c25100">JM</span><div><p>Jean Morel (vous)</p><p class="rh">Hôte</p></div></div>
+    <div class="pp"><span class="avt pa" style="background:#007b83">MD</span><div><p>Marc Duval</p><p class="rh">Invité</p></div><span class="mini"><span class="sw sm on"><i></i></span>Modifier</span><span class="mini"><span class="sw sm"><i></i></span>Valider</span></div>
+  </div>
+</Scaled>
+<style>
+  .inv {
+    width: 520px;
+    height: 560px;
+    border-radius: 16px;
+    padding: 24px;
+  }
+  .hd {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+  }
+  .hd b {
+    font-weight: 600;
+  }
+  .hd :global(svg) {
+    color: var(--muted);
+  }
+  .intro {
+    margin-top: 6px !important;
+    color: var(--muted);
+  }
+  .form {
+    margin-top: 16px;
+    display: flex;
+    gap: 8px;
+  }
+  .mail {
+    flex: 1;
+    height: 36px;
+    font-size: 13px;
+    color: var(--ink);
+    border: 1px solid var(--off);
+    background: var(--panel);
+  }
+  .nolink {
+    margin-top: 10px !important;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--off-ink);
+    font-weight: 500;
+  }
+  .sent {
+    margin-top: 12px;
+    background: var(--hover);
+    border-radius: 8px;
+    padding: 12px;
+  }
+  .sh {
+    margin: 20px 0 6px !important;
+    font-weight: 600;
+  }
+  .rr {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 6px 0;
+  }
+  .rh {
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .sw {
+    flex: none;
+    width: 36px;
+    height: 20px;
+    border-radius: 99px;
+    background: var(--faint);
+    position: relative;
+  }
+  .sw i {
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+  }
+  .sw.on {
+    background: var(--off);
+  }
+  .sw.on i {
+    left: 18px;
+  }
+  .sw.sm {
+    width: 26px;
+    height: 14px;
+  }
+  .sw.sm i {
+    width: 10px;
+    height: 10px;
+  }
+  .sw.sm.on i {
+    left: 14px;
+  }
+  .pp {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-top: 1px solid var(--line);
+  }
+  .pa {
+    width: 28px;
+    height: 28px;
+    font-size: 11px;
+  }
+  .mini {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .pp .mini:first-of-type {
+    margin-left: auto;
+  }
+</style>

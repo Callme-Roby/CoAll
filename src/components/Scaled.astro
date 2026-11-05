@@ -1,0 +1,34 @@
+---
+/** Affiche un visuel dessiné à sa taille réelle (w × h px), mis à l'échelle de son conteneur. */
+interface Props { w: number; h: number; class?: string; label?: string }
+const { w, h, class: cls = "", label } = Astro.props;
+---
+<div class={`sc ${cls}`} data-scaled data-w={w} data-h={h} style={`aspect-ratio:${w}/${h}`} role={label ? "img" : undefined} aria-label={label}>
+  <div class="sc-stage tui" style={`width:${w}px;height:${h}px`}><slot /></div>
+</div>
+
+<script>
+  const fit = (el: HTMLElement) => {
+    const st = el.firstElementChild as HTMLElement;
+    st.style.transform = `scale(${el.clientWidth / Number(el.dataset.w)})`;
+  };
+  const ro = new ResizeObserver((es) => es.forEach((e) => fit(e.target as HTMLElement)));
+  document.querySelectorAll<HTMLElement>("[data-scaled]").forEach((el) => {
+    fit(el);
+    ro.observe(el);
+  });
+</script>
+
+<style>
+  .sc {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  .sc-stage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: 0 0;
+  }
+</style>

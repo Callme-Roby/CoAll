@@ -3,6 +3,10 @@ import Base from "../layouts/Base.astro";
 import HeroDemo from "../components/HeroDemo.astro";
 import Flow from "../components/Flow.astro";
 import Waitlist from "../components/Waitlist.astro";
+import FigmaHandoff from "../components/visuals/FigmaHandoff.astro";
+import SkillAssistant from "../components/visuals/SkillAssistant.astro";
+import PreJoin from "../components/visuals/PreJoin.astro";
+import PlayV from "../components/visuals/Play.astro";
 
 const cursor = (color: string) =>
   `<svg viewBox="0 0 18 18"><path d="M2 1.5 L15.5 8.2 L9.2 9.6 L6.4 15.8 Z" fill="${color}" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/></svg>`;
@@ -205,34 +209,21 @@ const cursor = (color: string) =>
 
   <!-- ============ SKILLS ============ -->
   <section class="section">
-    <div class="wrap split reverse">
-      <div class="split-copy reveal">
+    <div class="wrap">
+      <div class="section-head reveal">
         <span class="label">Skills et règles</span>
         <h2 class="h2">Votre agence ne fait que des applications&nbsp;? Coall aussi.</h2>
         <p class="lead">
           Un skill apprend à l'IA votre façon de faire : charte graphique, formats d'écran, composants maison. Une règle tient en une phrase,
           <b>Toujours</b> ou <b>Jamais</b>. Les deux s'appliquent à toutes les demandes de vos projets, celles des invités comprises.
         </p>
-        <ul class="lines">
-          <li>L'assistant pose ses questions, lit votre charte en PDF et vos captures, puis propose le skill.</li>
-          <li><b>Essayer (sans et avec)</b> génère la même page côte à côte, avant d'adopter le skill.</li>
-          <li>Le format est celui des skills de Claude : un dossier avec un <code>SKILL.md</code>.</li>
-        </ul>
-        <a href="/docs/skills-et-regles" class="btn-link">Le guide des skills <span class="arrow">→</span></a>
       </div>
-      <div class="shot assistant reveal" aria-hidden="true">
-        <div class="as-head">Construire avec l'assistant IA</div>
-        <div class="as-msgs">
-          <p class="me">Nous ne concevons que des applications. Toujours en mobile d'abord.</p>
-          <p class="bot">Quelle largeur de référence ? Faut-il aussi une version tablette ? Avez-vous une charte à joindre ?</p>
-          <p class="me att"><span class="pdf">PDF</span> charte-studio.pdf · 390 px, puis 768 px</p>
-        </div>
-        <div class="as-try">
-          <div><span class="cap">Sans</span><div class="try-desk"><i></i><i></i><i></i></div></div>
-          <div><span class="cap">Avec le skill</span><div class="try-mob"><i></i><i></i><i></i><i></i></div></div>
-        </div>
-        <div class="as-foot"><span class="btn btn-sm btn-primary">Ajouter à ma bibliothèque</span></div>
-      </div>
+      <div class="reveal sk-vis"><SkillAssistant /></div>
+      <ul class="lines three reveal">
+        <li>L'assistant pose ses questions, lit votre charte en PDF et vos captures, puis propose le skill.</li>
+        <li><b>Essayer (sans et avec)</b> génère la même page côte à côte, avant d'adopter le skill.</li>
+        <li>Le format est celui des skills de Claude : un dossier avec un <code>SKILL.md</code>. <a href="/docs/skills-et-regles" class="inl">Le guide des skills</a></li>
+      </ul>
     </div>
   </section>
 
@@ -248,18 +239,7 @@ const cursor = (color: string) =>
         </p>
         <p class="note">Le mode Play montre le canvas actuel, en lecture. Il ne fait ni transitions ni interactions programmées : la finition se fait dans Figma.</p>
       </div>
-      <div class="shot play reveal" aria-hidden="true">
-        <div class="pv-bar">
-          <span>←</span><span class="pv-screens">Accueil ▾</span>
-          <span class="pv-dev"><i class="on">Ordinateur</i><i>Tablette</i><i>Mobile</i></span>
-          <span>Recommencer</span><span class="pv-quit">Quitter</span>
-        </div>
-        <div class="pv-page">
-          <div class="pv-nav"><b>Lumen</b><span class="lk">Collection</span><span class="lk">Tarifs</span><span class="btn-l">Commencer</span></div>
-          <div class="pv-h"></div><div class="pv-h s"></div>
-          <div class="pv-grid"><i></i><i></i><i></i></div>
-        </div>
-      </div>
+      <div class="reveal"><PlayV /></div>
     </div>
   </section>
 
@@ -269,28 +249,9 @@ const cursor = (color: string) =>
       <div class="section-head reveal">
         <span class="label">Votre flux de travail</span>
         <h2 class="h2">Concevoir et décider dans Coall.<br /><span class="dim">Finir dans Figma.</span></h2>
-        <p class="lead">Le plugin Coall ⇄ Figma envoie les écrans officiels, leurs variables, leurs composants et leurs variantes.</p>
+        <p class="lead">À la fin de la réunion, le plugin Coall ⇄ Figma envoie les écrans validés, leurs variables, leurs composants et leurs variantes.</p>
       </div>
-      <div class="jr reveal">
-        <div class="jr-col">
-          <h3 class="h3">Dans Coall</h3>
-          <ul>
-            <li>Importer un site, un export Claude Design, ou partir d'une frame blanche</li>
-            <li>En appel, explorer à voix haute, en hypothèses</li>
-            <li>Comparer, décider, garder la trace dans la timeline</li>
-            <li>Versions tablette et mobile, composants et variantes</li>
-          </ul>
-        </div>
-        <div class="jr-col">
-          <h3 class="h3">Dans Figma</h3>
-          <ul>
-            <li>Une page Écrans, rangée par section</li>
-            <li>De vrais calques texte, des icônes en vecteurs</li>
-            <li>Les retouches faites dans Figma sont gardées par défaut</li>
-            <li>Seul ce qui a changé revient à la synchronisation suivante</li>
-          </ul>
-        </div>
-      </div>
+      <div class="reveal"><FigmaHandoff /></div>
       <p class="jr-note reveal">Le plugin requiert l'application Figma pour ordinateur. Il s'installe pour l'instant en mode développement et n'est pas encore publié dans la communauté Figma.</p>
     </div>
   </section>
@@ -303,6 +264,7 @@ const cursor = (color: string) =>
         <h2 class="h2">L'IA écoute quand vous le décidez.</h2>
         <p class="lead">Ces engagements sont tenus par l'outil lui-même. <a href="/docs/confidentialite-et-securite" class="inl">Les lire en détail</a>.</p>
       </div>
+      <div class="reveal pj-wrap"><PreJoin /></div>
       <div class="trust reveal">
         <div><h3 class="h3">Un indicateur visible</h3><p>L'IA n'écoute que lorsque « L'IA écoute » est allumé, et seulement les personnes qui ont donné leur accord.</p></div>
         <div><h3 class="h3">Pause pour tous</h3><p>N'importe qui la met en pause, au bouton ou à la voix. La reprise se fait au bouton.</p></div>
@@ -1066,6 +1028,24 @@ const cursor = (color: string) =>
     }
   }
 
+  .section-head .lead b {
+    color: var(--ink);
+    font-weight: 510;
+  }
+  .sk-vis {
+    max-width: 1000px;
+  }
+  .lines.three {
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0 24px;
+  }
+  @media (max-width: 860px) {
+    .lines.three {
+      grid-template-columns: 1fr;
+    }
+  }
   .lines {
     margin: 4px 0 0;
     padding: 0;
@@ -1314,6 +1294,10 @@ const cursor = (color: string) =>
   }
 
   /* ---------- Confiance ---------- */
+  .pj-wrap {
+    max-width: 860px;
+    margin: 0 auto 56px;
+  }
   .inl {
     color: var(--ink);
     text-decoration: underline;

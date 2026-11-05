@@ -1,0 +1,340 @@
+---
+/** Comparaison d'une hypothèse avec l'officielle : repères numérotés sur le canvas et liste du panneau Design. */
+import Scaled from "../Scaled.astro";
+import Icon from "../Icon.astro";
+---
+<Scaled w={1040} h={560} label="Comparer : chaque différence entre l'hypothèse et l'officielle est numérotée sur les deux pages et listée avec l'avant et l'après.">
+  <div class="tui-win cmp">
+    <div class="cv">
+      <!-- Officielle (page d'origine) -->
+      <div class="fr off">
+        <p class="ft"><b>Tarifs</b></p>
+        <div class="pg">
+          <p class="h">Des formules simples</p>
+          <p class="t">Changez de formule à tout moment.</p>
+          <div class="plans">
+            <div class="pl"><b>Studio</b><span>19 €</span><em class="mk d chg">1</em><span class="btn">Choisir</span></div>
+            <div class="pl"><b>Agence</b><span>49 €</span><span class="btn">Choisir</span></div>
+          </div>
+          <div class="faq rem"><em class="mk d rm">3</em>En savoir plus</div>
+        </div>
+      </div>
+      <!-- Hypothèse -->
+      <div class="fr hyp">
+        <p class="ft"><b>Tarifs</b><span>— Version Marc</span><span class="chip">Hypothèse</span><span class="pin"><Icon name="GitCompareArrows" size={11} />3 différences</span></p>
+        <div class="pg">
+          <p class="h">Des formules simples</p>
+          <p class="t">Changez de formule à tout moment.</p>
+          <div class="plans">
+            <div class="pl"><b>Studio</b><span class="chg-box"><em class="mk chg">1</em>15 €</span><span class="btn">Choisir</span></div>
+            <div class="pl"><b>Agence</b><span>49 €</span><span class="btn">Choisir</span></div>
+          </div>
+          <div class="testi add"><em class="mk ad">2</em>« On a validé l'accueil en une réunion. »</div>
+        </div>
+        <div class="tip">
+          <p><span class="nb">1</span><b>Texte « 15 € »</b></p>
+          <p class="dl"><em>Texte</em> : <s>« 19 € »</s> → <em>« 15 € »</em></p>
+          <p class="dl"><em>Couleur du texte</em> : <s>#111111</s> → <em>#16a34a</em></p>
+        </div>
+      </div>
+    </div>
+
+    <aside class="rp">
+      <div class="tabs"><span class="tab on">Design</span><span class="tab">Timeline</span><span class="tab">Versions</span></div>
+      <div class="sec">
+        <p class="ch">Différences avec l’officielle<span>3</span></p>
+        <span class="b sm full"><Icon name="GitCompareArrows" size={13} />Masquer sur le canvas</span>
+        <p class="legend"><i style="background:#e8a10c"></i>Modifié<i style="background:#14ae5c"></i>Ajouté<i style="background:#ff6369"></i>Retiré</p>
+      </div>
+      <div class="di on"><span class="nb">1</span><div><b>Texte « 15 € »</b><p><em>Texte</em> : <s>« 19 € »</s> → <em>« 15 € »</em></p><p><em>Couleur du texte</em> : <s>#111111</s> → <em>#16a34a</em></p></div></div>
+      <div class="di"><span class="nb ad">2</span><div><b>Texte « On a validé l'accueil… »</b><p>Ajouté</p></div></div>
+      <div class="di"><span class="nb rm">3</span><div><b>Lien « En savoir plus »</b><p>Retiré</p></div></div>
+      <p class="foot">Survolez une différence pour la voir sur les deux pages.</p>
+    </aside>
+  </div>
+</Scaled>
+
+<style>
+  .cmp {
+    width: 1040px;
+    height: 560px;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+  }
+  .cv {
+    position: relative;
+    background-color: var(--canvas);
+    background-image: radial-gradient(#333336 1px, transparent 1.3px);
+    background-size: 24px 24px;
+  }
+  .fr {
+    position: absolute;
+    top: 70px;
+    width: 300px;
+  }
+  .off {
+    left: 40px;
+  }
+  .hyp {
+    left: 380px;
+  }
+  .ft {
+    position: absolute;
+    bottom: calc(100% + 4px);
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    white-space: nowrap;
+    color: var(--muted);
+  }
+  .ft b {
+    font-weight: 500;
+  }
+  .hyp .ft {
+    color: var(--hyp-ink);
+  }
+  .chip {
+    background: var(--hyp-soft);
+    color: var(--hyp-ink);
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 1px 5px;
+  }
+  .pin {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    background: var(--warn);
+    color: #000;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 16px;
+    padding: 0 4px;
+    border-radius: 2px;
+  }
+  .pg {
+    position: relative;
+    background: #fff;
+    color: #111;
+    padding: 22px 18px;
+    display: grid;
+    gap: 8px;
+    font-family: Inter, system-ui, sans-serif;
+    font-size: 10px;
+    height: 400px;
+    align-content: start;
+  }
+  .off .pg {
+    outline: 1px solid var(--off);
+  }
+  .hyp .pg {
+    outline: 2px solid var(--hyp);
+  }
+  .h {
+    font-size: 20px;
+    font-weight: 650;
+    letter-spacing: -0.02em;
+  }
+  .t {
+    color: #666;
+  }
+  .plans {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .pl {
+    position: relative;
+    border: 1px solid #e6e6e6;
+    border-radius: 8px;
+    padding: 12px;
+    display: grid;
+    gap: 6px;
+  }
+  .pl span:not(.btn) {
+    font-size: 18px;
+    font-weight: 650;
+  }
+  .btn {
+    justify-self: start;
+    background: #111;
+    color: #fff;
+    border-radius: 99px;
+    padding: 4px 10px;
+    font-size: 9px;
+    font-weight: 600;
+  }
+  .chg-box {
+    position: relative;
+    justify-self: start;
+    color: #16a34a;
+    outline: 1.5px solid var(--warn);
+    outline-offset: 1px;
+    background: color-mix(in srgb, var(--warn) 18%, transparent);
+  }
+  .off .pl:first-child span:first-of-type {
+    justify-self: start;
+    outline: 1.5px dashed var(--warn);
+    outline-offset: 1px;
+  }
+  .faq,
+  .testi {
+    position: relative;
+    margin-top: 12px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 10px;
+  }
+  .rem {
+    color: #555;
+    text-decoration: underline;
+    outline: 1.5px dashed var(--danger);
+    background: color-mix(in srgb, var(--danger) 8%, transparent);
+  }
+  .add {
+    background: #f3f1ee;
+    outline: 1.5px solid var(--hyp);
+    outline-offset: 1px;
+  }
+  .mk {
+    position: absolute;
+    left: -10px;
+    top: -10px;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    border-radius: 99px;
+    font-style: normal;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    z-index: 2;
+  }
+  .mk.chg {
+    background: var(--warn);
+    color: #000;
+  }
+  .mk.ad {
+    background: var(--hyp);
+    color: #fff;
+  }
+  .mk.rm {
+    background: var(--danger);
+    color: #fff;
+  }
+  .off .mk.chg {
+    left: -12px;
+    top: 26px;
+  }
+  .tip {
+    position: absolute;
+    left: 10px;
+    top: 196px;
+    width: 280px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+    display: grid;
+    gap: 3px;
+    z-index: 3;
+  }
+  .tip p:first-child {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tip b {
+    font-weight: 500;
+  }
+  .dl,
+  .di p {
+    color: var(--muted);
+  }
+  .dl em,
+  .di em {
+    font-style: normal;
+    color: var(--ink);
+  }
+  s {
+    opacity: 0.8;
+  }
+
+  .rp {
+    border-left: 1px solid var(--line);
+  }
+  .sec {
+    padding: 12px;
+    display: grid;
+    gap: 8px;
+  }
+  .ch {
+    font-weight: 600;
+  }
+  .ch span {
+    margin-left: 6px;
+    font-weight: 400;
+    color: var(--muted);
+  }
+  .legend {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--muted);
+  }
+  .legend i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-left: 8px;
+  }
+  .legend i:first-child {
+    margin-left: 0;
+  }
+  .di {
+    display: flex;
+    gap: 8px;
+    padding: 6px 12px;
+  }
+  .di.on {
+    background: var(--hover);
+  }
+  .di b {
+    font-weight: 500;
+  }
+  .di p {
+    margin-top: 2px !important;
+  }
+  .nb {
+    flex: none;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    border-radius: 99px;
+    background: var(--warn);
+    color: #000;
+    font-size: 10px;
+    font-weight: 600;
+    display: inline-grid;
+    place-items: center;
+  }
+  .nb.ad {
+    background: var(--hyp);
+    color: #fff;
+  }
+  .nb.rm {
+    background: var(--danger);
+    color: #fff;
+  }
+  .foot {
+    padding: 6px 12px;
+    color: var(--faint);
+  }
+</style>

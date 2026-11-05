@@ -1,0 +1,174 @@
+---
+/** Mode Play (components/editor/Play.tsx) : barre du prototype et page en plein écran. */
+import Scaled from "../Scaled.astro";
+import Icon from "../Icon.astro";
+---
+<Scaled w={900} h={540} label="Mode Play : la frame s'ouvre en plein écran comme un site ; les liens mènent aux autres écrans, dans le même format.">
+  <div class="tui play">
+    <div class="bar">
+      <span class="q"><Icon name="X" size={16} />Quitter</span>
+      <span class="bk"><Icon name="ArrowLeft" size={16} /></span>
+      <span class="nm">Accueil</span>
+      <span class="dev"><i class="on"><Icon name="Monitor" size={14} />1440</i><i><Icon name="Tablet" size={14} />768</i><i><Icon name="Smartphone" size={14} />390</i></span>
+      <span class="sel">Accueil <Icon name="ChevronDown" size={12} /></span>
+      <span class="bk"><Icon name="RotateCcw" size={15} /></span>
+    </div>
+    <div class="stagep">
+      <div class="page">
+        <div class="nav"><b>Lumen</b><span class="lk">Collection</span><span class="lk">Atelier</span><span class="lk">Tarifs</span><span class="cta lk">Commencer</span></div>
+        <p class="eye">Nouvelle collection</p>
+        <p class="h">La lumière qui vous suit.</p>
+        <p class="t">Une lumière douce le matin, franche l'après-midi, chaude le soir.</p>
+        <span class="btn lk">Voir la collection</span>
+        <div class="grid"><i></i><i></i><i></i></div>
+      </div>
+    </div>
+  </div>
+</Scaled>
+<style>
+  .play {
+    width: 900px;
+    height: 540px;
+    background: #0b0b0c;
+    color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #2f2f31;
+  }
+  .bar {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 13px;
+  }
+  .q {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 32px;
+    padding: 0 8px;
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .bk {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+  }
+  .nm {
+    flex: 1;
+    font-weight: 500;
+  }
+  .dev {
+    display: flex;
+    padding: 2px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+  .dev i {
+    font-style: normal;
+    height: 28px;
+    padding: 0 8px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    font-variant-numeric: tabular-nums;
+  }
+  .dev i.on {
+    background: #fff;
+    color: #000;
+  }
+  .sel {
+    height: 32px;
+    padding: 0 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.1);
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .stagep {
+    padding: 12px 48px 0;
+    height: calc(100% - 48px);
+  }
+  .page {
+    height: 100%;
+    background: #fbfaf8;
+    border-radius: 6px 6px 0 0;
+    color: #111;
+    padding: 22px 36px;
+    font-family: Inter, system-ui, sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 26px;
+  }
+  .nav b {
+    color: #111;
+    font-size: 15px;
+    margin-right: auto;
+  }
+  .lk {
+    outline: 2px solid rgba(124, 58, 237, 0.75);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+  .cta {
+    background: #111;
+    color: #fff;
+    border-radius: 99px;
+    padding: 5px 12px;
+  }
+  .eye {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8a6d3b;
+  }
+  .h {
+    font-size: 42px;
+    font-weight: 650;
+    letter-spacing: -0.035em;
+    color: #16a34a;
+    line-height: 1;
+  }
+  .t {
+    color: #555;
+    font-size: 13px;
+  }
+  .btn {
+    align-self: flex-start;
+    background: #111;
+    color: #fff;
+    border-radius: 99px;
+    padding: 7px 14px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .grid {
+    margin-top: 14px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    flex: 1;
+  }
+  .grid i {
+    border-radius: 6px;
+    background: #ece8e2;
+  }
+</style>

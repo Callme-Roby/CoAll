@@ -1,0 +1,271 @@
+---
+/** L'assistant de création de skill (components/home/SkillAssistant.tsx), avec un brouillon proposé et l'essai sans / avec. */
+import Scaled from "../Scaled.astro";
+import Icon from "../Icon.astro";
+---
+<Scaled w={900} h={600} label="L'assistant IA pose ses questions, lit la charte jointe et propose un skill modifiable, que l'on essaie sans puis avec.">
+  <div class="tui-win sa">
+    <header>
+      <span class="wand"><Icon name="Wand2" size={15} /></span>
+      <b>Construire un skill avec l'assistant IA</b>
+      <span class="b sm ghost">Fermer</span>
+    </header>
+    <div class="cols">
+      <!-- Conversation -->
+      <section class="chat">
+        <div class="msgs">
+          <p class="m me">Nous ne concevons que des applications. Toujours en mobile d'abord.</p>
+          <div class="att-row"><span class="att"><Icon name="Paperclip" size={10} />charte-studio.pdf</span></div>
+          <p class="m bot">J'ai lu la charte : vert #16a34a, Inter, arrondis de 12 px. Quelques questions avant de rédiger :</p>
+          <div class="qs">
+            <p><b>?</b> Quelle largeur de référence pour le mobile : 390 px ?</p>
+            <p><b>?</b> Faut-il aussi une version tablette à 768 px ?</p>
+            <p><b>?</b> Une taille minimale pour les zones tactiles ?</p>
+          </div>
+          <p class="m me">390 px, puis 768 px. Boutons de 44 px minimum.</p>
+        </div>
+        <div class="comp">
+          <span class="clip"><Icon name="Paperclip" size={15} /></span>
+          <span class="area ta">Votre réponse…</span>
+          <span class="b primary sendb"><Icon name="Send" size={14} /></span>
+        </div>
+      </section>
+
+      <!-- Brouillon -->
+      <section class="draft">
+        <p class="dh"><Icon name="Sparkles" size={12} />Skill proposé</p>
+        <span class="field strong">mobile-d-abord</span>
+        <span class="field">Concevoir chaque écran en mobile (390 px) avant la tablette et l'ordinateur.</span>
+        <div class="area mono instr">
+          ## Consignes<br />
+          - Créer d'abord la version 390 px, puis 768 px.<br />
+          - Zones tactiles de 44 px minimum.<br />
+          - Navigation en barre basse sur mobile.<br />
+          - Couleurs et polices : voir tokens.json.
+        </div>
+        <div class="area mono tok">{`{ "color": { "primary": "#16a34a" }, "radius": { "md": 12 } }`}</div>
+        <div class="trial">
+          <div><p class="cap">Sans le skill</p><div class="pv desk"><i></i><i></i><i></i></div></div>
+          <div><p class="cap">Avec le skill</p><div class="pv mob"><i></i><i></i><i></i><i></i></div></div>
+        </div>
+        <div class="dact">
+          <span class="b sm"><Icon name="FlaskConical" size={13} />Essayer (sans et avec)</span>
+          <span class="b sm primary"><Icon name="Check" size={13} />Ajouter à ma bibliothèque</span>
+        </div>
+      </section>
+    </div>
+  </div>
+</Scaled>
+
+<style>
+  .sa {
+    width: 900px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+  }
+  header b {
+    font-weight: 600;
+  }
+  header .b {
+    margin-left: auto;
+  }
+  .wand {
+    display: grid;
+    color: var(--ai);
+  }
+  .cols {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 0;
+  }
+  .chat {
+    border-right: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .msgs {
+    flex: 1;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .m {
+    max-width: 85%;
+    padding: 8px 12px;
+    border-radius: 8px;
+  }
+  .m.me {
+    align-self: flex-end;
+    background: var(--off-strong);
+    color: #fff;
+  }
+  .m.bot {
+    background: var(--ai-soft);
+  }
+  .att-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -6px;
+  }
+  .att {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: var(--hover);
+    font-size: 11px;
+  }
+  .qs {
+    border: 1px solid rgba(169, 121, 255, 0.3);
+    border-radius: 8px;
+    padding: 8px 12px;
+    display: grid;
+    gap: 4px;
+    max-width: 92%;
+  }
+  .qs b {
+    color: var(--ai);
+    margin-right: 4px;
+  }
+  .comp {
+    border-top: 1px solid var(--line);
+    padding: 12px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .clip {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+  }
+  .ta {
+    flex: 1;
+    font-size: 13px;
+    color: var(--muted);
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+  }
+  .sendb {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+  }
+  .draft {
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 0;
+  }
+  .dh {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+  .dh :global(svg) {
+    color: var(--ai);
+  }
+  .field {
+    height: 32px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .field.strong {
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .instr {
+    font-size: 11.5px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  .tok {
+    font-size: 10.5px;
+    color: var(--muted);
+  }
+  .trial {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 12px;
+    margin-top: 2px;
+  }
+  .cap {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 6px !important;
+  }
+  .pv {
+    height: 96px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #fff;
+    padding: 8px;
+    display: grid;
+    gap: 5px;
+  }
+  .pv.desk {
+    grid-template-columns: repeat(3, 1fr);
+    align-content: end;
+  }
+  .pv.desk i {
+    height: 40px;
+    border-radius: 3px;
+    background: #ececec;
+  }
+  .pv.mob {
+    width: 58px;
+    margin: 0 auto;
+    align-content: start;
+    padding: 6px;
+  }
+  .pv.mob i {
+    height: 10px;
+    border-radius: 3px;
+    background: #ececec;
+  }
+  .pv.mob i:nth-child(2) {
+    height: 30px;
+  }
+  .pv.mob i:last-child {
+    height: 14px;
+    border-radius: 99px;
+    background: #16a34a;
+  }
+  .dact {
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+</style>

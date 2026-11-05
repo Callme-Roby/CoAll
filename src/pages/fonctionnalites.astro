@@ -1,6 +1,12 @@
 ---
 import Base from "../layouts/Base.astro";
 import PageHead from "../components/PageHead.astro";
+import FigmaHandoff from "../components/visuals/FigmaHandoff.astro";
+import SkillAssistant from "../components/visuals/SkillAssistant.astro";
+import PreJoin from "../components/visuals/PreJoin.astro";
+import Timeline from "../components/visuals/Timeline.astro";
+import CompareV from "../components/visuals/Compare.astro";
+import Invite from "../components/visuals/Invite.astro";
 
 const features = [
   {
@@ -127,7 +133,11 @@ const more = [
           <a href={f.doc} class="btn-link">Lire la documentation <span class="arrow">→</span></a>
         </div>
         <div class="feat-body reveal">
-          <div class="capture">{f.cap}</div>
+          {f.id === "voix" && <div class="vis"><PreJoin /></div>}
+          {f.id === "non-destructif" && <div class="vis narrow"><Timeline /></div>}
+          {f.id === "comparer" && <div class="vis"><CompareV /></div>}
+          {f.id === "skills" && <div class="vis"><SkillAssistant /></div>}
+          {f.id === "collaborer" && <div class="vis narrow"><Invite /></div>}
           <dl class="pts">
             {f.pts.map(([a, b]) => (
               <div><dt>{a}</dt><dd>{b}</dd></div>
@@ -136,6 +146,7 @@ const more = [
           {f.note && <p class="fnote">{f.note}</p>}
         </div>
       </div>
+      {f.id === "figma" && <div class="wrap fig-wide reveal"><FigmaHandoff /></div>}
     </section>
   ))}
 
@@ -170,19 +181,25 @@ const more = [
   }
   .feat-grid {
     display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
-    gap: clamp(32px, 6vw, 96px);
-    align-items: start;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
   }
   .feat-copy {
-    position: sticky;
-    top: 110px;
     display: grid;
-    gap: 18px;
-    justify-items: start;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 16px 64px;
+    align-items: end;
   }
-  .feat-grid.alt .feat-copy {
-    order: 2;
+  .feat-copy .h2 {
+    grid-row: span 2;
+  }
+  .feat-copy .btn-link {
+    justify-self: start;
+  }
+  .pts {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 48px;
   }
   .doc-link {
     display: inline-flex;
@@ -193,17 +210,29 @@ const more = [
   .doc-link:hover {
     color: var(--ink);
   }
-  .feat-body .capture {
-    margin-top: 0;
-    min-height: 280px;
+  .vis {
+    margin-bottom: 40px;
+    max-width: 1040px;
+  }
+  .vis.narrow {
+    width: 360px;
+    max-width: 100%;
+    float: right;
+    margin: 0 0 24px 48px;
+  }
+  .fig-wide {
+    margin-top: 56px;
   }
   .pts {
     margin: 0;
     display: grid;
   }
+  .vis.narrow ~ .pts {
+    grid-template-columns: 1fr;
+  }
   .pts div {
     display: grid;
-    grid-template-columns: 180px 1fr;
+    grid-template-columns: 150px 1fr;
     gap: 20px;
     padding: 16px 0;
     border-top: 1px solid var(--line);
@@ -228,14 +257,16 @@ const more = [
     font-size: 14px;
   }
   @media (max-width: 900px) {
-    .feat-grid {
-      grid-template-columns: 1fr;
+    .feat-copy,
+    .pts {
+      grid-template-columns: 1fr !important;
     }
-    .feat-grid.alt .feat-copy {
-      order: 0;
+    .feat-copy .h2 {
+      grid-row: auto;
     }
-    .feat-copy {
-      position: static;
+    .vis.narrow {
+      float: none;
+      margin: 0 auto 32px;
     }
   }
   @media (max-width: 560px) {

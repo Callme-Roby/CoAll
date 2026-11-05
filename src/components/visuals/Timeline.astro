@@ -1,0 +1,163 @@
+---
+/** Onglet Timeline (components/editor/TimelinePanel.tsx) : chaque étape, son auteur, sa source, le modèle et la durée. */
+import Scaled from "../Scaled.astro";
+import Icon from "../Icon.astro";
+const steps = [
+  { k: "sys", icon: "Wrench", sum: "Import : Accueil, Tarifs, Atelier (3 frames)", who: [["JM", "#c25100"]], meta: "Jean Morel · 14:02" },
+  { k: "req", icon: "Sparkles", sum: "Ajouter une section témoignages sous les tarifs", who: [["MD", "#007b83"]], meta: "Marc Duval", src: "Mic", t: "14:09 · Sonnet · 8,1 s" },
+  { k: "hyp", icon: "GitBranch", sum: "Hypothèse « Version Marc » de Tarifs", det: "Section « Témoignages » ajoutée sous les formules", who: [["MD", "#007b83"]], meta: "Marc Duval", src: "Mic", t: "14:09", link: true },
+  { k: "hyp", icon: "GitBranch", sum: "Hypothèse « Version Alice » de Tarifs", det: "Désaccord : une version par personne", who: [["AB", "#9334e6"]], meta: "Alice Bernard", src: "Mic", t: "14:10", link: true },
+  { k: "dec", icon: "Star", sum: "Décision : « Version Marc » devient l'officielle", det: "L'ancienne Tarifs est archivée.", who: [["AB", "#9334e6"], ["JM", "#c25100"]], meta: "2 personnes", src: "Mic", t: "14:12", on: true },
+  { k: "edit", icon: "Pencil", sum: "Tarifs : prix de la formule Studio modifié", who: [["JM", "#c25100"]], meta: "Jean Morel", src: "Keyboard", t: "14:15" },
+];
+---
+<Scaled w={340} h={560} label="La timeline garde chaque demande, hypothèse et décision, avec son auteur, l'heure et la source (voix ou écrit).">
+  <div class="tui-win tl">
+    <div class="tabs"><span class="tab">Design</span><span class="tab on">Timeline</span><span class="tab">Versions</span></div>
+    <div class="st"><span>Note-timeline</span><span class="ex"><Icon name="FileText" size={12} />.md <Icon name="FileDown" size={12} />PDF</span></div>
+    <div class="seg2"><i class="on">Étapes</i><i>Transcription (12)</i></div>
+    <div class="steps">
+      {steps.map((s) => (
+        <div class:list={["step", { on: s.on }]}>
+          <span class={`k k-${s.k}`}><Icon name={s.icon} size={11} /></span>
+          <div>
+            <p class:list={["sum", { dec: s.k === "dec" }]}>{s.sum}</p>
+            {s.det && <p class="det">{s.det}</p>}
+            <p class="meta">
+              <span class="avs">{s.who.map(([i, c]) => <span class="ma" style={`background:${c}`}>{i}</span>)}</span>
+              {s.meta}
+              {s.src && <Icon name={s.src} size={10} />}
+              {s.t ?? ""}
+              {s.link && <span class="tlink"><Icon name="MessageSquareText" size={10} />Transcription</span>}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</Scaled>
+<style>
+  .tl {
+    width: 340px;
+    height: 560px;
+  }
+  .ex {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 400;
+    color: var(--muted);
+  }
+  .seg2 {
+    margin: 0 12px 8px;
+    display: flex;
+    padding: 2px;
+    border-radius: 6px;
+    background: var(--hover);
+    font-size: 11px;
+  }
+  .seg2 i {
+    flex: 1;
+    font-style: normal;
+    text-align: center;
+    height: 24px;
+    line-height: 24px;
+    border-radius: 5px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+  .seg2 i.on {
+    background: var(--panel);
+    color: var(--ink);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  .steps {
+    position: relative;
+    padding: 0 12px;
+  }
+  .steps::before {
+    content: "";
+    position: absolute;
+    left: 22px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: var(--line);
+  }
+  .step {
+    position: relative;
+    display: flex;
+    gap: 8px;
+    padding: 8px 4px 8px 2px;
+    border-radius: 6px;
+  }
+  .step.on {
+    background: var(--off-soft);
+  }
+  .k {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid currentColor;
+    background: var(--panel);
+    display: grid;
+    place-items: center;
+  }
+  .k-sys,
+  .k-edit {
+    color: var(--muted);
+  }
+  .k-req {
+    color: var(--ai);
+  }
+  .k-hyp {
+    color: var(--hyp);
+  }
+  .k-dec {
+    color: var(--off);
+  }
+  .sum {
+    font-weight: 500;
+    line-height: 1.375;
+  }
+  .sum.dec {
+    font-weight: 600;
+  }
+  .det {
+    color: var(--muted);
+    margin-top: 2px !important;
+  }
+  .meta {
+    margin-top: 4px !important;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px 6px;
+    color: var(--muted);
+  }
+  .avs {
+    display: inline-flex;
+  }
+  .ma {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 8px;
+    font-weight: 600;
+    display: inline-grid;
+    place-items: center;
+    box-shadow: 0 0 0 1px #fff;
+    margin-right: -4px;
+  }
+  .ma:last-child {
+    margin-right: 0;
+  }
+  .tlink {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    color: var(--ai);
+  }
+</style>

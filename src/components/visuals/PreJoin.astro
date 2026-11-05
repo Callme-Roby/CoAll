@@ -1,0 +1,267 @@
+---
+/** Fenêtre d'entrée de l'appel (components/call/PreJoin.tsx) : aperçu, micro, périphériques, accord d'écoute de l'IA. */
+import Scaled from "../Scaled.astro";
+import Icon from "../Icon.astro";
+---
+<Scaled w={860} h={480} label="Fenêtre d'entrée de l'appel : chacun choisit son micro et sa caméra, et accepte ou non que l'IA écoute sa voix.">
+  <div class="tui-win pj">
+    <span class="close"><Icon name="X" size={16} /></span>
+    <div class="left">
+      <div class="prev">
+        <span class="ini">AB</span>
+        <span class="tag">Alice Bernard</span>
+      </div>
+      <div class="tg">
+        <span class="mt"><Icon name="Mic" size={16} />Micro</span>
+        <span class="mt"><Icon name="Video" size={16} />Caméra</span>
+        <span class="meter">{[6, 8, 10, 12, 14, 16, 18, 20].map((h, i) => <i style={`height:${h}px`} class:list={[{ lit: i < 5 }]}></i>)}</span>
+      </div>
+      <div class="dev">
+        <span class="ds"><em>Micro</em>Par défaut<Icon name="ChevronDown" size={12} /></span>
+        <span class="ds"><em>Caméra</em>Par défaut<Icon name="ChevronDown" size={12} /></span>
+      </div>
+    </div>
+    <div class="right">
+      <p class="eye">Appel du projet</p>
+      <p class="h">Rejoindre l’appel</p>
+      <p class="who">
+        <span class="stack"><i style="background:#c25100">JM</i><i style="background:#007b83">MD</i></span>
+        Jean et Marc sont dans l’appel
+      </p>
+      <label class="consent">
+        <span class="cb"><Icon name="Check" size={11} stroke={3} /></span>
+        <span>
+          <b><Icon name="AudioLines" size={13} />Écoute de l’IA</b>
+          <span class="body">J’accepte que l’IA écoute ma voix pendant l’appel, uniquement lorsque l’indicateur « L’IA écoute » est allumé. Chacun peut la mettre en pause.</span>
+          <span class="fine">Sans accord, vous participez normalement : votre voix n’est pas transcrite.</span>
+        </span>
+      </label>
+      <div class="acts">
+        <span class="cancel">Annuler</span>
+        <span class="enter"><Icon name="LogIn" size={14} />Entrer dans l’appel</span>
+      </div>
+    </div>
+  </div>
+</Scaled>
+
+<style>
+  .pj {
+    position: relative;
+    width: 860px;
+    height: 480px;
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    border-radius: 16px;
+  }
+  .close {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+  }
+  .left {
+    background: var(--canvas);
+    border-right: 1px solid var(--line);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .prev {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    background: var(--stage);
+    display: grid;
+    place-items: center;
+  }
+  .ini {
+    width: 80px;
+    height: 80px;
+    border-radius: 16px;
+    background: #9334e6;
+    color: #fff;
+    font-size: 30px;
+    font-weight: 600;
+    display: grid;
+    place-items: center;
+  }
+  .tag {
+    position: absolute;
+    left: 8px;
+    bottom: 8px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.45);
+    font-size: 11px;
+    font-weight: 500;
+    color: #fff;
+  }
+  .tg {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .mt {
+    height: 36px;
+    padding: 0 12px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .meter {
+    margin-left: auto;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+  .meter i {
+    width: 4px;
+    border-radius: 99px;
+    background: var(--line);
+  }
+  .meter i.lit {
+    background: var(--hyp);
+  }
+  .dev {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .ds {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    border-radius: 8px;
+    padding: 6px 10px;
+  }
+  .ds em {
+    font-style: normal;
+    color: var(--muted);
+  }
+  .ds :global(svg) {
+    margin-left: auto;
+    color: var(--muted);
+  }
+  .right {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+  }
+  .eye {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+  .h {
+    margin-top: 4px !important;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .who {
+    margin-top: 12px !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .stack {
+    display: flex;
+  }
+  .stack i {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    color: #fff;
+    font-style: normal;
+    font-size: 10px;
+    font-weight: 600;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 0 0 2px var(--panel);
+    margin-right: -6px;
+  }
+  .stack i:last-child {
+    margin-right: 0;
+  }
+  .consent {
+    margin-top: 20px;
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(169, 121, 255, 0.4);
+    background: var(--ai-soft);
+    line-height: 1.625;
+  }
+  .cb {
+    flex: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    background: var(--ai);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    margin-top: 3px;
+  }
+  .consent b {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+  }
+  .consent b :global(svg) {
+    color: var(--ai);
+  }
+  .body {
+    display: block;
+    margin-top: 2px;
+  }
+  .fine {
+    display: block;
+    margin-top: 6px;
+    color: var(--muted);
+  }
+  .acts {
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+  .cancel,
+  .enter {
+    height: 36px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .cancel {
+    padding: 0 12px;
+    color: var(--muted);
+  }
+  .enter {
+    padding: 0 16px;
+    background: var(--ink);
+    color: var(--panel);
+  }
+</style>

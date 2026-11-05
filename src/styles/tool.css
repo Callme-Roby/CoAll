@@ -1,0 +1,189 @@
+/* Primitives de l'interface de Coall (thème sombre), pour les visuels produit du site.
+   Valeurs relevées dans apps/web/app/globals.css et components/ui/primitives.tsx du dépôt co-design. */
+
+.tui {
+  --ink: #ececec;
+  --muted: #a6a6a6;
+  --faint: #6a6a6a;
+  --line: #2f2f31;
+  --panel: #1c1c1e;
+  --hover: #2a2a2d;
+  --canvas: #121213;
+  --raised: #3a3a3f;
+  --stage: #0b0b0c;
+  --off: #0d99ff;
+  --off-soft: #0b2c44;
+  --off-ink: #4cb0ff;
+  --off-strong: #0a6ccf;
+  --hyp: #14ae5c;
+  --hyp-soft: #0f2e1d;
+  --hyp-ink: #5ee08f;
+  --hyp-strong: #0b7a3e;
+  --ai: #a979ff;
+  --ai-soft: #2a1c45;
+  --ai-strong: #7c3aed;
+  --danger: #ff6369;
+  --danger-strong: #c9252c;
+  --warn: #e8a10c;
+  --warn-ink: #f0b232;
+  --arch: #9a9a9a;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Inter, Roboto, sans-serif;
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: 0;
+  color: var(--ink);
+  font-feature-settings: normal;
+  -webkit-font-smoothing: antialiased;
+  text-align: left;
+}
+.tui svg {
+  flex: none;
+  display: inline-block;
+}
+.tui p {
+  margin: 0;
+}
+.tui .mono {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+/* Fenêtre (capture d'un panneau) */
+.tui-win {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.4),
+    0 30px 60px -24px rgba(0, 0, 0, 0.8);
+}
+
+/* Boutons */
+.tui .b {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 12px;
+  white-space: nowrap;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--ink);
+}
+.tui .b.sm {
+  height: 28px;
+  padding: 0 8px;
+  font-size: 11px;
+}
+.tui .b.lg {
+  height: 36px;
+  border-radius: 8px;
+  padding: 0 16px;
+  font-size: 13px;
+}
+.tui .b.primary {
+  background: var(--off-strong);
+  border-color: var(--off-strong);
+  color: #fff;
+}
+.tui .b.ghost {
+  border-color: transparent;
+  background: transparent;
+}
+.tui .b.danger {
+  color: var(--danger);
+}
+.tui .b.full {
+  width: 100%;
+}
+
+/* Champs */
+.tui .in {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 8px;
+  border-radius: 5px;
+  background: var(--hover);
+  font-size: 11px;
+  color: var(--ink);
+  min-width: 0;
+}
+.tui .in.ph {
+  color: var(--muted);
+}
+.tui .area {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px 10px;
+  background: var(--panel);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* Onglets et titres */
+.tui .tabs {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 8px;
+  border-bottom: 1px solid var(--line);
+}
+.tui .tab {
+  height: 28px;
+  padding: 0 8px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+  color: var(--muted);
+}
+.tui .tab.on {
+  background: var(--hover);
+  color: var(--ink);
+}
+.tui .st {
+  height: 32px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 600;
+}
+.tui .seg {
+  display: inline-flex;
+  padding: 2px;
+  border-radius: 8px;
+  background: var(--hover);
+}
+.tui .seg i {
+  font-style: normal;
+  padding: 0 10px;
+  height: 24px;
+  line-height: 24px;
+  border-radius: 6px;
+  color: var(--muted);
+  font-weight: 500;
+}
+.tui .seg i.on {
+  background: var(--raised);
+  color: var(--ink);
+}
+
+/* Avatars */
+.tui .avt {
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: 600;
+  flex: none;
+}
