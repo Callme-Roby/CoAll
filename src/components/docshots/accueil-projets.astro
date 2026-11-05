@@ -1,0 +1,186 @@
+---
+/** Page d'accueil de Coall (app/(home)/page.tsx) : barre latérale, liste des projets avec recherche, filtres, tri et miniatures. */
+import Scaled from "../Scaled.astro";
+import Icon from "../Icon.astro";
+import HomeShell from "./_d/HomeShell.astro";
+
+type F = [number, number, number, number, 0 | 1]; // x, y, largeur, hauteur, hypothèse
+const projects: { name: string; meta: string; members?: number; guest?: boolean; frames: F[] }[] = [
+  { name: "Lumen · Site vitrine", meta: "Il y a 12 min · 4 pages, 2 hypothèses", members: 3, frames: [[0, 0, 144, 200, 0], [184, 0, 144, 170, 0], [368, 0, 144, 230, 0], [552, 0, 40, 200, 0], [0, 260, 144, 200, 1], [184, 260, 144, 170, 1]] },
+  { name: "Studio Yoga · Application", meta: "Il y a 3 h · 6 pages", frames: [[0, 0, 60, 130, 0], [90, 0, 60, 130, 0], [180, 0, 60, 130, 0], [0, 170, 60, 130, 0], [90, 170, 60, 130, 0], [180, 170, 60, 130, 0]] },
+  { name: "Atelier Bois · Boutique", meta: "Il y a 1 j · 3 pages, 1 hypothèse", members: 2, guest: true, frames: [[0, 0, 144, 220, 0], [184, 0, 144, 180, 0], [368, 0, 144, 200, 0], [368, 260, 144, 200, 1]] },
+  { name: "Refonte des tarifs", meta: "Il y a 2 j · 2 pages, 3 hypothèses", members: 2, frames: [[0, 0, 144, 190, 0], [184, 0, 144, 190, 1], [368, 0, 144, 190, 1], [552, 0, 144, 190, 1], [0, 230, 144, 160, 0]] },
+  { name: "Newsletter de mars", meta: "Il y a 5 j · 1 page", frames: [[0, 0, 80, 220, 0]] },
+  { name: "Sans titre", meta: "Il y a 6 j", frames: [] },
+];
+const box = (fr: F[]) => {
+  const minX = Math.min(...fr.map((f) => f[0]));
+  const minY = Math.min(...fr.map((f) => f[1]));
+  const maxX = Math.max(...fr.map((f) => f[0] + f[2]));
+  const maxY = Math.max(...fr.map((f) => f[1] + f[3]));
+  const pad = Math.max(maxX - minX, maxY - minY) * 0.06;
+  return { vb: `${minX - pad} ${minY - pad} ${maxX - minX + pad * 2} ${maxY - minY + pad * 2}`, sw: Math.max(maxX - minX, maxY - minY) * 0.006 };
+};
+---
+<Scaled w={1200} h={720} label="Page d'accueil de Coall : la barre latérale (Projets, Collaborateurs, Skills et règles, Compte, Plan et facturation, Préférences) et la grille des projets, chacun avec la miniature de son canvas.">
+  <HomeShell active="Projets" title="Projets" desc="Vos maquettes et celles que l’on partage avec vous. Glissez un .zip sur cette page pour créer un projet.">
+    <Fragment slot="actions">
+      <div class="acts">
+        <span class="b lg"><Icon name="FileUp" size={14} />Importer un projet</span>
+        <span class="b lg primary"><Icon name="Plus" size={14} />Nouveau projet</span>
+      </div>
+    </Fragment>
+    <div class="bar">
+      <span class="srch"><Icon name="Search" size={14} />Rechercher un projet</span>
+      <span class="flt"><i class="on">Tous</i><i>Créés par moi</i><i>Partagés avec moi</i></span>
+      <span class="sort">Modifiés récemment<Icon name="ChevronDown" size={12} /></span>
+    </div>
+    <div data-t="ul" class="grid">
+      {projects.map((p) => {
+        const b = p.frames.length ? box(p.frames) : null;
+        return (
+          <div data-t="li" class="card">
+            {b ? (
+              <div class="thumb">
+                <svg viewBox={b.vb} preserveAspectRatio="xMidYMid meet">
+                  {p.frames.map(([x, y, w, h, hyp]) => (
+                    <rect x={x} y={y} width={w} height={h} rx={b.sw} stroke-width={b.sw} fill={hyp ? "#0f2e1d" : "#1c1c1e"} stroke={hyp ? "#14ae5c" : "#0d99ff"} />
+                  ))}
+                </svg>
+              </div>
+            ) : (
+              <div class="thumb empty">Aucune frame</div>
+            )}
+            <div class="info">
+              <div data-t="p" class="nm"><b>{p.name}</b>{p.guest && <span class="gst">Invité</span>}</div>
+              <div data-t="p" class="mt"><span>{p.meta}</span>{p.members && <span class="mb"><Icon name="Users" size={11} />{p.members}</span>}</div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </HomeShell>
+</Scaled>
+
+<style>
+  .acts {
+    display: flex;
+    gap: 8px;
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .srch {
+    width: 288px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--panel);
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .flt {
+    display: flex;
+    padding: 2px;
+    border-radius: 8px;
+    background: var(--hover);
+  }
+  .flt i {
+    font-style: normal;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 12px;
+    border-radius: 6px;
+    color: var(--muted);
+  }
+  .flt i.on {
+    background: var(--raised);
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .sort {
+    margin-left: auto;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 8px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--panel);
+  }
+  .grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .card {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--panel);
+    overflow: hidden;
+  }
+  .thumb {
+    height: 144px;
+    background-color: var(--canvas);
+    background-image: radial-gradient(var(--line) 1px, transparent 1px);
+    background-size: 12px 12px;
+  }
+  .thumb svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .thumb.empty {
+    display: grid;
+    place-items: center;
+    font-size: 11px;
+    color: var(--muted);
+    background-image: none;
+  }
+  .info {
+    border-top: 1px solid var(--line);
+    padding: 12px 16px;
+  }
+  .nm {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+  }
+  .nm b {
+    font-weight: 600;
+  }
+  .gst {
+    border-radius: 6px;
+    background: var(--hover);
+    padding: 2px 6px;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+  .mt {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px !important;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .mb {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+</style>

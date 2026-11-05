@@ -1,0 +1,242 @@
+---
+/** L'éditeur sur téléphone (Editor.tsx, Toolbar.tsx, PanelToggle.tsx › PanelDrawer) : en-tête réduit, canvas plein écran,
+    et le panneau Design · Timeline ouvert en tiroir par-dessus (un toucher à côté le referme). */
+import Scaled from "../Scaled.astro";
+import Icon from "../Icon.astro";
+import Canvas from "./_kit/Canvas.astro";
+import Frame from "./_kit/Frame.astro";
+import Site from "./_kit/Site.astro";
+---
+<Scaled w={414} h={820} label="L'éditeur sur un téléphone : l'en-tête ne garde que des icônes, le canvas occupe l'écran et le panneau Design · Timeline s'ouvre en tiroir par-dessus.">
+  <div class="phone">
+    <div class="screen tui">
+      <header class="tb">
+        <span class="ib"><Icon name="ChevronLeft" size={14} /></span>
+        <span class="nm">Lumen · Site…</span>
+        <span class="ib"><Icon name="SquarePlus" size={16} /></span>
+        <span class="ib"><Icon name="Search" size={16} /></span>
+        <span class="zm">38 %</span>
+        <i class="dv"></i>
+        <span class="avs"><span class="av" style="background:#c25100">JM</span><span class="av" style="background:#9334e6">AL</span></span>
+        <span class="inv"><Icon name="UserPlus" size={14} /></span>
+        <span class="call"><Icon name="Video" size={14} /></span>
+      </header>
+      <div class="main">
+        <Canvas>
+          <Frame x={22} y={70} w={170} h={330} name="Accueil · mobile"><Site page="accueil" size="mobile" scale={0.85} /></Frame>
+          <Frame x={212} y={70} w={170} h={330} name="Tarifs · mobile"><Site page="tarifs" size="mobile" scale={0.85} /></Frame>
+        </Canvas>
+        <div class="veil"></div>
+        <aside class="drawer">
+          <div class="tabs">
+            <span class="tab on">Design</span><span class="tab">Timeline</span><span class="tab">Versions</span><span class="tab"><Icon name="MessageCircle" size={14} /></span>
+            <span class="x"><Icon name="PanelRightClose" size={14} /></span>
+          </div>
+          <div class="st"><span>Frame</span></div>
+          <div class="fields">
+            <label class="f wide"><span>Nom</span><i class="in">Accueil · mobile</i></label>
+            <div class="g2">
+              <label class="f"><span>X</span><i class="in">1560</i></label>
+              <label class="f"><span>Y</span><i class="in">0</i></label>
+              <label class="f"><span>L</span><i class="in">390</i></label>
+              <label class="f dis"><span>H</span><i class="in">2480</i></label>
+            </div>
+          </div>
+          <div class="btns">
+            <span class="b sm full hyp"><Icon name="GitBranch" size={13} />Créer une hypothèse</span>
+            <span class="b sm full"><Icon name="Copy" size={13} />Dupliquer la frame</span>
+            <span class="b sm full danger"><Icon name="Archive" size={13} />Archiver</span>
+          </div>
+          <div class="meta">
+            <p>Statut : <b>Officielle</b></p>
+            <p>Origine : création</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</Scaled>
+
+<style>
+  .phone {
+    width: 414px;
+    height: 820px;
+    padding: 12px;
+    border-radius: 48px;
+    background: #1a1a1c;
+    box-shadow: inset 0 0 0 1px #3a3a3f;
+  }
+  .screen {
+    position: relative;
+    width: 390px;
+    height: 796px;
+    border-radius: 38px;
+    overflow: hidden;
+    background: var(--panel);
+    display: flex;
+    flex-direction: column;
+    padding-top: 34px;
+  }
+  .tb {
+    height: 44px;
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 0 4px;
+    border-bottom: 1px solid var(--line);
+    background: var(--panel);
+  }
+  .ib {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    flex: none;
+  }
+  .ib:first-child {
+    color: var(--muted);
+  }
+  .nm {
+    min-width: 0;
+    flex: 1;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .zm {
+    width: 40px;
+    text-align: center;
+    flex: none;
+  }
+  .dv {
+    width: 1px;
+    height: 20px;
+    background: var(--line);
+    margin: 0 2px;
+  }
+  .avs {
+    display: flex;
+    padding: 0 4px;
+  }
+  .av {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 0 0 2px var(--panel);
+  }
+  .av + .av {
+    margin-left: -6px;
+  }
+  .inv {
+    height: 32px;
+    padding: 0 8px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    flex: none;
+  }
+  .call {
+    margin-left: 4px;
+    height: 32px;
+    padding: 0 10px;
+    border-radius: 8px;
+    background: var(--ink);
+    color: var(--panel);
+    display: grid;
+    place-items: center;
+    flex: none;
+  }
+  .main {
+    position: relative;
+    flex: 1;
+  }
+  .veil {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+  }
+  .drawer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 320px;
+    background: var(--panel);
+    border-left: 1px solid var(--line);
+    box-shadow: -16px 0 40px rgba(0, 0, 0, 0.45);
+  }
+  .tabs {
+    gap: 2px;
+  }
+  .tab {
+    padding: 0 6px;
+  }
+  .x {
+    margin-left: auto;
+    width: 24px;
+    height: 24px;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+  }
+  .fields {
+    padding: 0 12px;
+    display: grid;
+    gap: 8px;
+  }
+  .g2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .f {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .f > span {
+    width: 36px;
+    flex: none;
+    color: var(--muted);
+  }
+  .f.wide > span {
+    width: 64px;
+  }
+  .f i {
+    flex: 1;
+    font-style: normal;
+  }
+  .f.dis i {
+    opacity: 0.4;
+  }
+  .btns {
+    margin-top: 12px;
+    padding: 0 12px;
+    display: grid;
+    gap: 6px;
+  }
+  .b.hyp {
+    border-color: color-mix(in srgb, var(--hyp) 40%, transparent);
+    color: var(--hyp-ink);
+  }
+  .meta {
+    margin-top: 16px;
+    border-top: 1px solid var(--line);
+    padding: 12px 12px 0;
+    display: grid;
+    gap: 4px;
+    color: var(--muted);
+  }
+  .meta b {
+    font-weight: 500;
+    color: var(--ink);
+  }
+</style>

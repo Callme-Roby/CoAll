@@ -20,7 +20,7 @@ En ouvrant Coall, vous arrivez sur la page d'accueil. Une barre latérale donne 
 | **Plan et facturation** | Votre formule et l'usage de l'IA du mois. |
 | **Préférences** | Thème, langue, micro et caméra par défaut, raccourcis, code de connexion Figma (voir [Compte et réglages](/docs/compte-et-reglages)). |
 
-<div class="capture">Capture : page d'accueil avec la barre latérale (Projets, Collaborateurs, Skills et règles, Compte, Plan et facturation, Préférences) et la grille des projets avec leurs miniatures</div>
+<div class="capture" data-shot="accueil-projets">La page d'accueil : la barre latérale et la grille des projets, avec <strong>Importer un projet</strong> et <strong>Nouveau projet</strong> en haut.</div>
 
 ### La liste des projets
 
@@ -60,7 +60,7 @@ Vous avez trois façons de démarrer.
 
 1. Glissez un fichier HTML, plusieurs fichiers, un dossier ou un `.zip` sur le canvas, ou utilisez le bouton **Importer**.
 2. Coall indique la largeur des pages trouvées (par exemple « 3 pages à 1440 px »).
-3. Choisissez **Importer à ces tailles**, ou **Une même largeur pour toutes les pages** puis **Importer à … px**.
+3. Choisissez **Garder ces tailles** puis **Importer à ces tailles**, ou **Une même largeur pour toutes les pages** puis **Importer à … px**.
 4. Chaque page HTML devient une frame officielle.
 
 **Partir d'une feuille blanche**
@@ -73,7 +73,7 @@ Vous avez trois façons de démarrer.
 1. Appuyez sur **/** pour ouvrir la barre de demande, en bas du canvas.
 2. Écrivez par exemple « crée une page d'accueil pour un studio de yoga », puis validez avec Entrée.
 
-<div class="capture">Capture : fenêtre d'import montrant « 3 pages à 1440 px » avec les choix « Importer à ces tailles » et « Une même largeur pour toutes les pages »</div>
+<div class="capture" data-shot="import-tailles">Coall annonce la largeur des pages avant l'import ; <strong>Importer à ces tailles</strong> les garde telles quelles.</div>
 
 ### 3. Faire une première demande à l'IA
 
@@ -100,7 +100,7 @@ Vous pouvez aussi créer une hypothèse vous-même, sans passer par l'IA.
 2. Survolez une différence : elle s'éclaire sur les deux pages.
 3. Cliquez sur **Comparer**, au-dessus de l'hypothèse sur le canvas, pour voir toutes les différences numérotées sur les deux pages.
 
-<div class="capture">Capture : une hypothèse sélectionnée à côté de son officielle, avec le bouton « Comparer » activé, les différences numérotées sur les deux pages et la liste des différences dans le panneau Design</div>
+<div class="capture" data-shot="compare">La comparaison : les différences numérotées sur les deux pages et leur liste dans le panneau <strong>Design</strong>.</div>
 
 ### 6. Promouvoir l'hypothèse
 

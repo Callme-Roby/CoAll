@@ -1,0 +1,142 @@
+---
+/** Panneau de gauche, onglet Calques (components/editor/LayersPanel.tsx) : frames, puis arbre des éléments de la frame sélectionnée.
+    Les calques portent le texte de l'élément, ou « balise.classe » (lib/elements.ts › elementLabel). */
+import Scaled from "../Scaled.astro";
+import Icon from "../Icon.astro";
+
+type Row = { d: number; open?: boolean; leaf?: boolean; icon: string; t: string; sel?: boolean; cmp?: boolean };
+const tree: Row[] = [
+  { d: 0, open: true, icon: "Square", t: "Page" },
+  { d: 1, icon: "Square", t: "header.nav" },
+  { d: 1, open: true, icon: "Square", t: "section.hero" },
+  { d: 2, leaf: true, icon: "Type", t: "Nouvelle collection" },
+  { d: 2, leaf: true, icon: "Type", t: "Des lampes qui suivent votre jou…", sel: true },
+  { d: 2, leaf: true, icon: "Type", t: "Une lumière douce le matin, fran…" },
+  { d: 2, leaf: true, icon: "Component", t: "Voir la collection", cmp: true },
+  { d: 2, leaf: true, icon: "Image", t: "img « Lampe Aube »" },
+  { d: 1, icon: "Square", t: "section.collection" },
+  { d: 1, icon: "Square", t: "footer.footer" },
+];
+---
+<Scaled w={240} h={540} label="Onglet Calques : la liste des frames, puis l'arbre des éléments de la frame Accueil, avec le titre sélectionné et le bouton marqué comme composant (icône violette).">
+  <aside class="tui-win lp">
+    <div class="tabs"><span class="tab on">Calques</span><span class="tab">Ressources</span><span class="x"><Icon name="PanelLeftClose" size={14} /></span></div>
+    <div class="st"><span>Frames</span><label class="arch"><i class="cb"></i>Archives</label></div>
+    <div class="search"><Icon name="Search" size={12} /><span>Rechercher dans les calques</span></div>
+    <div class="frames">
+      <div class="fr on"><span style="color:var(--off)"><Icon name="Frame" size={13} /></span><span>Accueil</span></div>
+      <div class="fr"><span style="color:var(--hyp)"><Icon name="Frame" size={13} /></span><span>Accueil</span><span class="lb">Version Jean</span></div>
+      <div class="fr"><span style="color:var(--off)"><Icon name="Frame" size={13} /></span><span>Tarifs</span></div>
+      <div class="fr"><span style="color:var(--off)"><Icon name="Frame" size={13} /></span><span>Atelier</span></div>
+    </div>
+    <div class="tree">
+      <div class="st"><span>Calques</span></div>
+      {tree.map((r) => (
+        <div class:list={["tr", { sel: r.sel }]} style={`padding-left:${8 + r.d * 12}px`}>
+          <span class:list={["ch", { inv: r.leaf }]}><Icon name={r.open ? "ChevronDown" : "ChevronRight"} size={12} /></span>
+          <span class:list={["ic", { cmp: r.cmp }]}><Icon name={r.icon} size={12} /></span>
+          <span class="tt">{r.t}</span>
+        </div>
+      ))}
+    </div>
+  </aside>
+</Scaled>
+
+<style>
+  .lp {
+    width: 240px;
+    height: 540px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+  }
+  .x {
+    margin-left: auto;
+    width: 24px;
+    height: 24px;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+  }
+  .arch {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 400;
+    color: var(--muted);
+  }
+  .cb {
+    width: 12px;
+    height: 12px;
+    border: 1px solid #77777c;
+    border-radius: 3px;
+  }
+  .search {
+    margin: 0 8px 6px;
+    height: 28px;
+    border-radius: 6px;
+    background: var(--hover);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 8px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .frames {
+    padding-bottom: 8px;
+  }
+  .fr {
+    height: 28px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px;
+  }
+  .fr span {
+    display: grid;
+  }
+  .fr.on {
+    background: var(--off-soft);
+  }
+  .lb {
+    color: var(--muted);
+  }
+  .tree {
+    flex: 1;
+    border-top: 1px solid var(--line);
+  }
+  .tr {
+    height: 24px;
+    display: flex;
+    align-items: center;
+    padding-right: 8px;
+    white-space: nowrap;
+  }
+  .tr.sel {
+    background: var(--off-soft);
+    color: var(--off-ink);
+  }
+  .ch {
+    width: 16px;
+    height: 16px;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+  }
+  .ch.inv {
+    visibility: hidden;
+  }
+  .ic {
+    margin: 0 4px;
+    display: grid;
+    color: var(--muted);
+  }
+  .ic.cmp {
+    color: var(--ai);
+  }
+  .tt {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+</style>

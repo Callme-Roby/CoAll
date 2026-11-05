@@ -317,7 +317,7 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
       font-size: 16px;
       line-height: 1.7;
     }
-    .prose :global(h2) {
+    .prose :global(h2:not(.docshot *)) {
       font-size: 24px;
       letter-spacing: -0.018em;
       line-height: 1.25;
@@ -325,49 +325,49 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
       margin: 56px 0 14px;
       font-weight: 510;
     }
-    .prose :global(h3) {
+    .prose :global(h3:not(.docshot *)) {
       font-size: 18px;
       letter-spacing: -0.01em;
       color: var(--ink);
       margin: 36px 0 10px;
       font-weight: 510;
     }
-    .prose :global(h4) {
+    .prose :global(h4:not(.docshot *)) {
       color: var(--ink);
       margin: 28px 0 8px;
       font-size: 16px;
     }
-    .prose :global(p) {
+    .prose :global(p:not(.docshot *)) {
       margin: 0 0 16px;
     }
-    .prose :global(a) {
+    .prose :global(a:not(.docshot *)) {
       color: var(--ink);
       text-decoration: underline;
       text-decoration-color: rgba(255, 255, 255, 0.25);
       text-underline-offset: 3px;
     }
-    .prose :global(a:hover) {
+    .prose :global(a:hover:not(.docshot *)) {
       text-decoration-color: currentColor;
     }
-    .prose :global(strong) {
+    .prose :global(strong:not(.docshot *)) {
       color: var(--ink);
       font-weight: 510;
     }
-    .prose :global(ul),
-    .prose :global(ol) {
+    .prose :global(ul:not(.docshot *)),
+    .prose :global(ol:not(.docshot *)) {
       padding-left: 22px;
       margin: 0 0 18px;
     }
-    .prose :global(li) {
+    .prose :global(li:not(.docshot *)) {
       margin: 6px 0;
     }
-    .prose :global(li::marker) {
+    .prose :global(li:not(.docshot *)::marker) {
       color: var(--faint);
     }
-    .prose :global(ol > li::marker) {
+    .prose :global(ol > li:not(.docshot *)::marker) {
       color: var(--muted);
     }
-    .prose :global(code) {
+    .prose :global(code:not(.docshot *)) {
       font-family: var(--font-mono);
       font-size: 0.86em;
       padding: 1px 6px;
@@ -376,7 +376,7 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
       border: 1px solid var(--line);
       color: var(--ink);
     }
-    .prose :global(pre) {
+    .prose :global(pre:not(.docshot *)) {
       padding: 16px 18px;
       border-radius: 12px;
       background: var(--bg-2) !important;
@@ -386,12 +386,12 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
       line-height: 1.6;
       margin: 0 0 20px;
     }
-    .prose :global(pre code) {
+    .prose :global(pre code:not(.docshot *)) {
       padding: 0;
       background: none;
       border: 0;
     }
-    .prose :global(kbd) {
+    .prose :global(kbd:not(.docshot *)) {
       font-family: var(--font-mono);
       font-size: 0.82em;
       padding: 1px 6px;
@@ -399,7 +399,7 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
       border: 1px solid var(--line-2);
       border-bottom-width: 2px;
     }
-    .prose :global(blockquote) {
+    .prose :global(blockquote:not(.docshot *)) {
       margin: 24px 0;
       padding: 14px 18px;
       border-radius: 8px;
@@ -408,17 +408,17 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
       color: var(--ink-2);
       font-size: 15px;
     }
-    .prose :global(blockquote p:last-child) {
+    .prose :global(blockquote p:last-child:not(.docshot *)) {
       margin-bottom: 0;
     }
-    .prose :global(.note-t) {
+    .prose :global(.note-t:not(.docshot *)) {
       display: block;
       margin: 0 0 4px;
       color: var(--ink);
       font-weight: 510;
       font-size: 14px;
     }
-    .prose :global(table) {
+    .prose :global(table:not(.docshot *)) {
       width: 100%;
       border-collapse: collapse;
       margin: 8px 0 24px;
@@ -426,25 +426,25 @@ const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
       display: block;
       overflow-x: auto;
     }
-    .prose :global(th),
-    .prose :global(td) {
+    .prose :global(th:not(.docshot *)),
+    .prose :global(td:not(.docshot *)) {
       text-align: left;
       padding: 10px 14px 10px 0;
       border-bottom: 1px solid var(--line);
       vertical-align: top;
     }
-    .prose :global(th) {
+    .prose :global(th:not(.docshot *)) {
       color: var(--ink);
       font-weight: 600;
       font-size: 13px;
       white-space: nowrap;
     }
-    .prose :global(hr) {
+    .prose :global(hr:not(.docshot *)) {
       border: 0;
       border-top: 1px solid var(--line);
       margin: 40px 0;
     }
-    .prose :global(.todo) {
+    .prose :global(.todo:not(.docshot *)) {
       font-size: 0.9em;
       color: var(--muted);
       border-bottom: 1px dashed var(--faint);

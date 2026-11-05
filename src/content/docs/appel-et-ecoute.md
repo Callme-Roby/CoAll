@@ -14,21 +14,23 @@ Coall intègre une visio au canvas. Pendant l'appel, l'IA peut écouter la conve
    - l'aperçu de votre caméra ;
    - une jauge du micro, pour vérifier qu'il vous entend ;
    - le choix du micro, du haut-parleur et de la caméra ;
-   - les **accords** (voir ci-dessous).
+   - l'**accord** d'écoute de l'IA (voir ci-dessous).
 3. Cliquez sur **Entrer dans l'appel**, ou sur **Annuler**.
 
-<div class="capture">Capture : fenêtre d'entrée dans l'appel avec l'aperçu caméra, la jauge du micro, les listes de périphériques, les deux cases d'accord (écoute de l'IA, conservation de la transcription) et les boutons Annuler et Entrer dans l'appel</div>
+<div class="capture" data-shot="entree-appel">La fenêtre d'entrée : aperçu de la caméra, micro, caméra et l'accord <strong>Écoute de l'IA</strong>, dont le texte annonce la conservation de la transcription.</div>
 
-### Les deux accords
+### L'accord d'écoute
 
-La fenêtre d'entrée vous demande deux accords, distincts :
+La fenêtre d'entrée vous demande votre accord, avec la case **Écoute de l'IA** : l'IA peut entendre votre voix pendant l'appel, uniquement lorsque l'indicateur « L'IA écoute » est allumé.
 
-| Accord | Ce qu'il permet |
-|---|---|
-| **Écoute de l'IA** | L'IA peut entendre ce que vous dites, quand l'écoute est activée. |
-| **Conservation de la transcription** | Ce que vous dites pendant l'écoute est conservé dans le projet, dans la transcription. |
+Le texte de la case dit aussi ce qui est conservé :
 
-Vous pouvez accepter l'écoute sans accepter la conservation. Si l'hôte a désactivé la conservation de la transcription, la fenêtre d'entrée l'annonce.
+- si l'hôte conserve la transcription, ce que vous dites pendant l'écoute est gardé dans le projet (onglet **Timeline › Transcription**), visible par ses membres et supprimé avec le projet ;
+- si l'hôte l'a désactivée, la case l'annonce : seuls des résumés sont conservés.
+
+Sans accord, vous participez normalement : votre voix n'est pas transcrite.
+
+La conservation de la transcription reste un accord distinct : un accord à l'écoute donné sans elle (par exemple avec **Autoriser ma voix**, dans l'indicateur d'écoute) ne la couvre pas. Vos phrases ne sont alors conservées qu'une fois l'accord donné dans l'onglet **Transcription**.
 
 > **À savoir** Votre micro et votre caméra par défaut se règlent dans **Préférences** (voir [Compte et réglages](/docs/compte-et-reglages)).
 
@@ -49,7 +51,7 @@ Pendant l'appel, tout tient dans un panneau à droite du canvas.
 | **Main levée** | Demander la parole. |
 | **Quitter** | Quitter l'appel. |
 
-<div class="capture">Capture : panneau d'appel déplié à droite du canvas, avec la durée et le nombre de participants en haut, trois vignettes vidéo (une qui parle, une avec micro coupé, une main levée) et la rangée de commandes en bas</div>
+<div class="capture" data-shot="panneau-appel">Le panneau d'appel : <strong>En appel</strong> et la durée, une vignette par personne (Jean parle, Marc a coupé son micro, vous avez levé la main), puis les commandes et <strong>Quitter</strong>.</div>
 
 ### Replier et redimensionner le panneau
 
@@ -77,7 +79,7 @@ Pendant un appel, **Faire suivre** (en haut à droite, ou l'icône de présentat
 
 L'écoute ne dépend pas des droits de modification : chacun l'active pour lui-même en acceptant l'écoute à l'entrée de l'appel.
 
-<div class="capture">Capture : indicateur « L'IA écoute » allumé en violet, avec en dessous le message « Compris : passer le titre en vert » et les sous-titres de la conversation</div>
+<div class="capture" data-shot="ecoute-ia">En haut, l'indicateur <strong>L'IA écoute</strong> et ce qu'elle a compris ; en bas, les sous-titres de la conversation.</div>
 
 ### Mettre en pause et reprendre
 
@@ -130,7 +132,7 @@ Seules y figurent les paroles des personnes qui ont accepté la conservation, pr
 - Une autre phrase ouvre le canvas tel qu'il était quand elle a été dite.
 - Dans la timeline, une étape née d'une phrase a un lien **Transcription** qui mène à ses phrases.
 
-<div class="capture">Capture : onglet Timeline › Transcription avec les prises de parole, une phrase soulignée survolée et la carte d'aperçu de la version créée à ce moment</div>
+<div class="capture" data-shot="transcription">Au survol d'une phrase soulignée, une carte montre l'étape qu'elle a créée et la version de ce moment.</div>
 
 ### Accepter plus tard, ou désactiver
 

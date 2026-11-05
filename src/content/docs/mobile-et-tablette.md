@@ -23,7 +23,7 @@ La barre latérale devient un **menu** (icône **☰** en haut à gauche), qui s
 - On se déplace **au doigt** et l'on **pince pour zoomer**. La minimap est masquée.
 - Les fenêtres (**Démarrer l'appel**, **Inviter**, **Exporter**, **Importer**) tiennent dans l'écran et défilent si besoin.
 
-<div class="capture">Capture : éditeur sur téléphone, canvas plein écran et tiroir Design · Timeline ouvert par-dessus</div>
+<div class="capture" data-shot="mobile-editeur">Sur téléphone, le canvas occupe l'écran et le panneau <strong>Design · Timeline</strong> s'ouvre en tiroir par-dessus.</div>
 
 ### Pendant un appel
 

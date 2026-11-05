@@ -1,0 +1,144 @@
+---
+/** Frame « Composants » créée par l'IA après « unifie les boutons » (packages/ai/src/prompts.ts) : chaque variante une fois,
+    état compris, sous un petit titre par composant. */
+import Scaled from "../Scaled.astro";
+import Canvas from "./_kit/Canvas.astro";
+import Frame from "./_kit/Frame.astro";
+import Site from "./_kit/Site.astro";
+
+const types = ["Primaire", "Secondaire", "Tertiaire"];
+const states = ["Repos", "Survol", "Désactivé"];
+---
+<Scaled w={900} h={520} label="La frame Composants créée par l'IA : le composant Bouton en variantes Primaire, Secondaire et Tertiaire, chacune dans ses états repos, survol et désactivé, à côté de la page Accueil.">
+  <div class="tui-win cw">
+    <Canvas>
+      <Frame x={60} y={60} w={560} h={410} name="Composants">
+        <div class="board">
+          <p class="eye">Design system</p>
+          <h4>Bouton</h4>
+          <div class="grid">
+            <span></span>
+            {states.map((s) => <span class="colh">{s}</span>)}
+            {types.map((t) => (
+              <>
+                <span class="rowh">{t}</span>
+                {states.map((s) => (
+                  <div class="cell">
+                    <span class:list={["btn", t.toLowerCase(), s === "Survol" && "hov", s === "Désactivé" && "dis"]}>Voir la collection</span>
+                    <small>Type={t}, État={s}</small>
+                  </div>
+                ))}
+              </>
+            ))}
+          </div>
+        </div>
+      </Frame>
+      <Frame x={660} y={60} w={200} h={250} name="Accueil"><Site page="accueil" scale={0.6} /></Frame>
+    </Canvas>
+  </div>
+</Scaled>
+
+<style>
+  .cw {
+    width: 900px;
+    height: 520px;
+    border-radius: 10px;
+  }
+  .board {
+    height: 100%;
+    background: #fff;
+    color: #111;
+    font-family: Inter, system-ui, sans-serif;
+    padding: 22px 26px;
+  }
+  .eye {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8a6d3b;
+  }
+  h4 {
+    margin: 4px 0 16px;
+    font-size: 20px;
+    font-weight: 650;
+    letter-spacing: -0.02em;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 80px repeat(3, 1fr);
+    gap: 14px 12px;
+    align-items: center;
+  }
+  .colh,
+  .rowh {
+    font-size: 10px;
+    color: #777;
+  }
+  .cell {
+    display: grid;
+    gap: 6px;
+    justify-items: start;
+  }
+  .cell small {
+    font-size: 8.5px;
+    color: #999;
+    white-space: nowrap;
+  }
+  .btn {
+    display: inline-block;
+    border-radius: 99px;
+    padding: 6px 12px;
+    font-size: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .primaire {
+    background: #16a34a;
+    color: #fff;
+  }
+  .primaire.hov {
+    background: #128a3e;
+  }
+  .secondaire {
+    border: 1px solid #111;
+    color: #111;
+  }
+  .secondaire.hov {
+    background: #f3f1ee;
+  }
+  .tertiaire {
+    color: #111;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .tertiaire.hov {
+    color: #16a34a;
+  }
+  .dis {
+    opacity: 0.38;
+  }
+  .mini {
+    height: 100%;
+    background: #fff;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    font-family: Inter, system-ui, sans-serif;
+    color: #111;
+    font-size: 9px;
+  }
+  .mini i {
+    display: block;
+    height: 6px;
+    border-radius: 3px;
+    background: #e9e6e2;
+  }
+  .mini .btn {
+    align-self: flex-start;
+    padding: 4px 8px;
+    font-size: 7.5px;
+  }
+</style>

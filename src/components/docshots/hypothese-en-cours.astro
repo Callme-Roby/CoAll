@@ -1,0 +1,152 @@
+---
+/** Attente d'une demande (components/editor/AiWorking.tsx) : la future hypothèse en pointillés violets (squelette, vagues,
+    pastille et chronomètre) à côté de l'écran d'origine, balayé par la ligne de lecture. */
+import Scaled from "../Scaled.astro";
+import Icon from "../Icon.astro";
+import Canvas from "./_kit/Canvas.astro";
+import Frame from "./_kit/Frame.astro";
+import Site from "./_kit/Site.astro";
+---
+<Scaled w={820} h={500} label="Pendant que l'IA travaille : la future hypothèse apparaît en pointillés violets à côté de l'écran Accueil, avec une esquisse qui se remplit de vagues et la pastille « L'IA prépare une hypothèse… » et son chronomètre ; l'écran d'origine est balayé d'une ligne de lecture.">
+  <div class="tui-win hw">
+    <Canvas>
+      <Frame x={70} y={70} w={300} h={380} name="Accueil">
+        <Site page="accueil" />
+        <div class="scan" slot="over"></div>
+      </Frame>
+
+      <div class="ghost">
+        <span class="badge"><Icon name="Sparkles" size={13} />L’IA prépare une hypothèse…<span class="timer">0:14</span></span>
+        <div class="gb">
+          <div class="sk">
+            <div class="nav"><i style="width:14%;height:7px"></i><span><i></i><i></i><i></i><i></i></span></div>
+            <div class="hd">
+              <i style="width:90%;height:13px"></i>
+              <i style="width:70%;height:13px"></i>
+              <i style="width:80%;height:4.5px;margin-top:4px"></i>
+              <i style="width:64%;height:4.5px"></i>
+              <div class="bt"><i style="width:18%;height:12px;border-radius:3px"></i><i style="width:18%;height:12px;border-radius:3px;opacity:.6"></i></div>
+            </div>
+            <div class="cards"><i></i><i></i><i></i></div>
+          </div>
+          <div class="fill">
+            <span class="ai-wave ai-wave-1"></span><span class="ai-wave ai-wave-2"></span><span class="ai-wave ai-wave-3"></span>
+          </div>
+        </div>
+      </div>
+    </Canvas>
+  </div>
+</Scaled>
+
+<style>
+  .hw {
+    width: 820px;
+    height: 500px;
+    border-radius: 10px;
+  }
+  /* Lecture de l'écran d'origine : une ligne qui le balaie. */
+  .scan {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 34%;
+    height: 22%;
+    background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--ai) 22%, transparent));
+    border-bottom: 2px solid color-mix(in srgb, var(--ai) 70%, transparent);
+  }
+  .ghost {
+    position: absolute;
+    left: 450px;
+    top: 70px;
+    width: 300px;
+    height: 380px;
+  }
+  .badge {
+    position: absolute;
+    left: 0;
+    top: -30px;
+    height: 24px;
+    padding: 0 10px;
+    border-radius: 999px;
+    background: var(--ai-strong);
+    color: #fff;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  .timer {
+    opacity: 0.8;
+    font-variant-numeric: tabular-nums;
+  }
+  .gb {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    outline: 2px dashed var(--ai);
+    background: color-mix(in srgb, var(--ai) 5%, var(--panel));
+  }
+  .sk {
+    position: absolute;
+    inset: 0;
+    padding: 12px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .sk i {
+    display: block;
+    border-radius: 3px;
+    background: color-mix(in srgb, var(--ai) 16%, transparent);
+  }
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav span {
+    display: flex;
+    gap: 6px;
+    width: 36%;
+  }
+  .nav span i {
+    flex: 1;
+    height: 4px;
+  }
+  .hd {
+    margin-top: 12px;
+    width: 62%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .bt {
+    display: flex;
+    gap: 5px;
+    margin-top: 6px;
+  }
+  .bt i {
+    flex: none;
+    width: 30% !important;
+  }
+  .cards {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .cards i {
+    flex: 1;
+    height: 42px;
+    opacity: 0.7;
+  }
+  .fill {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 40%;
+    background: linear-gradient(to bottom, color-mix(in srgb, var(--ai) 14%, transparent), color-mix(in srgb, var(--off) 18%, transparent));
+  }
+</style>

@@ -18,7 +18,7 @@ La barre latérale donne accès à :
 - **Plan et facturation** : votre formule et l'usage de l'IA ;
 - **Préférences** : thème, langue, appareils, raccourcis, Figma.
 
-<div class="capture">Capture : page d'accueil, barre latérale à gauche et liste des projets avec leurs miniatures</div>
+<div class="capture" data-shot="accueil-projets">La page d'accueil : la barre latérale à gauche, les projets à droite, chacun avec la miniature de son canvas (officielles en bleu, hypothèses en vert).</div>
 
 ### Projets
 
@@ -61,9 +61,9 @@ La langue choisie s'applique aussi :
 
 > **À savoir** Le contenu des maquettes n'est pas traduit quand vous changez de langue.
 
-### Micro et caméra par défaut
+### Appels
 
-Choisissez le micro et la caméra utilisés en entrant dans un appel. Vous pouvez en changer à tout moment pendant l'appel. Voir [Appel, écoute de l'IA et transcription](/docs/appel-et-ecoute).
+**Micro activé en entrant** et **Caméra activée en entrant** fixent l'état du micro et de la caméra quand vous rejoignez un appel. Vous pouvez toujours les changer avant d'entrer, et pendant l'appel. Voir [Appel, écoute de l'IA et transcription](/docs/appel-et-ecoute).
 
 ### Raccourcis
 
@@ -73,4 +73,4 @@ La liste des raccourcis clavier. Voir aussi [Raccourcis clavier](/docs/raccourci
 
 **Créer un code de connexion** pour relier le plugin Figma à Coall, ou révoquer un code existant. Le code n'est affiché qu'une fois. Voir [Plugin Figma](/docs/plugin-figma).
 
-<div class="capture">Capture : Préférences, avec le choix du thème, de la langue et la rubrique Figma</div>
+<div class="capture" data-shot="preferences">La page <strong>Préférences</strong> : <strong>Apparence</strong>, <strong>Langue</strong>, <strong>Appels</strong>, puis <strong>Figma</strong>.</div>

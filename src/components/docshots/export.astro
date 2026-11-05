@@ -1,0 +1,199 @@
+---
+/** Fenêtre « Exporter des frames » (components/editor/ExportDialog.tsx), format HTML/CSS et largeur fixe. */
+import Scaled from "../Scaled.astro";
+import Icon from "../Icon.astro";
+---
+<div style="max-width:460px;margin:0 auto">
+<Scaled w={460} h={652} label="Fenêtre Exporter des frames : les frames qui partent (sélection, frames officielles, tout le projet), le format (Images PNG, PDF, HTML/CSS), la largeur et l'option Au pixel près, pour Figma.">
+  <div class="tui-win dlg">
+    <div class="hd"><b>Exporter des frames</b><Icon name="X" size={16} /></div>
+    <div class="bd">
+      <fieldset>
+        <div data-t="p" class="lg">Frames</div>
+        <div data-t="p" class="opt"><i class="rd"></i><span>Sélection</span><em>2 frames</em></div>
+        <div data-t="p" class="opt on"><i class="rd on"></i><span>Frames officielles</span><em>4 frames</em></div>
+        <div data-t="p" class="opt"><i class="rd"></i><span>Tout le projet (hors archives)</span><em>7 frames</em></div>
+      </fieldset>
+      <fieldset>
+        <div data-t="p" class="lg">Format</div>
+        <div class="fmts">
+          <span><Icon name="FileImage" size={18} />Images PNG</span>
+          <span><Icon name="FileText" size={18} />PDF</span>
+          <span class="on"><Icon name="FileCode2" size={18} />HTML/CSS (.zip)</span>
+        </div>
+        <div data-t="p" class="hint">Pages autonomes avec leurs images et polices. Pour les développeurs, pour réimporter dans Coall, ou pour Figma avec le plugin Coall.</div>
+      </fieldset>
+      <fieldset>
+        <div data-t="p" class="lg">Largeur</div>
+        <div data-t="p" class="opt"><i class="rd"></i><span>Largeur de chaque frame</span><em>390 à 1440 px</em></div>
+        <div data-t="p" class="opt on"><i class="rd on"></i><span>Largeur fixe</span></div>
+        <div class="wp">
+          <span class="seg"><i class="on">1440</i><i>1280</i><i>1024</i><i>768</i><i>390</i></span>
+          <span class="px"><span class="in">1440</span>px</span>
+        </div>
+        <div data-t="p" class="hint ind">Toutes les frames sont rendues à cette largeur ; la hauteur suit le contenu.</div>
+        <div class="chk">
+          <i class="cb"><Icon name="Check" size={9} stroke={3} /></i>
+          <span><span>Au pixel près, pour Figma</span><small>Pages figées à leur largeur (media queries et unités vw résolues). Dans Figma, chaque calque garde sa position mesurée, sans auto layout.</small></span>
+        </div>
+      </fieldset>
+      <div class="ft"><span class="b">Fermer</span><span class="b primary"><Icon name="Download" size={13} />Exporter</span></div>
+    </div>
+  </div>
+</Scaled>
+</div>
+
+<style>
+  .dlg {
+    width: 460px;
+    height: 652px;
+    font-size: 13px;
+  }
+  .hd {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .hd b {
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .bd {
+    padding: 16px;
+    display: grid;
+    gap: 16px;
+  }
+  fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 2px;
+  }
+  .lg {
+    margin-bottom: 4px !important;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .opt {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 6px;
+  }
+  .opt span {
+    flex: 1;
+  }
+  .opt em {
+    font-style: normal;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .opt.on {
+    background: var(--hover);
+  }
+  .rd {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    border: 1px solid #777;
+    flex: none;
+  }
+  .rd.on {
+    border: 4px solid var(--off);
+  }
+  .fmts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .fmts span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 8px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .fmts span.on {
+    border-color: var(--off);
+    background: color-mix(in srgb, var(--off-soft) 60%, transparent);
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .hint {
+    margin-top: 6px !important;
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--muted);
+  }
+  .hint.ind {
+    padding-left: 28px;
+  }
+  .wp {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+    padding-left: 28px;
+  }
+  .seg i {
+    height: 24px;
+    line-height: 24px;
+    padding: 0 8px;
+    font-size: 12px;
+  }
+  .px {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .px .in {
+    width: 64px;
+    justify-content: flex-end;
+    font-size: 12px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+  }
+  .chk {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 8px;
+    padding: 6px 8px;
+  }
+  .chk small {
+    display: block;
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--muted);
+  }
+  .cb {
+    width: 13px;
+    height: 13px;
+    margin-top: 2px;
+    border-radius: 3px;
+    background: var(--off-strong);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    flex: none;
+  }
+  .ft {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+</style>

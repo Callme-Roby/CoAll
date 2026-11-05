@@ -1,0 +1,39 @@
+---
+/** Bloc de réglages de l'accueil (components/home/Page.tsx › Section) : titre, explication, contenu. */
+interface Props { title: string; desc?: string }
+const { title, desc } = Astro.props;
+---
+<section class="ps">
+  <div class="ps-h">
+    <div data-t="h3">{title}</div>
+    {desc && <div data-t="p">{desc}</div>}
+  </div>
+  <div class="ps-b"><slot /></div>
+</section>
+
+<style>
+  .ps {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--panel);
+  }
+  .ps-h {
+    border-bottom: 1px solid var(--line);
+    padding: 14px 20px;
+  }
+  [data-t="h3"] {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .ps-h [data-t="p"] {
+    margin-top: 2px;
+    font-size: 12px;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+  .ps-b {
+    padding: 14px 20px;
+    font-size: 13px;
+  }
+</style>

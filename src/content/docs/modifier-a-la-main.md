@@ -16,7 +16,7 @@ Une frame sélectionnée se manipule en bloc. Pour travailler sur ses éléments
 3. Cliquez sur un élément (un titre, un bouton, un bloc) pour le sélectionner.
 4. Appuyez sur **Échap** pour remonter à l'élément parent. Appuyez à nouveau pour sortir de la frame.
 
-<div class="capture">Capture : une frame ouverte en édition, un bouton survolé mis en évidence et un titre sélectionné, avec le panneau Design de l'élément à droite</div>
+<div class="capture" data-shot="edition-frame">Frame ouverte en édition : le bouton survolé est entouré de pointillés, le titre sélectionné d'un trait plein avec sa balise, et le panneau <strong>Design</strong> montre ses propriétés.</div>
 
 > **À savoir** Sans le droit **modifier l'officiel**, les frames officielles ne se modifient pas à la main. Vous pouvez toujours en créer une hypothèse et travailler sur la copie. Voir [Collaborer](/docs/collaborer).
 
@@ -88,7 +88,7 @@ L'onglet **Calques**, dans le panneau de gauche, montre l'arbre des éléments d
 - Le champ de recherche en haut du panneau filtre aussi cet arbre.
 - Un composant est signalé par une icône violette.
 
-<div class="capture">Capture : onglet Calques avec l'arbre des éléments d'une frame, un calque sélectionné et un composant repéré par son icône violette</div>
+<div class="capture" data-shot="calques">Onglet <strong>Calques</strong> : les frames, puis l'arbre des éléments de la frame sélectionnée. Le bouton, marqué comme composant, porte l'icône violette.</div>
 
 ## Le panneau Design d'une frame
 
@@ -110,7 +110,7 @@ Il propose aussi quatre boutons :
 - **Archiver** ;
 - **Exporter** (voir [Importer et exporter](/docs/importer-et-exporter)).
 
-<div class="capture">Capture : panneau Design d'une frame officielle sélectionnée, avec nom, position, largeur, statut, origine et les boutons « Créer une hypothèse », « Dupliquer la frame », « Archiver », « Exporter »</div>
+<div class="capture" data-shot="design-frame">Panneau <strong>Design</strong> d'une frame officielle : nom, position et taille, <strong>Créer une hypothèse</strong>, <strong>Dupliquer la frame</strong>, <strong>Archiver</strong>, statut, origine et <strong>Exporter</strong>.</div>
 
 ## Annuler et rétablir
 

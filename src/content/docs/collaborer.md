@@ -24,7 +24,7 @@ Seul l'hôte peut inviter.
 
 Le lien est **à usage unique** et **valable 12 heures**. Créez un lien par personne.
 
-<div class="capture">Capture : fenêtre Inviter, avec le lien d'invitation, les droits des invités et la liste des participants</div>
+<div class="capture" data-shot="invite">La fenêtre <strong>Inviter des participants</strong> : l'invitation par e-mail ou par lien, les droits des invités et les participants.</div>
 
 > **À savoir** Tant que Coall n'est pas hébergé en ligne, un lien d'invitation ne s'ouvre que sur l'ordinateur où Coall tourne (dans un autre navigateur ou une fenêtre privée). Inviter quelqu'un à distance demandera la version en ligne. [à mettre à jour au lancement]
 
@@ -68,7 +68,7 @@ L'hôte voit la demande au-dessus de sa barre de demande et répond d'un clic :
 
 ### Proposer une version
 
-Un invité qui n'a pas le droit de valider peut quand même pousser une hypothèse : **Proposer cette version**. Une personne autorisée la confirme ensuite. Lorsqu'une proposition de l'IA attend une validation qu'il ne peut pas donner, l'invité voit **En attente de l'hôte** [à confirmer].
+Un invité qui n'a pas le droit de valider peut quand même pousser une hypothèse : **Proposer cette version**. Une personne autorisée la confirme ensuite. Lorsqu'une proposition de l'IA attend une validation qu'il ne peut pas donner, l'invité voit **En attente de validation**.
 
 > **À savoir** La voix ne dépend pas des droits. Chacun active l'écoute de l'IA pour lui-même, en donnant son accord à l'entrée de l'appel. Ce que l'IA propose à partir de la voix suit les mêmes règles : une hypothèse sur un écran officiel, une décision à valider. Voir [Appel, écoute de l'IA et transcription](/docs/appel-et-ecoute).
 
@@ -92,7 +92,7 @@ Votre vue se cale sur la sienne et la suit : quand elle se déplace ou zoome, vo
 
 Pour arrêter : **Échap**, le bouton **Arrêter** du bandeau, un nouveau clic sur son avatar, ou simplement déplacer le canvas vous-même.
 
-<div class="capture">Capture : bandeau « Vous suivez Jean » et cadre à sa couleur autour de la vue</div>
+<div class="capture" data-shot="suivre">Un cadre et un bandeau à la couleur de la personne suivie ; <strong>Arrêter</strong> vous rend la main.</div>
 
 ## Faire suivre votre point de vue
 
@@ -126,4 +126,4 @@ Tout participant peut commenter, **même sans le droit de modifier**. Les commen
 
 Dans le panneau de droite, l'onglet **Commentaires** (icône bulle, avec le nombre de fils ouverts) liste tous les fils, rangés par page, avec un filtre **Ouverts** / **Résolus**. Un clic sur un fil amène la vue sur la page et l'ouvre.
 
-<div class="capture">Capture : pastille de commentaire ouverte sur un titre, bulle avec une réponse et le bouton Résoudre</div>
+<div class="capture" data-shot="commentaire">Un fil ouvert sur un titre : la pastille de son auteur, l'élément entouré de bleu, les messages, <strong>Résoudre</strong> et le champ <strong>Répondre…</strong>.</div>

@@ -11,7 +11,7 @@ Les skills et les règles orientent l'IA dans tous vos projets, sans qu'il faill
 
 Sur la page d'accueil, ouvrez **Skills et règles** dans la barre latérale. La page a deux onglets : **Skills** et **Règles**.
 
-<div class="capture">Capture : page Skills et règles avec l'onglet Skills ouvert, la liste des skills de la bibliothèque, le bouton « Ajouter un skill » et, pour chaque skill, les projets auxquels il s'applique</div>
+<div class="capture" data-shot="skills-bibliotheque">L'onglet <strong>Skills</strong> : chaque skill indique les projets auxquels il s'applique, à choisir dans sa liste.</div>
 
 ## Les skills
 
@@ -114,9 +114,9 @@ L'assistant construit un skill avec vous, par la conversation, à partir de vos 
 7. Cliquez sur **Essayer (sans et avec)** : la même page d'exemple est générée sans puis avec le skill, côte à côte.
 8. Si le résultat vous convient, cliquez sur **Ajouter à ma bibliothèque**. Le skill rejoint vos skills, avec ses jetons (fichier `tokens.json`), et s'applique à vos projets comme les autres.
 
-<div class="capture">Capture : assistant IA de création de skill, avec la conversation à gauche (questions de l'assistant et charte PDF jointe) et, à droite, le skill proposé (nom, description, consignes, jetons) modifiable</div>
+<div class="capture" data-shot="skill-assistant">L'assistant : la conversation et la charte jointe à gauche, le <strong>Skill proposé</strong> à droite, modifiable.</div>
 
-<div class="capture">Capture : résultat de « Essayer (sans et avec) », la même page d'exemple générée sans le skill et avec le skill, côte à côte</div>
+<div class="capture" data-shot="skill-essai"><strong>Essayer (sans et avec)</strong> : la même page d'exemple, <strong>Sans le skill</strong> et <strong>Avec le skill</strong>.</div>
 
 ### Documents acceptés
 

@@ -32,7 +32,7 @@ Le plugin apparaît ensuite dans **Plugins › Development › Coall ⇄ Figma**
 
 Figma garde la connexion pour les fois suivantes. Le code se révoque au même endroit, dans **Préférences › Figma**.
 
-<div class="capture">Capture : Préférences › Figma dans Coall, avec le bouton Créer un code de connexion</div>
+<div class="capture" data-shot="preferences-figma">Dans <strong>Préférences › Figma</strong> : <strong>Créer un code de connexion</strong>, puis la liste des <strong>Codes actifs</strong>, chacun révocable.</div>
 
 ### Lire puis appliquer
 
@@ -53,7 +53,7 @@ Seules les frames **officielles** partent. Les hypothèses restent dans Coall.
 
 Pour chaque différence, vous choisissez **Coall remplace** ou **Garder Figma**. Déplacer une frame dans Figma ne compte pas comme une retouche.
 
-<div class="capture" data-shot="plugin-report">Après <strong>Lire le projet</strong> : chaque frame est classée (Nouvelle, Différence, Archivée) et, pour une différence, vous choisissez <strong>Coall remplace</strong> ou <strong>Garder Figma</strong>.</div>
+<div class="capture" data-shot="plugin-lecture">Après <strong>Lire le projet</strong> : chaque frame est classée (Nouvelle, Différence, Archivée) et, pour une différence, vous choisissez <strong>Coall remplace</strong> ou <strong>Garder Figma</strong>.</div>
 
 ### Comment le fichier Figma est rangé
 

@@ -27,12 +27,12 @@ Chaque page HTML devient une **frame**. Les feuilles de style CSS, les images et
 
 Avant l'import, Coall montre la largeur des pages du fichier, par exemple « 3 pages à 1440 px, 1 page à 390 px ». Sans indication dans le fichier, la largeur est de 1440 px. Deux choix :
 
-- **Importer à ces tailles** ;
+- **Garder ces tailles**, puis **Importer à ces tailles** ;
 - **Une même largeur pour toutes les pages**, puis **Importer à … px**.
 
 Seule la largeur se règle : la hauteur de chaque frame suit son contenu, de l'en-tête au pied de page.
 
-<div class="capture">Capture : fenêtre d'import annonçant « 3 pages à 1440 px, 1 page à 390 px », avec les deux choix de largeur</div>
+<div class="capture" data-shot="import-tailles">Avant l'import : la largeur des pages trouvées, puis <strong>Garder ces tailles</strong> ou <strong>Une même largeur pour toutes les pages</strong>.</div>
 
 ### Maquettes qui dépendent de JavaScript
 
@@ -80,7 +80,7 @@ Pour l'ouvrir :
 | **PDF** | Une page par frame, à sa taille, avec des textes sélectionnables. | Envoyer une revue à un client. |
 | **HTML/CSS** (`.zip`) | Des pages autonomes, avec leurs images et leurs polices. | Réimporter dans Coall (noms, hypothèses et tailles gardés), ou ouvrir dans Figma avec le plugin. |
 
-<div class="capture">Capture : fenêtre Exporter, avec le choix de ce qui part, des formats et de la largeur</div>
+<div class="capture" data-shot="export">La fenêtre <strong>Exporter des frames</strong>, ici en HTML/CSS à largeur fixe, avec <strong>Au pixel près, pour Figma</strong>.</div>
 
 ### Largeur
 

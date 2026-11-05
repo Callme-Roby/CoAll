@@ -1,0 +1,154 @@
+---
+/** Onglet Versions (components/editor/VersionsPanel.tsx) : compteur, filtre Épinglées, Canvas actuel, versions et punaises. */
+import Scaled from "../Scaled.astro";
+import Icon from "../Icon.astro";
+
+const rows = [
+  { i: "Pencil", s: "Modifications manuelles", t: "14:15:40" },
+  { i: "Star", s: "Décision : « Version Marc » devient l’officielle", t: "14:12:03", pin: true },
+  { i: "Sparkles", s: "Ajouter une section témoignages sous les tarifs", t: "14:09:12", hov: true },
+  { i: "Bookmark", s: "Avant la revue client", t: "14:05:27", pin: true },
+  { i: "Sparkles", s: "Passer le titre de l’accueil en vert", t: "14:04:51" },
+  { i: "Download", s: "Import : Accueil, Tarifs, Atelier (3 frames)", t: "14:02:08" },
+];
+---
+<div class="narrow">
+<Scaled w={340} h={560} label="L'onglet Versions : le nombre de versions gardées et épinglées, le filtre Épinglées, le canvas actuel puis chaque version, avec sa punaise.">
+  <div class="tui-win vp">
+    <div class="tabs">
+      <span class="tab">Design</span><span class="tab">Timeline</span><span class="tab on">Versions</span>
+      <span class="tab"><Icon name="MessageCircle" size={14} /></span>
+    </div>
+    <div class="st"><span>Historique</span><span class="save"><Icon name="Bookmark" size={12} />Enregistrer</span></div>
+    <p class="help">Les 30 dernières versions sont gardées : au-delà, la plus ancienne laisse sa place. Épinglez une version pour la garder ; une version enregistrée est épinglée d’office.</p>
+    <div class="cnt"><span>18 / 30 versions · 2 épinglées</span><span class="flt"><Icon name="Pin" size={11} />Épinglées</span></div>
+    <div class="cur"><span class="d"></span><b>Canvas actuel</b></div>
+    <ol>
+      {rows.map((r) => (
+        <li class:list={[{ hov: r.hov }]}>
+          <Icon name={r.i} size={13} />
+          <span class="tx"><b>{r.s}</b><em>{r.t}</em></span>
+          <span class:list={["pn", { on: r.pin }]}><Icon name="Pin" size={13} /></span>
+        </li>
+      ))}
+    </ol>
+  </div>
+</Scaled>
+</div>
+
+<style>
+  .narrow {
+    max-width: 360px;
+    margin: 0 auto;
+  }
+  .vp {
+    width: 340px;
+    height: 560px;
+  }
+  .save {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 28px;
+    padding: 0 8px;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+  .help {
+    padding: 0 12px 8px;
+    line-height: 1.625;
+    color: var(--muted);
+  }
+  .cnt {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px 8px;
+    color: var(--muted);
+  }
+  .flt {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    height: 24px;
+    padding: 0 6px;
+    border-radius: 6px;
+  }
+  .cur {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: var(--off-soft);
+    color: var(--off-ink);
+  }
+  .cur b {
+    font-weight: 500;
+  }
+  .d {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--off);
+  }
+  ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 8px 36px 8px 12px;
+  }
+  li > :global(svg) {
+    margin-top: 2px;
+    color: var(--muted);
+  }
+  li.hov {
+    background: var(--hover);
+  }
+  .tx {
+    min-width: 0;
+    flex: 1;
+  }
+  .tx b {
+    display: block;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .tx em {
+    display: block;
+    font-style: normal;
+    color: var(--muted);
+  }
+  .pn {
+    position: absolute;
+    right: 8px;
+    top: 6px;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+    opacity: 0;
+  }
+  .pn.on {
+    opacity: 1;
+    color: var(--off);
+  }
+  .pn.on :global(svg) {
+    fill: currentColor;
+  }
+  li.hov .pn {
+    opacity: 1;
+    background: var(--panel);
+    color: var(--ink);
+  }
+</style>

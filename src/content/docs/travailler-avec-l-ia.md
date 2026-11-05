@@ -23,7 +23,7 @@ Exemples de demandes :
 - « crée une page tarifs » ;
 - « fais la version mobile de l'accueil ».
 
-<div class="capture">Capture : barre de demande en bas du canvas, avec la cible « Sur 3 frames » affichée au-dessus, le sélecteur de mode (Auto, Officielle, Hypothèse) et une demande en cours de saisie</div>
+<div class="capture" data-shot="barre-demande">Trois frames sélectionnées : la barre indique « Sur 3 frames », le mode <strong>Auto</strong> est choisi et la demande est en cours de saisie.</div>
 
 ### La cible de la demande
 
@@ -108,7 +108,7 @@ Une demande peut prendre de quelques secondes à une minute ou plus. Pendant ce 
 
 Si le réglage « réduire les animations » de votre système est activé, les vagues restent immobiles.
 
-<div class="capture">Capture : une future hypothèse en pointillés violets à côté de l'écran officiel, avec l'esquisse remplie de vagues, la ligne de lecture sur l'écran d'origine et le temps écoulé</div>
+<div class="capture" data-shot="hypothese-en-cours">La future hypothèse se dessine en pointillés violets, avec son chronomètre, pendant que l'écran d'origine est lu.</div>
 
 ### Vos retouches sont gardées
 
@@ -141,9 +141,9 @@ Certaines actions ne s'appliquent pas d'office :
 
 À la place, une carte « L'IA propose : … » apparaît au-dessus de la barre de demande, avec **Valider** et **Annuler**. Survolez la carte pour voir l'aperçu sur le canvas : emplacements en pointillés violets, ou version qui deviendrait officielle.
 
-> **À savoir** Valider une proposition demande le droit **valider**. Sans lui, la carte indique « En attente de l'hôte ».
+> **À savoir** Valider une proposition demande le droit **valider**. Sans lui, la carte indique « En attente de validation ».
 
-<div class="capture">Capture : carte « L'IA propose : ranger les pages par familles » au-dessus de la barre de demande, avec les boutons Valider et Annuler, et l'aperçu des emplacements en pointillés violets sur le canvas</div>
+<div class="capture" data-shot="proposition-ia">Au survol de la carte « L'IA propose : … », les emplacements prévus s'affichent en pointillés violets. Rien ne bouge avant <strong>Valider</strong>.</div>
 
 ## Revenir à une version passée
 

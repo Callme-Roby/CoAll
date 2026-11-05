@@ -1,0 +1,299 @@
+---
+/** Panneau d'appel (components/call/CallSidebar.tsx, CallBar.tsx) : « En appel » et durée, participants,
+    vignettes (qui parle, micro coupé, main levée), commandes, Quitter. */
+import Scaled from "../Scaled.astro";
+import Icon from "../Icon.astro";
+import Canvas from "./_kit/Canvas.astro";
+import Frame from "./_kit/Frame.astro";
+import Site from "./_kit/Site.astro";
+---
+<Scaled w={1000} h={640} label="Panneau d'appel à droite du canvas : durée et participants en haut, une vignette par personne (qui parle, micro coupé, main levée), les commandes et Quitter en bas.">
+  <div class="tui-win pa">
+    <Canvas>
+      <div class="banner"><span class="dot"></span>L’IA écoute<span class="pause">Pause</span></div>
+      <Frame x={60} y={120} w={300} h={380} name="Accueil" kind="off"><Site /></Frame>
+      <Frame x={400} y={120} w={300} h={380} name="Accueil" kind="hyp" label="Version Jean"><Site title="La lumière qui vous suit." titleColor="#16a34a" /></Frame>
+    </Canvas>
+
+    <aside class="call">
+      <div class="hd">
+        <span class="live"><span class="ld"></span>En appel · 12:41</span>
+        <span class="sp"></span>
+        <span class="ppl"><Icon name="Users" size={14} />3</span>
+        <span class="ib"><Icon name="PanelRightClose" size={15} /></span>
+      </div>
+      <div class="tiles">
+        <div class="tile speaking">
+          <span class="av" style="background:#c25100">JM</span>
+          <span class="nm">Jean Morel</span>
+          <span class="badges"><span class="bars on"><i></i><i></i><i></i></span></span>
+        </div>
+        <div class="tile">
+          <span class="av" style="background:#007b83">MD</span>
+          <span class="nm">Marc Duval</span>
+          <span class="badges"><span class="bd mute"><Icon name="MicOff" size={12} /></span></span>
+        </div>
+        <div class="tile">
+          <span class="av" style="background:#9334e6">AB</span>
+          <span class="nm">Vous</span>
+          <span class="badges"><span class="bd hand"><Icon name="Hand" size={13} /></span><span class="bars"><i></i><i></i><i></i></span></span>
+        </div>
+      </div>
+      <div class="ctl">
+        <div class="row">
+          <span class="grp"><span class="bb"><Icon name="Mic" size={18} /></span><span class="chev"><Icon name="ChevronUp" size={14} /></span></span>
+          <span class="grp"><span class="bb"><Icon name="Video" size={18} /></span><span class="chev"><Icon name="ChevronUp" size={14} /></span></span>
+          <span class="bb off"><Icon name="Captions" size={18} /></span>
+          <span class="bb ai"><Icon name="AudioLines" size={18} /></span>
+          <span class="bb warn"><Icon name="Hand" size={18} /></span>
+          <span class="bb mut"><Icon name="Presentation" size={14} /></span>
+        </div>
+        <span class="leave"><Icon name="PhoneOff" size={16} />Quitter</span>
+      </div>
+    </aside>
+  </div>
+</Scaled>
+
+<style>
+  .pa {
+    width: 1000px;
+    height: 640px;
+    display: grid;
+    grid-template-columns: 1fr 264px;
+    border-radius: 12px;
+  }
+  .banner {
+    position: absolute;
+    left: 50%;
+    top: 12px;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 99px;
+    background: var(--ai-strong);
+    color: #fff;
+    font-weight: 500;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    z-index: 3;
+  }
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+  }
+  .pause {
+    margin-left: 4px;
+    padding: 2px 8px;
+    border-radius: 99px;
+    background: rgba(0, 0, 0, 0.2);
+  }
+  .call {
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--line);
+    background: var(--panel);
+    min-height: 0;
+  }
+  .hd {
+    height: 40px;
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .live {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 8px;
+    border-radius: 99px;
+    background: var(--hyp-soft);
+    color: var(--hyp-ink);
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .ld {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--hyp);
+    box-shadow: 0 0 0 3px rgba(20, 174, 92, 0.25);
+  }
+  .sp {
+    flex: 1;
+  }
+  .ppl {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    height: 28px;
+    padding: 0 6px;
+    border-radius: 6px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .ib {
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+  }
+  .tiles {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px;
+    background: var(--canvas);
+  }
+  .tile {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    flex: none;
+    border-radius: 12px;
+    background: var(--stage);
+    display: grid;
+    place-items: center;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+  }
+  .tile.speaking {
+    box-shadow: 0 0 0 2px var(--hyp);
+  }
+  .av {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .speaking .av {
+    box-shadow: 0 0 0 4px rgba(20, 174, 92, 0.4);
+  }
+  .nm {
+    position: absolute;
+    left: 6px;
+    bottom: 6px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .badges {
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    display: flex;
+    gap: 4px;
+  }
+  .bd,
+  .bars {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    display: grid;
+    place-items: center;
+  }
+  .mute {
+    background: var(--danger-strong);
+    color: #fff;
+  }
+  .hand {
+    background: var(--warn);
+    color: #000;
+  }
+  .bars {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    background: var(--hyp-strong);
+  }
+  .bars i {
+    width: 3px;
+    height: 3px;
+    border-radius: 99px;
+    background: #fff;
+  }
+  .bars.on i:nth-child(1) {
+    height: 7px;
+  }
+  .bars.on i:nth-child(2) {
+    height: 11px;
+  }
+  .bars.on i:nth-child(3) {
+    height: 5px;
+  }
+  .ctl {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px;
+    border-top: 1px solid var(--line);
+  }
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+  }
+  .grp {
+    display: flex;
+    align-items: center;
+  }
+  .bb {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    color: var(--ink);
+  }
+  .bb.off {
+    background: var(--off-soft);
+    color: var(--off-ink);
+  }
+  .bb.ai {
+    background: var(--ai-soft);
+    color: var(--ai);
+  }
+  .bb.warn {
+    background: rgba(232, 161, 12, 0.15);
+    color: var(--warn-ink);
+  }
+  .bb.mut {
+    color: var(--muted);
+  }
+  .chev {
+    width: 20px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+  }
+  .leave {
+    height: 36px;
+    border-radius: 8px;
+    background: var(--danger-strong);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+</style>

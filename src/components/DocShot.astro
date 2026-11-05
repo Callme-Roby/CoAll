@@ -28,6 +28,11 @@ if (!Comp) throw new Error(`DocShot : visuel inconnu « ${k} »`);
   .docshot-v > :global(*) {
     width: 100%;
   }
+  /* Jamais plus grand que sa taille dessinée : les panneaux étroits restent à l'échelle 1. */
+  .docshot-v :global([data-scaled]) {
+    max-width: var(--w);
+    margin-inline: auto;
+  }
   @media (max-width: 640px) {
     .docshot-v {
       padding: 14px;
@@ -38,5 +43,9 @@ if (!Comp) throw new Error(`DocShot : visuel inconnu « ${k} »`);
     font-size: 13px;
     line-height: 1.5;
     color: var(--faint);
+  }
+  figcaption :global(strong) {
+    color: var(--ink-2);
+    font-weight: 550;
   }
 </style>

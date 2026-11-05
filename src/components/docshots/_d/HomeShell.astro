@@ -1,0 +1,189 @@
+---
+/** Accueil de Coall (app/(home)/layout.tsx, components/home/Sidebar.tsx, Page.tsx) :
+    barre latérale, en-tête de page, corps sur le fond du canvas. */
+import Icon from "../../Icon.astro";
+import BrandMark from "../../BrandMark.astro";
+interface Props { active: string; title: string; desc?: string; narrow?: boolean }
+const { active, title, desc, narrow = false } = Astro.props;
+const MAIN = [
+  ["Projets", "FolderKanban"],
+  ["Collaborateurs", "Users"],
+  ["Skills et règles", "Sparkles"],
+];
+const ACCOUNT = [
+  ["Compte", "UserRound"],
+  ["Plan et facturation", "CreditCard"],
+  ["Préférences", "SlidersHorizontal"],
+];
+---
+<div class="home">
+  <aside class="sb">
+    <div data-t="p" class="brand"><BrandMark size={18} />Coall</div>
+    <nav>
+      {MAIN.map(([l, i]) => <span class:list={["nl", { on: l === active }]}><Icon name={i} size={16} />{l}</span>)}
+      <div data-t="p" class="grp">Compte</div>
+      {ACCOUNT.map(([l, i]) => <span class:list={["nl", { on: l === active }]}><Icon name={i} size={16} />{l}</span>)}
+    </nav>
+    <div class="foot">
+      <div class="theme"><i><Icon name="Sun" size={14} /></i><i class="on"><Icon name="Moon" size={14} /></i><i><Icon name="Monitor" size={14} /></i></div>
+      <div class="me"><span class="avq">JM</span><span><b>Jean Morel</b><small>Version locale</small></span></div>
+    </div>
+  </aside>
+  <div class="main">
+    <header class="ph">
+      <div><div data-t="h2">{title}</div>{desc && <div data-t="p">{desc}</div>}</div>
+      <slot name="actions" />
+    </header>
+    <div class:list={["body", { narrow }]}><slot /></div>
+  </div>
+</div>
+
+<style>
+  .home {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background: var(--canvas);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+  }
+  .sb {
+    width: 240px;
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--line);
+    background: var(--panel);
+  }
+  .brand {
+    height: 56px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 16px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  nav {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 8px 0;
+  }
+  .nl {
+    height: 32px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .nl.on {
+    background: var(--hover);
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .nl.on :global(svg) {
+    color: var(--off);
+  }
+  .grp {
+    margin: 20px 0 4px !important;
+    padding: 0 10px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .foot {
+    display: grid;
+    gap: 12px;
+    padding: 12px;
+    border-top: 1px solid var(--line);
+  }
+  .theme {
+    display: flex;
+    padding: 2px;
+    border-radius: 8px;
+    background: var(--hover);
+  }
+  .theme i {
+    flex: 1;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    border-radius: 6px;
+    color: var(--muted);
+  }
+  .theme i.on {
+    background: var(--raised);
+    color: var(--ink);
+  }
+  .me {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px;
+  }
+  .avq {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: #c25100;
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .me b {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .me small {
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .main {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .ph {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 32px 32px 20px;
+    border-bottom: 1px solid var(--line);
+    background: var(--panel);
+  }
+  .ph [data-t="h2"] {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+  .ph [data-t="p"] {
+    margin-top: 4px;
+    max-width: 640px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+  .body {
+    flex: 1;
+    padding: 32px;
+    overflow: hidden;
+  }
+  .body.narrow {
+    padding: 28px 48px;
+  }
+</style>

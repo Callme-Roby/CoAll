@@ -1,0 +1,188 @@
+---
+/** « Essayer (sans et avec) » dans l'assistant de création de skill (components/home/SkillAssistant.tsx) :
+    la même page d'exemple générée sans puis avec le skill, côte à côte. */
+import Scaled from "../Scaled.astro";
+import Icon from "../Icon.astro";
+---
+<Scaled w={720} h={392} label="Essai d'un skill : la même page d'exemple, générée sans le skill puis avec, côte à côte ; avec le skill, elle reprend les couleurs, la police et les arrondis de la charte.">
+  <div class="tui-win es">
+    <div data-t="p" class="dh"><Icon name="Sparkles" size={12} />Skill proposé</div>
+    <span class="field strong">charte-studio</span>
+    <div data-t="p" class="note">Relisez et modifiez-le ici, ou demandez des changements à l’assistant.</div>
+    <div class="acts">
+      <span class="b"><Icon name="FlaskConical" size={14} />Essayer (sans et avec)</span>
+      <span class="b primary"><Icon name="Check" size={14} />Ajouter à ma bibliothèque</span>
+    </div>
+    <div class="trial">
+      <figure>
+        <figcaption>Sans le skill</figcaption>
+        <div class="pv sans">
+          <div class="nav"><b>Studio</b><span>Cours</span><span>Tarifs</span><span>Contact</span><em>S'inscrire</em></div>
+          <div class="hero">
+            <div><div data-t="h5">Trouvez votre équilibre</div><div data-t="p">Des cours de yoga pour tous les niveaux, en studio ou en ligne.</div><em>Réserver un cours</em></div>
+            <i class="img"></i>
+          </div>
+          <div class="cards"><i></i><i></i><i></i></div>
+        </div>
+      </figure>
+      <figure>
+        <figcaption>Avec le skill</figcaption>
+        <div class="pv avec">
+          <div class="nav"><b>Studio</b><span>Cours</span><span>Tarifs</span><span>Contact</span><em>S'inscrire</em></div>
+          <div class="hero">
+            <div><div data-t="h5">Trouvez votre équilibre</div><div data-t="p">Des cours de yoga pour tous les niveaux, en studio ou en ligne.</div><em>Réserver un cours</em></div>
+            <i class="img"></i>
+          </div>
+          <div class="cards"><i></i><i></i><i></i></div>
+        </div>
+      </figure>
+    </div>
+  </div>
+</Scaled>
+
+<style>
+  .es {
+    width: 720px;
+    height: 392px;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .dh {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .dh :global(svg) {
+    color: var(--ai);
+  }
+  .field {
+    height: 32px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .note {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .acts {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+  .trial {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding-top: 8px;
+  }
+  figure {
+    margin: 0;
+  }
+  figcaption {
+    margin-bottom: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  /* Page d'exemple réduite (1440 px ramenés à la largeur de la colonne, 192 px de haut) */
+  .pv {
+    height: 192px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: #fff;
+    color: #222;
+    padding: 10px 14px;
+    display: grid;
+    gap: 12px;
+    align-content: start;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 7px;
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #555;
+  }
+  .nav b {
+    margin-right: auto;
+    font-size: 9px;
+    color: #222;
+  }
+  .nav em,
+  .hero em {
+    font-style: normal;
+    padding: 3px 7px;
+    background: #2563eb;
+    color: #fff;
+  }
+  .hero {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 12px;
+    align-items: center;
+  }
+  [data-t="h5"] {
+    margin: 0 0 4px;
+    font-size: 17px;
+    line-height: 1.1;
+    font-weight: 700;
+  }
+  .hero [data-t="p"] {
+    margin: 0 0 8px !important;
+    color: #666;
+  }
+  .hero em {
+    display: inline-block;
+  }
+  .img {
+    height: 74px;
+    background: #d8dde6;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .cards i {
+    height: 34px;
+    background: #eef0f3;
+  }
+  /* Avec la charte : vert #16a34a, Inter, arrondis de 12 px */
+  .avec {
+    font-family: Inter, system-ui, sans-serif;
+    background: #fbfaf7;
+    color: #111;
+  }
+  .avec [data-t="h5"] {
+    font-weight: 650;
+    letter-spacing: -0.03em;
+  }
+  .avec .nav em,
+  .avec .hero em {
+    background: #16a34a;
+    border-radius: 99px;
+    font-weight: 600;
+  }
+  .avec .img {
+    border-radius: 12px;
+    background: linear-gradient(160deg, #dcfce7, #bbf7d0);
+  }
+  .avec .cards i {
+    border-radius: 12px;
+    background: #f0efe9;
+  }
+</style>

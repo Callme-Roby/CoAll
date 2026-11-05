@@ -111,7 +111,7 @@ Voir [Skills et règles](/docs/skills-et-regles).
 ## Composants marqués dans Coall, instances dans Figma
 
 - **Faire un composant**, en haut du panneau Design : donnez un nom ; un autre élément devient le même composant en lui donnant le même nom.
-- **Renommer** renomme toutes les occurrences ; **Détacher** ne concerne que l'élément sélectionné. Un composant a une icône violette dans les calques.
+- **Renommer** renomme toutes les occurrences ; le bouton **Ne plus en faire un composant** (icône de lien rompu) ne concerne que l'élément sélectionné. Un composant a une icône violette dans les calques.
 - Dans Figma, le composant principal arrive sur une page **Composants**, et chaque occurrence devient une instance avec son propre texte.
 
 ## Plugin Figma : variables et bouton Actualiser

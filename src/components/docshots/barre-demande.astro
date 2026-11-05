@@ -1,0 +1,107 @@
+---
+/** Barre de demande (components/editor/PromptBar.tsx) avec trois frames sélectionnées : cible « Sur 3 frames », modes, demande en cours. */
+import Scaled from "../Scaled.astro";
+import Icon from "../Icon.astro";
+import Canvas from "./_kit/Canvas.astro";
+import Frame from "./_kit/Frame.astro";
+import Site from "./_kit/Site.astro";
+---
+<Scaled w={900} h={420} label="Barre de demande en bas du canvas : trois frames sont sélectionnées, la barre indique « Sur 3 frames », le mode Auto est choisi et une demande est en cours de saisie.">
+  <div class="tui-win pbw">
+    <Canvas>
+      <Frame x={60} y={50} w={240} h={210} name="Accueil" selected><Site page="accueil" scale={0.7} /></Frame>
+      <Frame x={330} y={50} w={240} h={210} name="Tarifs" selected><Site page="tarifs" scale={0.7} /></Frame>
+      <Frame x={600} y={50} w={240} h={210} name="Atelier" selected><Site page="atelier" scale={0.7} /></Frame>
+      <form class="pb">
+        <div class="pb-1">
+          <span class="ai"><Icon name="Sparkles" size={12} /></span>
+          <span>Sur 3 frames</span>
+          <span class="modes"><i class="on">Auto</i><i>Officielle</i><i>Hypothèse</i></span>
+        </div>
+        <div class="pb-2">
+          <span class="tx">ajoute une section témoignages sous le hero<span class="caret"></span></span>
+          <span class="send"><Icon name="ArrowUp" size={14} /></span>
+        </div>
+      </form>
+    </Canvas>
+  </div>
+</Scaled>
+
+<style>
+  .pbw {
+    width: 900px;
+    height: 420px;
+    border-radius: 10px;
+  }
+  .pbw :global(.kfr .kb) {
+    outline-width: 2px;
+  }
+  .pb {
+    position: absolute;
+    left: 50%;
+    bottom: 28px;
+    transform: translateX(-50%);
+    width: 600px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  }
+  .pb-1 {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px 0;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .ai {
+    display: grid;
+    color: var(--ai);
+  }
+  .modes {
+    margin-left: auto;
+    display: flex;
+    padding: 2px;
+    border-radius: 6px;
+    background: var(--hover);
+  }
+  .modes i {
+    font-style: normal;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .modes i.on {
+    background: var(--raised);
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .pb-2 {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    padding: 4px 12px 8px;
+  }
+  .tx {
+    flex: 1;
+    font-size: 13px;
+    padding: 4px 0;
+  }
+  .caret {
+    display: inline-block;
+    width: 1px;
+    height: 15px;
+    margin-left: 1px;
+    vertical-align: -3px;
+    background: var(--ink);
+  }
+  .send {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--panel);
+    display: grid;
+    place-items: center;
+  }
+</style>

@@ -1,0 +1,154 @@
+---
+/** Onglet Ressources du panneau de gauche (components/editor/AssetsPanel.tsx) : composants et variantes, puis variables du projet. */
+import Scaled from "../Scaled.astro";
+import Icon from "../Icon.astro";
+
+const variants = [
+  ["Type=Primaire, État=Repos", 6],
+  ["Type=Primaire, État=Survol", 1],
+  ["Type=Secondaire, État=Repos", 4],
+  ["Type=Secondaire, État=Survol", 1],
+  ["Type=Tertiaire, État=Repos", 1],
+  ["Type=Tertiaire, État=Survol", 1],
+];
+const groups: { t: string; rows: [string, string, string][] }[] = [
+  { t: "Couleurs", rows: [["#111111", "color-ink", "#111111"], ["#16A34A", "color-primary", "#16A34A"], ["#F3F1EE", "color-surface", "#F3F1EE"], ["#555555", "Texte 2", "#555555"]] },
+  { t: "Tailles de texte", rows: [["12", "12", "px"], ["16", "16", "px"], ["40", "40", "px"]] },
+  { t: "Interlignages", rows: [["24", "24", "px"]] },
+  { t: "Polices", rows: [["Aa", "Inter", ""]] },
+  { t: "Arrondis", rows: [["8", "radius-md", "px"], ["99", "radius-pill", "px"]] },
+];
+---
+<Scaled w={264} h={840} label="Onglet Ressources : les composants du projet (Bouton et ses variantes avec leurs occurrences, Carte produit, Champ) et les variables : couleurs avec aperçu et code, tailles de texte, interlignages, polices, arrondis.">
+  <aside class="tui-win lp">
+    <div class="tabs"><span class="tab">Calques</span><span class="tab on">Ressources</span><span class="x"><Icon name="PanelLeftClose" size={14} /></span></div>
+    <div class="st"><span>Composants (3)</span></div>
+    <div class="cp"><span class="ai"><Icon name="Component" size={13} /></span><b>Bouton</b><em>6 variantes · 14 occurrences</em></div>
+    <ul class="vl">
+      {variants.map(([v, n]) => <li><span>{v}</span><em>{n}</em></li>)}
+    </ul>
+    <div class="cp"><span class="ai"><Icon name="Component" size={13} /></span><b>Carte produit</b><em>6 occurrences</em></div>
+    <div class="cp"><span class="ai"><Icon name="Component" size={13} /></span><b>Champ</b><em>2 occurrences</em></div>
+    <div class="st sep"><span>Variables</span></div>
+    <p class="help">Lues dans les frames officielles, sous les noms qu’elles auront dans Figma. Une couleur utilisée une seule fois reste sur son calque.</p>
+    {groups.map((g) => (
+      <div class="grp">
+        <p class="gt">{g.t} <span>({g.rows.length})</span></p>
+        {g.rows.map(([a, n, u]) => (
+          <div class="tk">
+            {g.t === "Couleurs" ? <i class="sw" style={`background:${a}`}></i> : <i class="nb mono">{a}</i>}
+            <span>{n}</span>
+            <em class="mono">{u}</em>
+          </div>
+        ))}
+      </div>
+    ))}
+  </aside>
+</Scaled>
+
+<style>
+  .lp {
+    width: 264px;
+    height: 840px;
+    border-radius: 10px;
+  }
+  .x {
+    margin-left: auto;
+    width: 24px;
+    height: 24px;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+  }
+  .cp {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+  }
+  .ai {
+    display: grid;
+    color: var(--ai);
+  }
+  .cp b {
+    flex: 1;
+    min-width: 0;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .cp em {
+    flex: none;
+    white-space: nowrap;
+  }
+  .cp em,
+  .vl em {
+    font-style: normal;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .vl {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 4px;
+  }
+  .vl li {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 12px 4px 32px;
+    font-size: 11px;
+  }
+  .sep {
+    margin-top: 6px;
+  }
+  .help {
+    padding: 0 12px 8px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .grp {
+    padding-bottom: 6px;
+  }
+  .gt {
+    padding: 4px 12px 2px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .gt span {
+    font-weight: 400;
+  }
+  .tk {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 12px;
+  }
+  .tk span {
+    flex: 1;
+  }
+  .tk em {
+    font-style: normal;
+    font-size: 10px;
+    color: var(--muted);
+  }
+  .sw {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    border: 1px solid var(--line);
+  }
+  .nb {
+    font-style: normal;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    border-radius: 4px;
+    background: var(--hover);
+    color: var(--muted);
+    font-size: 10px;
+    display: grid;
+    place-items: center;
+  }
+</style>

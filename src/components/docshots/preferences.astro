@@ -1,0 +1,173 @@
+---
+/** Page Préférences (app/(home)/preferences/page.tsx) : Apparence, Langue, Appels, début de la section Figma. */
+import Scaled from "../Scaled.astro";
+import Icon from "../Icon.astro";
+import HomeShell from "./_d/HomeShell.astro";
+import PrefSection from "./_d/PrefSection.astro";
+const THEMES = [
+  ["Clair", "Sun", "Fond clair, idéal en journée", "light"],
+  ["Sombre", "Moon", "Interface sombre ; les maquettes gardent leurs couleurs", "dark"],
+  ["Système", "Monitor", "Suit le réglage de votre ordinateur", "system"],
+];
+---
+<Scaled w={1040} h={900} label="Page Préférences : choix du thème (Clair, Sombre, Système), de la langue (English, Français), du micro et de la caméra en entrant dans un appel, puis la section Figma.">
+  <HomeShell active="Préférences" title="Préférences" desc="Réglages de ce navigateur." narrow>
+    <div class="stack">
+      <PrefSection title="Apparence">
+        <div class="themes">
+          {THEMES.map(([l, i, h, m]) => (
+            <div class:list={["th", { on: m === "dark" }]}>
+              <div class="pv">
+                {(m === "system" ? ["light", "dark"] : [m]).map((x) => (
+                  <div class:list={["half", x]}><i class="side"></i><span class="fr o"></span><span class="fr h"></span></div>
+                ))}
+              </div>
+              <div data-t="p" class="tl"><Icon name={i} size={14} />{l}</div>
+              <div data-t="p" class="hint">{h}</div>
+            </div>
+          ))}
+        </div>
+      </PrefSection>
+      <PrefSection title="Langue" desc="Langue de l’interface et de la reconnaissance vocale. L’IA répond dans la langue de votre demande.">
+        <div class="seg2"><i>English</i><i class="on">Français</i></div>
+      </PrefSection>
+      <PrefSection title="Appels" desc="État du micro et de la caméra en entrant dans un appel. Vous pouvez toujours les changer avant d’entrer.">
+        <div class="sw"><span>Micro activé en entrant</span><i class="on"></i></div>
+        <div class="sw"><span>Caméra activée en entrant</span><i></i></div>
+      </PrefSection>
+      <PrefSection title="Figma" desc="Reliez le plugin Figma à Coall : il envoie dans Figma les frames officielles de vos projets, puis les tient à jour.">
+        <span class="b primary"><Icon name="KeyRound" size={13} />Créer un code de connexion</span>
+      </PrefSection>
+    </div>
+  </HomeShell>
+</Scaled>
+
+<style>
+  .stack {
+    display: grid;
+    gap: 24px;
+  }
+  .themes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .th {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 12px;
+  }
+  .th.on {
+    border-color: var(--off);
+    background: color-mix(in srgb, var(--off-soft) 50%, transparent);
+  }
+  .pv {
+    display: flex;
+    height: 64px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .half {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #121213;
+  }
+  .half.light {
+    background: #f3f3f2;
+  }
+  .side {
+    align-self: stretch;
+    width: 25%;
+    background: #1c1c1e;
+    border-right: 1px solid #2f2f31;
+    margin-right: auto;
+  }
+  .light .side {
+    background: #fff;
+    border-color: #e6e6e6;
+  }
+  .fr {
+    width: 20px;
+    height: 28px;
+    border-radius: 2px;
+    background: #fff;
+    border: 2px solid #0d99ff;
+  }
+  .fr.h {
+    border-color: #14ae5c;
+    margin-right: auto;
+  }
+  .light .fr.o {
+    border-color: #0c8ce9;
+  }
+  .light .fr.h {
+    border-color: #0e944e;
+  }
+  .tl {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px !important;
+    font-weight: 500;
+  }
+  .hint {
+    margin-top: 2px !important;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .seg2 {
+    display: flex;
+    padding: 2px;
+    border-radius: 8px;
+    background: var(--hover);
+  }
+  .seg2 i {
+    flex: 1;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 6px;
+    color: var(--muted);
+  }
+  .seg2 i.on {
+    background: var(--raised);
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .sw {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 0;
+  }
+  .sw + .sw {
+    margin-top: 8px;
+  }
+  .sw i {
+    position: relative;
+    width: 36px;
+    height: 20px;
+    border-radius: 99px;
+    background: var(--faint);
+  }
+  .sw i::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+  }
+  .sw i.on {
+    background: var(--off);
+  }
+  .sw i.on::after {
+    left: 18px;
+  }
+</style>

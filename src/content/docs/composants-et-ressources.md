@@ -15,7 +15,7 @@ Un composant est un élément d'interface réutilisé dans plusieurs pages : un 
 
 Dans le panneau **Calques**, un composant est signalé par une icône violette.
 
-<div class="capture">Capture : panneau Design d'un bouton sélectionné, avec en haut le bloc composant (nom « Bouton », champ Variante, nombre d'occurrences, boutons Renommer et Détacher)</div>
+<div class="capture" data-shot="design-composant">Le bloc composant, en haut du panneau <strong>Design</strong> : nom, nombre d'occurrences, <strong>Renommer</strong>, l'icône de lien brisé et le champ <strong>Variante</strong>.</div>
 
 ### Relier d'autres éléments au même composant
 
@@ -27,7 +27,7 @@ Pour qu'un autre élément, dans n'importe quelle page, soit le même composant,
 |---|---|
 | **Nombre d'occurrences** | Le panneau indique combien de fois le composant est utilisé dans le projet. |
 | **Renommer** | Renomme toutes les occurrences. |
-| **Détacher** (icône de lien brisé) | Détache cet élément seulement ; les autres occurrences restent liées. |
+| Icône de lien brisé (**Ne plus en faire un composant**) | Détache cet élément seulement ; les autres occurrences restent liées. |
 
 ## Les variantes
 
@@ -60,7 +60,7 @@ Les variables du projet, lues dans les frames officielles :
 
 Elles portent les mêmes noms que dans Figma : Coall et le plugin font le même calcul. Les variables CSS de vos maquettes (par exemple `--color-primary`) gardent leur nom.
 
-<div class="capture">Capture : onglet Ressources du panneau de gauche, avec la liste des composants (Bouton et ses variantes, avec leurs occurrences) et la liste des variables (couleurs avec aperçu et code, tailles de texte, polices)</div>
+<div class="capture" data-shot="ressources-panel">Onglet <strong>Ressources</strong> : chaque composant avec ses variantes et leurs occurrences, puis les variables lues dans les frames officielles.</div>
 
 ## L'IA travaille en composants
 
@@ -84,7 +84,7 @@ L'IA alors :
 
 Les pages créées ensuite (« crée une page Tarifs ») reprennent ces composants.
 
-<div class="capture">Capture : frame « Composants » créée par l'IA, montrant le bouton en variantes Primaire, Secondaire et Tertiaire, chacune avec ses états (normal, survol, désactivé)</div>
+<div class="capture" data-shot="frame-composants">La frame <strong>Composants</strong> créée par l'IA : chaque variante du bouton une fois, état compris.</div>
 
 ## Dans Figma
 

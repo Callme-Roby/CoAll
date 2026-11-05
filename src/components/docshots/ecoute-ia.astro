@@ -1,0 +1,192 @@
+---
+/** Indicateur « L'IA écoute », message de ce qu'elle a compris et sous-titres (components/call/Voice.tsx). */
+import Scaled from "../Scaled.astro";
+import Icon from "../Icon.astro";
+import Canvas from "./_kit/Canvas.astro";
+import Frame from "./_kit/Frame.astro";
+import Site from "./_kit/Site.astro";
+---
+<Scaled w={960} h={580} label="En haut du canvas, l'indicateur « L'IA écoute » et, dessous, ce qu'elle a compris ; en bas, les sous-titres de la conversation.">
+  <div class="tui-win ei">
+    <Canvas>
+      <div class="top">
+        <div class="banner"><span class="dot"></span>L’IA écoute<span class="pause">Pause</span></div>
+        <div class="status">Compris : passer le titre en vert</div>
+      </div>
+      <Frame x={160} y={130} w={300} h={380} name="Accueil" kind="off"><Site /></Frame>
+      <Frame x={500} y={130} w={300} h={380} name="Tarifs" kind="off"><Site page="tarifs" /></Frame>
+
+      <div class="caps">
+        <div class="cl"><span class="ca" style="background:#9334e6">AB</span><p><span class="cn">Alice Bernard</span>Le titre de l’accueil, on pourrait le passer en vert, non ?</p></div>
+        <div class="cl"><span class="ca" style="background:#c25100">JM</span><p><span class="cn">Jean Morel</span>Oui, essayons.</p></div>
+      </div>
+
+      <div class="pb">
+        <div class="pb-1">
+          <span class="pb-s"><Icon name="Sparkles" size={12} /></span>
+          <span>Sur tout le canvas</span>
+          <span class="modes"><i class="on">Auto</i><i>Officielle</i><i>Hypothèse</i></span>
+        </div>
+        <div class="pb-2">
+          <span class="ph">Demandez une modification… (ex. « passe le titre en vert »)</span>
+          <span class="send"><Icon name="ArrowUp" size={14} /></span>
+        </div>
+      </div>
+    </Canvas>
+  </div>
+</Scaled>
+
+<style>
+  .ei {
+    width: 960px;
+    height: 580px;
+    border-radius: 12px;
+  }
+  .top {
+    position: absolute;
+    inset: 12px 0 auto 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    z-index: 3;
+  }
+  .banner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 99px;
+    background: var(--ai-strong);
+    color: #fff;
+    font-weight: 500;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+  }
+  .pause {
+    margin-left: 4px;
+    padding: 2px 8px;
+    border-radius: 99px;
+    background: rgba(0, 0, 0, 0.2);
+  }
+  .status {
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: var(--panel);
+    color: var(--ink);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  .caps {
+    position: absolute;
+    left: 50%;
+    bottom: 120px;
+    transform: translateX(-50%);
+    width: max-content;
+    max-width: 640px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: rgba(11, 11, 12, 0.88);
+    color: #fff;
+    z-index: 3;
+  }
+  .cl {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .ca {
+    flex: none;
+    width: 24px;
+    height: 24px;
+    margin-top: 1px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .cl p {
+    font-size: 15px;
+    line-height: 1.375;
+  }
+  .cn {
+    margin-right: 6px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .pb {
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    width: 600px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    z-index: 3;
+  }
+  .pb-1 {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px 0;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .pb-1 b {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .pb-s {
+    display: grid;
+    color: var(--ai);
+  }
+  .modes {
+    margin-left: auto;
+    display: flex;
+    padding: 2px;
+    border-radius: 6px;
+    background: var(--hover);
+  }
+  .modes i {
+    font-style: normal;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .modes i.on {
+    background: var(--raised);
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .pb-2 {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    padding: 4px 12px 8px;
+  }
+  .ph {
+    flex: 1;
+    font-size: 13px;
+    color: var(--muted);
+    padding: 4px 0;
+  }
+  .send {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--hover);
+    color: var(--faint);
+    display: grid;
+    place-items: center;
+  }
+</style>

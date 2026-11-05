@@ -3,7 +3,7 @@
 interface Props { w: number; h: number; class?: string; label?: string }
 const { w, h, class: cls = "", label } = Astro.props;
 ---
-<div class={`sc ${cls}`} data-scaled data-w={w} data-h={h} style={`aspect-ratio:${w}/${h}`} role={label ? "img" : undefined} aria-label={label}>
+<div class={`sc ${cls}`} data-scaled data-w={w} data-h={h} style={`aspect-ratio:${w}/${h};--w:${w}px`} role={label ? "img" : undefined} aria-label={label}>
   <div class="sc-stage tui" style={`width:${w}px;height:${h}px`}><slot /></div>
 </div>
 

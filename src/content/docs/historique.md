@@ -22,7 +22,7 @@ L'onglet **Timeline** liste chaque **étape** du projet :
 
 Chaque étape indique son **auteur**, l'**heure**, et pour une demande à l'IA le **modèle utilisé** et la **durée** de traitement.
 
-<div class="capture">Capture : onglet Timeline, avec une demande à l'IA (auteur, heure, modèle, durée) et une décision</div>
+<div class="capture" data-shot="timeline">Chaque étape avec son auteur et l'heure ; une demande à l'IA indique aussi le modèle et la durée.</div>
 
 ### Revoir le canvas à une étape
 
@@ -62,7 +62,7 @@ Cliquez sur une version : elle s'affiche en **lecture seule**, avec un bandeau q
 
 > **Astuce** Vous pouvez aussi revenir en arrière en le demandant à l'IA, à l'écrit ou à la voix : « rétablis la version jaune », « remets en hypothèse la version d'avant », « la page contact comme ce matin ». Voir [Travailler avec l'IA](/docs/travailler-avec-l-ia).
 
-<div class="capture">Capture : onglet Versions, avec le compteur « 18 / 30 versions · 2 épinglées », le filtre Épinglées et une punaise au survol</div>
+<div class="capture" data-shot="versions">L'onglet <strong>Versions</strong> : 18 versions sur 30, dont 2 épinglées, le filtre <strong>Épinglées</strong> et la punaise au survol d'une version.</div>
 
 ## 30 versions en roulement, plus les épinglées
 

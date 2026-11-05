@@ -1,0 +1,268 @@
+---
+/** Frame ouverte en édition (FrameView.tsx › Highlight) : élément survolé en pointillés, élément sélectionné en trait plein
+    avec sa balise ; à droite, le panneau Design de l'élément (PropertiesPanel.tsx › ElementProperties). */
+import Scaled from "../Scaled.astro";
+import Icon from "../Icon.astro";
+import Canvas from "./_kit/Canvas.astro";
+import Frame from "./_kit/Frame.astro";
+import Site from "./_kit/Site.astro";
+---
+<Scaled w={1000} h={600} label="Une frame ouverte en édition : le bouton survolé est entouré de pointillés, le titre sélectionné d'un trait plein avec sa balise h1, et le panneau Design affiche les propriétés du titre.">
+  <div class="tui-win ed">
+    <div class="cv">
+      <Canvas>
+        <div class="tools">
+          <span class="tl on"><Icon name="MousePointer2" size={16} /></span>
+          <span class="tl"><Icon name="Hand" size={16} /></span>
+          <span class="tl"><Icon name="Frame" size={16} /></span>
+          <span class="tl"><Icon name="SquareDashed" size={16} /></span>
+          <span class="tl"><Icon name="MessageCircle" size={16} /></span>
+        </div>
+        <Frame x={90} y={64} w={540} h={500} name="Accueil" kind="off" selected={false} style="--sel:1">
+          <Site page="accueil" scale={1.55} />
+        </Frame>
+        <svg class="ptr" width="18" height="18" viewBox="0 0 18 18"><path d="M2 1.5 L15.5 8.2 L9.2 9.6 L6.4 15.8 Z" fill="#fff" stroke="#000" stroke-width="1.2" stroke-linejoin="round" /></svg>
+      </Canvas>
+    </div>
+    <aside class="rp">
+      <div class="tabs">
+        <span class="tab on">Design</span><span class="tab">Timeline</span><span class="tab">Versions</span><span class="tab"><Icon name="MessageCircle" size={14} /></span>
+        <span class="x"><Icon name="PanelRightClose" size={14} /></span>
+      </div>
+      <div class="eh">
+        <span class="tag mono">h1</span>
+        <span class="ibs">
+          <span><Icon name="ArrowUpLeft" size={14} /></span><span><Icon name="ArrowUp" size={14} /></span><span><Icon name="ArrowDown" size={14} /></span><span><Icon name="Copy" size={14} /></span><span class="red"><Icon name="Trash2" size={14} /></span>
+        </span>
+      </div>
+      <div class="cm"><span class="b sm full"><span class="ai"><Icon name="Component" size={13} /></span>Faire un composant</span></div>
+      <div class="sec">
+        <div class="st"><span>Contenu</span></div>
+        <div class="px"><i class="ta">Des lampes qui suivent votre journée</i></div>
+      </div>
+      <div class="sec">
+        <div class="st"><span>Insérer après</span></div>
+        <div class="px row"><span class="b sm">Titre</span><span class="b sm">Texte</span><span class="b sm">Bouton</span><span class="b sm">Bloc</span><span class="b sm">Image</span></div>
+      </div>
+      <div class="sec last">
+        <div class="st"><span>Typographie</span></div>
+        <div class="px">
+          <label class="f wide"><span>Police</span><i class="in ph">Inter, sans-serif</i></label>
+          <div class="g2">
+            <label class="f"><span>Taille</span><i class="in">40px</i></label>
+            <label class="f"><span>Graisse</span><i class="in sel">600<Icon name="ChevronDown" size={11} /></i></label>
+            <label class="f"><span>Interl.</span><i class="in ph">41.2px</i></label>
+            <label class="f"><span>Esp.</span><i class="in ph">-1.2px</i></label>
+          </div>
+          <div class="seg4"><i><Icon name="AlignLeft" size={13} /></i><i><Icon name="AlignCenter" size={13} /></i><i><Icon name="AlignRight" size={13} /></i><i><Icon name="AlignJustify" size={13} /></i></div>
+          <label class="f"><span class="auto">Couleur</span><i class="sw" style="background:#111"></i><i class="in">#111111</i></label>
+        </div>
+      </div>
+    </aside>
+  </div>
+</Scaled>
+
+<style>
+  .ed {
+    width: 1000px;
+    height: 600px;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    border-radius: 10px;
+  }
+  .cv {
+    position: relative;
+    min-width: 0;
+  }
+  .tools {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 4px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+  }
+  .tl {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+  }
+  .tl.on {
+    background: var(--off-strong);
+    color: #fff;
+  }
+  /* Frame en édition : contour épais. */
+  .cv :global(.kfr .kb) {
+    outline-width: 2px;
+  }
+  /* Élément sélectionné : trait plein et balise. */
+  .cv :global([data-el="title"]) {
+    outline: 1.5px solid var(--off);
+    outline-offset: 2px;
+  }
+  .cv :global([data-el="title"])::after {
+    content: "h1";
+    position: absolute;
+    left: -2px;
+    top: -19px;
+    background: var(--off-strong);
+    color: #fff;
+    font: 500 10px/14px ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: 0;
+    padding: 0 4px;
+    border-radius: 2px;
+  }
+  /* Élément survolé : pointillés. */
+  .cv :global([data-el="btn"]) {
+    outline: 1.5px dashed var(--off);
+    outline-offset: 2px;
+  }
+  .ptr {
+    position: absolute;
+    left: 250px;
+    top: 268px;
+    z-index: 4;
+  }
+  .rp {
+    border-left: 1px solid var(--line);
+    background: var(--panel);
+  }
+  .tabs {
+    gap: 2px;
+  }
+  .tab {
+    padding: 0 6px;
+  }
+  .x {
+    margin-left: auto;
+    width: 24px;
+    height: 24px;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+  }
+  .eh {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  .tag {
+    background: var(--off-soft);
+    color: var(--off-ink);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .ibs {
+    display: flex;
+  }
+  .ibs span {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+  }
+  .ibs .red {
+    color: var(--danger);
+  }
+  .cm {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  .ai {
+    display: grid;
+    color: var(--ai);
+  }
+  .sec {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 12px;
+  }
+  .sec.last {
+    border: 0;
+  }
+  .px {
+    padding: 0 12px;
+    display: grid;
+    gap: 8px;
+  }
+  .px.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .ta {
+    font-style: normal;
+    background: var(--hover);
+    border-radius: 5px;
+    padding: 6px 8px;
+    font-size: 11px;
+    min-height: 40px;
+  }
+  .g2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .f {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .f > span {
+    width: 36px;
+    flex: none;
+    color: var(--muted);
+  }
+  .f.wide > span {
+    width: 64px;
+  }
+  .f > span.auto {
+    width: auto;
+  }
+  .f i {
+    font-style: normal;
+  }
+  .f i.in {
+    flex: 1;
+  }
+  .in.sel {
+    justify-content: space-between;
+  }
+  .sw {
+    width: 28px;
+    height: 28px;
+    flex: none;
+    border-radius: 4px;
+    border: 3px solid var(--panel);
+    box-shadow: 0 0 0 1px var(--line);
+  }
+  .seg4 {
+    display: flex;
+    gap: 2px;
+    padding: 2px;
+    border-radius: 6px;
+    background: var(--hover);
+  }
+  .seg4 i {
+    flex: 1;
+    height: 24px;
+    display: grid;
+    place-items: center;
+    border-radius: 4px;
+    color: var(--muted);
+  }
+  .seg4 i.on {
+    background: var(--raised);
+    color: var(--ink);
+  }
+</style>

@@ -17,9 +17,9 @@ L'IA **n'écoute que lorsque l'indicateur « L'IA écoute » est visible**, et s
 
 La **transcription n'est conservée qu'avec un accord distinct** de chaque personne, et seulement si l'hôte ne l'a pas désactivée. Elle est **supprimée avec le projet**.
 
-Accepter l'écoute ne suffit pas : la conservation de la transcription se demande à part, à l'entrée de l'appel ou depuis l'onglet **Timeline › Transcription**. Lorsque l'hôte désactive la conservation, seuls les résumés arrivent dans la timeline, et l'écran d'entrée de l'appel l'annonce.
+Accepter l'écoute ne suffit pas : la conservation de la transcription est annoncée dans le texte de l'accord, à l'entrée de l'appel, ou se demande depuis l'onglet **Timeline › Transcription**. Lorsque l'hôte désactive la conservation, seuls les résumés arrivent dans la timeline, et l'écran d'entrée de l'appel l'annonce.
 
-<div class="capture">Capture : écran d'entrée de l'appel, avec les deux accords distincts (écoute de l'IA, conservation de la transcription)</div>
+<div class="capture" data-shot="entree-appel">À l'entrée de l'appel, le texte de l'accord <strong>Écoute de l'IA</strong> dit ce qui est conservé, par qui c'est visible et quand c'est supprimé.</div>
 
 ### Rien n'est détruit
 

@@ -1,0 +1,224 @@
+---
+/** Plugin « Coall ⇄ Figma » après « Lire le projet » : le rapport complet, jusqu'au bouton d'application
+    (libellés de figma-plugin/src/ui.html et ui-sync.ts). */
+import Scaled from "../Scaled.astro";
+import Icon from "../Icon.astro";
+---
+<div style="max-width:400px;margin:0 auto">
+<Scaled w={400} h={668} label="Le plugin Coall ⇄ Figma après Lire le projet : deux frames nouvelles, une différence avec le choix Coall remplace ou Garder Figma, une frame archivée à ranger, puis le bouton Appliquer dans Figma.">
+  <div class="plug">
+    <div class="pt"><span>Coall ⇄ Figma</span><Icon name="X" size={14} /></div>
+    <nav><span class="on">Depuis Coall</span><span>Vers Coall</span></nav>
+    <main>
+      <div class="row sb"><span>Connecté : Jean Morel</span><span class="link">Se déconnecter</span></div>
+      <label class="fld">Projet
+        <span class="sel-row"><span class="sel">Lumen · Site vitrine <Icon name="ChevronDown" size={12} /></span><span class="ic">↻</span></span>
+      </label>
+      <div class="check"><span class="box on"><Icon name="Check" size={10} stroke={3} /></span><div><b>Positions fixes, au pixel près</b><div data-t="p">Chaque calque à sa position mesurée, sans auto layout : rien ne se réorganise dans Figma.</div></div></div>
+      <span class="pbtn">Lire le projet</span>
+      <div data-t="p" class="sum">2 nouvelles, 1 différence, 1 archivée, 4 à jour</div>
+      <div data-t="ul" class="report">
+        <div data-t="li"><span class="tag new">Nouvelle</span>Accueil · mobile<span class="why">390 px — sera ajoutée</span></div>
+        <div data-t="li"><span class="tag new">Nouvelle</span>Contact<span class="why">1440 px — sera ajoutée</span></div>
+        <div data-t="li"><span class="tag chg">Différence</span>Tarifs<span class="why">Modifiée dans Coall</span>
+          <span class="choice"><span><i class="rd on"></i>Coall remplace</span><span><i class="rd"></i>Garder Figma</span></span></div>
+        <div data-t="li"><span class="tag arc">Archivée</span>Atelier<span class="why">N'est plus officielle dans Coall</span>
+          <span class="choice"><span><span class="box on sm"><Icon name="Check" size={9} stroke={3} /></span>Ranger dans « Archives Coall »</span></span></div>
+      </div>
+      <span class="pbtn">Appliquer dans Figma (3 frames à créer, 1 à ranger)</span>
+      <div data-t="p" class="zip"><Icon name="ChevronRight" size={12} />Ou importer un .zip exporté de Coall</div>
+    </main>
+  </div>
+</Scaled>
+</div>
+
+<style>
+  .plug {
+    width: 400px;
+    height: 668px;
+    background: #2c2c2c;
+    color: #fff;
+    border-radius: 12px;
+    border: 1px solid #444;
+    overflow: hidden;
+    font: 12px/1.5 Inter, system-ui, sans-serif;
+    box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.8);
+  }
+  .pt {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px 0 16px;
+    border-bottom: 1px solid #444;
+    font-weight: 600;
+  }
+  .plug nav {
+    display: flex;
+    gap: 2px;
+    padding: 8px 12px 0;
+    border-bottom: 1px solid #444;
+  }
+  .plug nav span {
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+  }
+  .plug nav span.on {
+    color: #fff;
+    border-bottom-color: #0c8ce9;
+  }
+  .plug main {
+    padding: 12px 16px 16px;
+    display: grid;
+    gap: 10px;
+  }
+  .row.sb {
+    display: flex;
+    justify-content: space-between;
+  }
+  .link {
+    color: #4cb0ff;
+    font-weight: 500;
+  }
+  .fld {
+    display: grid;
+    gap: 4px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .sel-row {
+    display: flex;
+    gap: 6px;
+  }
+  .sel {
+    flex: 1;
+    height: 32px;
+    border: 1px solid #444;
+    border-radius: 6px;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+  }
+  .ic {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #444;
+    border-radius: 6px;
+    display: grid;
+    place-items: center;
+    font-size: 16px;
+    color: #fff;
+  }
+  .check {
+    display: flex;
+    gap: 8px;
+  }
+  .check b {
+    font-weight: 500;
+  }
+  .check [data-t="p"] {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .box {
+    flex: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    border: 1px solid #777;
+    display: inline-grid;
+    place-items: center;
+    margin-top: 2px;
+  }
+  .box.on {
+    background: #0c8ce9;
+    border-color: #0c8ce9;
+    color: #fff;
+  }
+  .box.sm {
+    width: 12px;
+    height: 12px;
+    margin: 0;
+  }
+  .pbtn {
+    height: 36px;
+    border-radius: 6px;
+    background: #0c8ce9;
+    color: #fff;
+    font-weight: 600;
+    display: grid;
+    place-items: center;
+  }
+  .sum {
+    color: #fff;
+  }
+  .report {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #444;
+    border-radius: 8px;
+  }
+  .report [data-t="li"] {
+    padding: 8px 10px;
+    border-top: 1px solid #444;
+  }
+  .report [data-t="li"]:first-child {
+    border-top: 0;
+  }
+  .tag {
+    padding: 0 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .tag.new {
+    background: #e5f4ff;
+    color: #0a6ccf;
+  }
+  .tag.chg {
+    background: #fff1d6;
+    color: #8a5a00;
+  }
+  .tag.arc {
+    background: #383838;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .why {
+    display: block;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .choice {
+    display: flex;
+    gap: 12px;
+    margin-top: 4px;
+  }
+  .choice > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .rd {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid #777;
+  }
+  .rd.on {
+    border: 4px solid #0c8ce9;
+  }
+
+  .zip {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: rgba(255, 255, 255, 0.7);
+    border-top: 1px solid #444;
+    padding-top: 10px;
+  }
+</style>

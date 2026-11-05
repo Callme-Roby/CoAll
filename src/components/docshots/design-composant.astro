@@ -1,0 +1,180 @@
+---
+/** Panneau Design d'un bouton marqué comme composant (PropertiesPanel.tsx › ElementProperties, ComponentMark.tsx). */
+import Scaled from "../Scaled.astro";
+import Icon from "../Icon.astro";
+---
+<Scaled w={320} h={450} label="Panneau Design d'un bouton : en haut, le bloc composant « Bouton » avec son nombre d'occurrences, Renommer, l'icône pour ne plus en faire un composant et le champ Variante.">
+  <aside class="tui-win rp">
+    <div class="tabs">
+      <span class="tab on">Design</span><span class="tab">Timeline</span><span class="tab">Versions</span><span class="tab"><Icon name="MessageCircle" size={14} /></span>
+      <span class="x"><Icon name="PanelRightClose" size={14} /></span>
+    </div>
+    <div class="eh">
+      <span class="tag mono">a</span>
+      <span class="ibs">
+        <span><Icon name="ArrowUpLeft" size={14} /></span><span><Icon name="ArrowUp" size={14} /></span><span><Icon name="ArrowDown" size={14} /></span><span><Icon name="Copy" size={14} /></span><span class="red"><Icon name="Trash2" size={14} /></span>
+      </span>
+    </div>
+    <div class="cm">
+      <div class="cm-1">
+        <span class="ai"><Icon name="Component" size={14} /></span>
+        <span class="cm-n"><b>Bouton</b><small>Composant · 14 occurrences dans le projet</small></span>
+        <span class="b sm ghost">Renommer</span>
+        <span class="b sm ghost hl"><Icon name="Unlink" size={12} /></span>
+      </div>
+      <label class="vr"><span>Variante</span><i>Type=Primaire, État=Repos</i></label>
+    </div>
+    <div class="sec">
+      <div class="st"><span>Contenu</span></div>
+      <div class="px">
+        <i class="ta">Voir la collection</i>
+        <label class="f wide"><span>Lien</span><i class="in">/collection</i></label>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="st"><span>Insérer après</span></div>
+      <div class="px row"><span class="b sm">Titre</span><span class="b sm">Texte</span><span class="b sm">Bouton</span><span class="b sm">Bloc</span><span class="b sm">Image</span></div>
+    </div>
+    <div class="sec last">
+      <div class="st"><span>Typographie</span></div>
+      <div class="px">
+        <label class="f wide"><span>Police</span><i class="in ph">Inter, sans-serif</i></label>
+      </div>
+    </div>
+  </aside>
+</Scaled>
+
+<style>
+  .rp {
+    width: 320px;
+    height: 450px;
+    border-radius: 10px;
+  }
+  .tabs {
+    gap: 2px;
+  }
+  .tab {
+    padding: 0 6px;
+  }
+  .x {
+    margin-left: auto;
+    width: 24px;
+    height: 24px;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+  }
+  .eh {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  .tag {
+    background: var(--off-soft);
+    color: var(--off-ink);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .ibs {
+    display: flex;
+  }
+  .ibs span {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+  }
+  .ibs .red {
+    color: var(--danger);
+  }
+  .cm {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ai) 0%, transparent);
+  }
+  .cm-1 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ai {
+    color: var(--ai);
+    display: grid;
+  }
+  .cm-n {
+    flex: 1;
+    min-width: 0;
+    display: grid;
+  }
+  .cm-n b {
+    font-weight: 500;
+  }
+  .cm-n small {
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .b.ghost {
+    padding: 0 8px;
+  }
+  .vr {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .vr i {
+    flex: 1;
+    font-style: normal;
+    height: 28px;
+    line-height: 26px;
+    padding: 0 8px;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    color: var(--ink);
+  }
+  .sec {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 12px;
+  }
+  .sec.last {
+    border: 0;
+  }
+  .px {
+    padding: 0 12px;
+    display: grid;
+    gap: 8px;
+  }
+  .px.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .ta {
+    font-style: normal;
+    background: var(--hover);
+    border-radius: 5px;
+    padding: 6px 8px;
+    font-size: 11px;
+    min-height: 40px;
+  }
+  .f {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .f > span {
+    width: 64px;
+    flex: none;
+    color: var(--muted);
+  }
+  .f i {
+    flex: 1;
+    font-style: normal;
+  }
+</style>

@@ -1,0 +1,77 @@
+---
+/** Préférences › Figma (components/home/FigmaConnection.tsx) : les trois étapes, le bouton Créer un code de connexion et les codes actifs. */
+import Scaled from "../Scaled.astro";
+import Icon from "../Icon.astro";
+import PrefSection from "./_d/PrefSection.astro";
+---
+<Scaled w={640} h={340} label="Section Figma des Préférences : trois étapes pour relier le plugin, le bouton Créer un code de connexion et la liste des codes actifs, chacun avec Révoquer.">
+  <div class="wrapf">
+    <PrefSection title="Figma" desc="Reliez le plugin Figma à Coall : il envoie dans Figma les frames officielles de vos projets, puis les tient à jour.">
+      <div class="fc">
+        <div data-t="ol">
+          <div data-t="li">Dans Figma, ouvrez le plugin « Coall ⇄ Figma » (Plugins › Développement).</div>
+          <div data-t="li">Créez un code ci-dessous et collez-le dans le plugin, avec l’adresse du serveur (pas celle de cette page) : <span data-t="code" class="mono">http://localhost:4000</span></div>
+          <div data-t="li">Choisissez le projet : ses frames officielles arrivent dans Figma ; ensuite, seules les nouveautés et les modifications sont ramenées.</div>
+        </div>
+        <div><span class="b primary"><Icon name="KeyRound" size={13} />Créer un code de connexion</span></div>
+        <div>
+          <div data-t="p" class="act">Codes actifs</div>
+          <div data-t="ul">
+            <div data-t="li"><span>Créé le 04/11/2026 14:02 · utilisé le 05/11/2026 09:15</span><span class="b sm danger">Révoquer</span></div>
+          </div>
+        </div>
+      </div>
+    </PrefSection>
+  </div>
+</Scaled>
+
+<style>
+  .wrapf {
+    width: 640px;
+    height: 340px;
+  }
+  .fc {
+    display: grid;
+    gap: 12px;
+  }
+  [data-t="ol"] {
+    margin: 0;
+    padding-left: 20px;
+    color: var(--muted);
+    display: grid;
+    gap: 4px;
+    line-height: 1.5;
+  }
+  [data-t="code"] {
+    background: var(--hover);
+    color: var(--ink);
+    border-radius: 4px;
+    padding: 0 4px;
+    font-size: 12px;
+  }
+  .act {
+    margin-bottom: 4px !important;
+    font-weight: 500;
+  }
+  [data-t="ul"] {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+  [data-t="ol"] > [data-t="li"] {
+    display: list-item;
+    list-style: decimal;
+  }
+  [data-t="ul"] > [data-t="li"] {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+  }
+  [data-t="ul"] span:first-child {
+    flex: 1;
+    color: var(--muted);
+  }
+</style>

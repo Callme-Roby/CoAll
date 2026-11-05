@@ -1,0 +1,189 @@
+---
+/** Proposition de l'IA (components/editor/Proposals.tsx) : carte « L'IA propose : … » au-dessus de la barre de demande,
+    et, au survol de la carte, l'aperçu des emplacements en pointillés violets sur le canvas (ProposalPreview). */
+import Scaled from "../Scaled.astro";
+import Icon from "../Icon.astro";
+import Canvas from "./_kit/Canvas.astro";
+import Frame from "./_kit/Frame.astro";
+import Site from "./_kit/Site.astro";
+
+const W = 140;
+const H = 112;
+const ghosts = [
+  { n: "Accueil", x: 470, y: 64 },
+  { n: "Tarifs", x: 640, y: 64 },
+  { n: "Atelier", x: 810, y: 64 },
+  { n: "Accueil", x: 470, y: 222 },
+];
+---
+<Scaled w={1000} h={560} label="L'IA propose de ranger les pages par familles : la carte s'affiche au-dessus de la barre de demande avec Valider et Annuler, et au survol, les emplacements prévus apparaissent en pointillés violets sur le canvas.">
+  <div class="tui-win pw">
+    <Canvas>
+      <Frame x={50} y={70} w={W} h={H} name="Accueil"><Site page="accueil" scale={0.45} /></Frame>
+      <Frame x={250} y={46} w={W} h={H} name="Accueil" kind="hyp" label="Version Jean"><Site page="accueil" scale={0.45} title="La lumière qui vous suit." titleColor="#16a34a" /></Frame>
+      <Frame x={210} y={214} w={W} h={H} name="Atelier"><Site page="atelier" scale={0.45} /></Frame>
+      <Frame x={40} y={250} w={W} h={H} name="Tarifs"><Site page="tarifs" scale={0.45} /></Frame>
+
+      {ghosts.map((g) => (
+        <div class="gh" style={`left:${g.x}px;top:${g.y}px;width:${W}px;height:${H}px`}><span>{g.n}</span></div>
+      ))}
+
+      <div class="dock">
+        <div class="card">
+          <span class="ai"><Icon name="LayoutGrid" size={14} /></span>
+          <span class="txt"><b>L’IA propose : </b>ranger les pages par familles<em> · suite à Alice</em></span>
+          <span class="ok"><Icon name="Check" size={12} />Valider</span>
+          <span class="no"><Icon name="X" size={12} />Annuler</span>
+        </div>
+        <div class="pb">
+          <div class="pb-1">
+            <span class="ai"><Icon name="Sparkles" size={12} /></span>
+            <span>Sur tout le canvas</span>
+            <span class="modes"><i class="on">Auto</i><i>Officielle</i><i>Hypothèse</i></span>
+          </div>
+          <div class="pb-2">
+            <span class="ph">Demandez une modification… (ex. « passe le titre en vert »)</span>
+            <span class="send"><Icon name="ArrowUp" size={14} /></span>
+          </div>
+        </div>
+      </div>
+      <svg class="ptr" width="18" height="18" viewBox="0 0 18 18"><path d="M2 1.5 L15.5 8.2 L9.2 9.6 L6.4 15.8 Z" fill="#fff" stroke="#000" stroke-width="1.2" stroke-linejoin="round" /></svg>
+    </Canvas>
+  </div>
+</Scaled>
+
+<style>
+  .pw {
+    width: 1000px;
+    height: 560px;
+    border-radius: 10px;
+  }
+  .gh {
+    position: absolute;
+    border: 2px dashed var(--ai);
+    border-radius: 1px;
+    background: color-mix(in srgb, var(--ai) 6%, transparent);
+  }
+  .gh span {
+    position: absolute;
+    left: 6px;
+    top: 6px;
+    background: var(--ai-strong);
+    color: #fff;
+    border-radius: 3px;
+    padding: 2px 6px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .dock {
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .card {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 6px 6px 12px;
+    border-radius: 12px;
+    border: 1px solid color-mix(in srgb, var(--ai) 30%, transparent);
+    background: var(--panel);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+    white-space: nowrap;
+  }
+  .ai {
+    display: grid;
+    color: var(--ai);
+  }
+  .txt b {
+    font-weight: 500;
+    color: var(--ai);
+  }
+  .txt em {
+    font-style: normal;
+    color: var(--muted);
+  }
+  .ok,
+  .no {
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    border-radius: 999px;
+    font-weight: 500;
+  }
+  .ok {
+    background: var(--off-strong);
+    color: #fff;
+    padding: 0 12px;
+  }
+  .no {
+    color: var(--muted);
+    padding: 0 10px;
+    font-weight: 400;
+  }
+  .pb {
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  }
+  .pb-1 {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px 0;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .modes {
+    margin-left: auto;
+    display: flex;
+    padding: 2px;
+    border-radius: 6px;
+    background: var(--hover);
+  }
+  .modes i {
+    font-style: normal;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .modes i.on {
+    background: var(--raised);
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .pb-2 {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    padding: 4px 12px 8px;
+  }
+  .ph {
+    flex: 1;
+    font-size: 13px;
+    color: var(--muted);
+    padding: 4px 0;
+  }
+  .send {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--hover);
+    color: var(--faint);
+    display: grid;
+    place-items: center;
+  }
+  .ptr {
+    position: absolute;
+    left: 560px;
+    top: 452px;
+  }
+</style>
