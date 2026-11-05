@@ -338,7 +338,8 @@ const cursor = (color: string) =>
     hero.addEventListener("pointermove", (e) => {
       const r = hero.getBoundingClientRect();
       you.style.opacity = "1";
-      you.style.transform = `translate(${e.clientX - r.left + 2}px, ${e.clientY - r.top + 2}px)`;
+      // La pointe de la flèche (2, 1.5 dans son repère de 18 px) se place exactement sous la souris.
+      you.style.transform = `translate(${e.clientX - r.left - 2}px, ${e.clientY - r.top - 1.5}px)`;
     });
     hero.addEventListener("pointerleave", () => (you.style.opacity = "0"));
     hov?.addEventListener("pointerenter", () => hov.classList.add("on"));
@@ -471,10 +472,18 @@ const cursor = (color: string) =>
     33% { transform: translate(36px, -22px); }
     66% { transform: translate(-18px, 26px); }
   }
+  /* Dans le hero, la flèche système laisse la place au curseur « Vous ». */
+  @media (pointer: fine) {
+    .hero,
+    .hero :global(*) {
+      cursor: none !important;
+    }
+  }
   .you {
     left: 0;
     top: 0;
     opacity: 0;
+    pointer-events: none;
     transition: opacity 0.2s;
     z-index: 4;
   }
