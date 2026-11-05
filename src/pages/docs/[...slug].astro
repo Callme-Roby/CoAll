@@ -1,14 +1,27 @@
 ---
 import { getCollection, render } from "astro:content";
 import Docs from "../../layouts/Docs.astro";
+import DocShot from "../../components/DocShot.astro";
 
 export async function getStaticPaths() {
   const docs = await getCollection("docs");
   return docs.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
 }
 const { entry } = Astro.props;
-const { Content, headings } = await render(entry);
+const { headings } = await render(entry);
+
+// Le texte est rendu en HTML ; chaque emplacement <div class="capture" data-shot="…"> est remplacé par le visuel de l'outil.
+const html = entry.rendered?.html ?? "";
+const parts: ({ html: string } | { k: string; caption: string })[] = [];
+const re = /<div class="capture" data-shot="([\w-]+)">([\s\S]*?)<\/div>/g;
+let last = 0;
+for (const m of html.matchAll(re)) {
+  parts.push({ html: html.slice(last, m.index) });
+  parts.push({ k: m[1], caption: m[2].trim() });
+  last = m.index! + m[0].length;
+}
+parts.push({ html: html.slice(last) });
 ---
 <Docs title={entry.data.title} description={entry.data.description} slug={entry.id} headings={headings}>
-  <Content />
+  {parts.map((p) => ("k" in p ? <DocShot k={p.k} caption={p.caption} /> : <Fragment set:html={p.html} />))}
 </Docs>

@@ -1,0 +1,169 @@
+---
+/** Frame du canvas, telle que dessinée dans Coall : ligne de titre au-dessus, contour selon le statut.
+    kind : off (officielle, bleu) · hyp (hypothèse, vert) · arch (archivée, pointillés gris) · plain (sans statut mis en avant). */
+import Icon from "../../Icon.astro";
+interface Props {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  name: string;
+  kind?: "off" | "hyp" | "arch" | "plain";
+  label?: string;
+  selected?: boolean;
+  play?: boolean;
+  promote?: boolean;
+  compare?: string | boolean;
+  dim?: boolean;
+  style?: string;
+}
+const { x, y, w, h, name, kind = "off", label, selected = false, play = false, promote = false, compare = false, dim = false, style = "" } = Astro.props;
+---
+<div class:list={["kfr", `k-${kind}`, { sel: selected, dim }]} style={`left:${x}px;top:${y}px;width:${w}px;height:${h}px;${style}`}>
+  <div class="kt">
+    <b>{name}</b>
+    {label && <span class="kl">— {label}</span>}
+    {kind === "hyp" && <span class="kc hyp">Hypothèse</span>}
+    {kind === "arch" && <span class="kc arch">Archivée</span>}
+    {promote && <span class="kp">✓ Promouvoir</span>}
+    {compare && <span class:list={["kcmp", { on: typeof compare === "string" }]}><Icon name="GitCompareArrows" size={11} />{typeof compare === "string" ? compare : "Comparer"}</span>}
+  </div>
+  {play && <span class="kplay"><Icon name="Play" size={10} /></span>}
+  <div class="kb"><slot /></div>
+  {selected && <><span class="kh a"></span><span class="kh b"></span><span class="kh c"></span><span class="kh d"></span></>}
+  <slot name="over" />
+</div>
+
+<style>
+  .kfr {
+    position: absolute;
+  }
+  .kt {
+    position: absolute;
+    left: 0;
+    bottom: calc(100% + 4px);
+    height: 18px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    color: var(--muted);
+    max-width: calc(100% - 28px);
+  }
+  .kt > * {
+    flex: none;
+  }
+  .kt b {
+    font-weight: 500;
+  }
+  .kl {
+    flex: 0 1 auto !important;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .kb {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+  .k-off .kt {
+    color: var(--off-ink);
+  }
+  .k-off .kb {
+    outline: 1px solid var(--off);
+  }
+  .k-off.sel .kb {
+    outline-width: 2px;
+  }
+  .k-hyp .kt {
+    color: var(--hyp-ink);
+  }
+  .k-hyp .kb {
+    outline: 2px solid var(--hyp);
+  }
+  .k-arch .kb {
+    outline: 1.5px dashed var(--arch);
+    opacity: 0.55;
+    filter: grayscale(1);
+  }
+  .k-plain .kb {
+    outline: 0;
+  }
+  .dim {
+    opacity: 0.45;
+  }
+  .kc {
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 1px 5px;
+  }
+  .kc.hyp {
+    background: var(--hyp-soft);
+    color: var(--hyp-ink);
+  }
+  .kc.arch {
+    background: var(--hover);
+    color: var(--muted);
+  }
+  .kp {
+    background: var(--hyp-strong);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 16px;
+    padding: 0 4px;
+    border-radius: 2px;
+  }
+  .kcmp {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 16px;
+    padding: 0 4px;
+    border-radius: 2px;
+    background: var(--hover);
+    color: var(--ink);
+  }
+  .kcmp.on {
+    background: var(--warn);
+    color: #000;
+  }
+  .kplay {
+    position: absolute;
+    right: 0;
+    top: -24px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--panel);
+    display: grid;
+    place-items: center;
+    padding-left: 1px;
+  }
+  .kplay :global(svg) {
+    fill: currentColor;
+  }
+  .kh {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border: 1px solid var(--off);
+    border-radius: 1px;
+    z-index: 2;
+  }
+  .k-hyp .kh {
+    border-color: var(--hyp);
+  }
+  .kh.a { left: -5px; top: -5px; }
+  .kh.b { right: -5px; top: -5px; }
+  .kh.c { left: -5px; bottom: -5px; }
+  .kh.d { right: -5px; bottom: -5px; }
+</style>

@@ -53,7 +53,7 @@ Seules les frames **officielles** partent. Les hypothèses restent dans Coall.
 
 Pour chaque différence, vous choisissez **Coall remplace** ou **Garder Figma**. Déplacer une frame dans Figma ne compte pas comme une retouche.
 
-<div class="capture">Capture : plugin Coall ⇄ Figma après « Lire le projet », avec une frame Nouvelle et une Différence (choix Coall remplace / Garder Figma)</div>
+<div class="capture" data-shot="plugin-report">Après <strong>Lire le projet</strong> : chaque frame est classée (Nouvelle, Différence, Archivée) et, pour une différence, vous choisissez <strong>Coall remplace</strong> ou <strong>Garder Figma</strong>.</div>
 
 ### Comment le fichier Figma est rangé
 

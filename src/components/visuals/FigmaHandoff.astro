@@ -9,6 +9,11 @@ import Scaled from "../Scaled.astro";
 import Icon from "../Icon.astro";
 import BrandMark from "../BrandMark.astro";
 
+/** only : n'affiche qu'un des trois panneaux (pour la documentation). */
+interface Props { only?: "coall" | "plugin" | "figma" }
+const { only } = Astro.props;
+const show = (k: string) => !only || only === k;
+
 const variants = [
   ["Primaire", "Repos"],
   ["Primaire", "Survol"],
@@ -18,9 +23,9 @@ const variants = [
   ["Tertiaire", "Survol"],
 ];
 ---
-<div class="fh">
+<div class:list={["fh", { solo: only }]}>
   <!-- 1. Coall -->
-  <figure class="col">
+  {show("coall") && <figure class="col">
     <Scaled w={460} h={640} label="Coall : l'onglet Ressources liste les composants et les variables du projet, à côté de la planche Composants.">
       <div class="tui-win coall">
         <div class="ct"><BrandMark size={14} /><b>Lumen · Site vitrine</b></div>
@@ -60,13 +65,13 @@ const variants = [
         </div>
       </div>
     </Scaled>
-    <figcaption>Dans Coall, les composants et leurs variantes sont repérés dans <b>Ressources</b>.</figcaption>
-  </figure>
+    {!only && <figcaption>Dans Coall, les composants et leurs variantes sont repérés dans <b>Ressources</b>.</figcaption>}
+  </figure>}
 
-  <span class="arrow" aria-hidden="true"><Icon name="ArrowRight" size={18} /></span>
+  {!only && <span class="arrow" aria-hidden="true"><Icon name="ArrowRight" size={18} /></span>}
 
   <!-- 2. Plugin -->
-  <figure class="col">
+  {show("plugin") && <figure class="col">
     <Scaled w={400} h={640} label="Le plugin Coall ⇄ Figma liste ce qui va arriver dans Figma avant de l'appliquer.">
       <div class="plug">
         <div class="pt"><span>Coall ⇄ Figma</span><Icon name="X" size={14} /></div>
@@ -91,13 +96,13 @@ const variants = [
         </main>
       </div>
     </Scaled>
-    <figcaption>Le plugin montre ce qui change avant d'écrire quoi que ce soit dans Figma.</figcaption>
-  </figure>
+    {!only && <figcaption>Le plugin montre ce qui change avant d'écrire quoi que ce soit dans Figma.</figcaption>}
+  </figure>}
 
-  <span class="arrow" aria-hidden="true"><Icon name="ArrowRight" size={18} /></span>
+  {!only && <span class="arrow" aria-hidden="true"><Icon name="ArrowRight" size={18} /></span>}
 
   <!-- 3. Fichier Figma -->
-  <figure class="col">
+  {show("figma") && <figure class="col">
     <Scaled w={400} h={640} label="Dans Figma : les pages Écrans, Composants et Archives Coall, le jeu de composants Bouton et les variables du projet.">
       <div class="fig">
         <div class="fg-sec">
@@ -127,8 +132,8 @@ const variants = [
         <p class="done">Figma est à jour : 2 ajoutées, 1 remplacée, 1 rangée dans les archives, 9 variables créées, 1 jeu de composants à variantes, 3 composants créés, 14 instances.</p>
       </div>
     </Scaled>
-    <figcaption>Dans Figma : des calques modifiables, un jeu de composants et des variables nommées comme dans le code.</figcaption>
-  </figure>
+    {!only && <figcaption>Dans Figma : des calques modifiables, un jeu de composants et des variables nommées comme dans le code.</figcaption>}
+  </figure>}
 </div>
 
 <style>
@@ -137,6 +142,10 @@ const variants = [
     grid-template-columns: 460fr auto 400fr auto 400fr;
     gap: 14px;
     align-items: start;
+  }
+  .fh.solo {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 400px;
   }
   .col {
     margin: 0;

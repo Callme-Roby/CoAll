@@ -1,0 +1,42 @@
+---
+/** Visuel de l'outil inséré dans la doc à la place d'une capture : `<div class="capture" data-shot="clé">Légende</div>`.
+    Chaque clé correspond à un fichier de src/components/docshots/. */
+interface Props { k: string; caption?: string }
+const { k, caption } = Astro.props;
+const mods = import.meta.glob<{ default: any }>("./docshots/*.astro", { eager: true });
+const Comp = mods[`./docshots/${k}.astro`]?.default;
+if (!Comp) throw new Error(`DocShot : visuel inconnu « ${k} »`);
+---
+<figure class="docshot" data-pagefind-ignore>
+  <div class="docshot-v"><Comp /></div>
+  {caption && <figcaption set:html={caption} />}
+</figure>
+
+<style>
+  .docshot {
+    margin: 28px 0;
+  }
+  /* Plateau neutre : les visuels étroits (panneaux, fenêtres) y sont centrés, les larges le remplissent. */
+  .docshot-v {
+    display: grid;
+    justify-items: center;
+    padding: 28px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--bg-2);
+  }
+  .docshot-v > :global(*) {
+    width: 100%;
+  }
+  @media (max-width: 640px) {
+    .docshot-v {
+      padding: 14px;
+    }
+  }
+  figcaption {
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--faint);
+  }
+</style>
