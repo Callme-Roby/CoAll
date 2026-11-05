@@ -1,0 +1,113 @@
+---
+import { SITE } from "../config";
+interface Props { id?: string }
+const { id = "waitlist" } = Astro.props;
+const endpoint = SITE.waitlistEndpoint;
+---
+<form class="wl" id={id} data-waitlist data-endpoint={endpoint} method="post" action={endpoint || undefined}>
+  <div class="wl-row">
+    <label class="sr-only" for={`${id}-email`}>Adresse e-mail</label>
+    <input id={`${id}-email`} name="email" type="email" required placeholder="vous@studio.fr" autocomplete="email" />
+    <label class="sr-only" for={`${id}-role`}>Vous êtes</label>
+    <select id={`${id}-role`} name="role">
+      <option value="designer">Designer</option>
+      <option value="produit">Équipe produit</option>
+      <option value="agence">Agence</option>
+      <option value="autre">Autre</option>
+    </select>
+    <button class="btn btn-primary" type="submit">Rejoindre la liste d'attente <span class="arrow">→</span></button>
+  </div>
+  <p class="wl-note" data-note>Coall n'est pas encore en ligne. Nous vous écrivons à l'ouverture, rien d'autre.</p>
+</form>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>("[data-waitlist]").forEach((form) => {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const note = form.querySelector<HTMLElement>("[data-note]")!;
+      const endpoint = form.dataset.endpoint;
+      if (!endpoint) {
+        // [à confirmer] aucun service de liste d'attente n'est encore branché (src/config.ts).
+        note.textContent = "Merci ! L'inscription sera activée au lancement : ce formulaire n'envoie encore rien.";
+        note.classList.add("ok");
+        return;
+      }
+      try {
+        const res = await fetch(endpoint, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
+        if (!res.ok) throw new Error();
+        note.textContent = "C'est noté. Nous vous écrivons à l'ouverture.";
+        note.classList.add("ok");
+        form.reset();
+      } catch {
+        note.textContent = "L'envoi n'a pas abouti. Réessayez dans un instant.";
+      }
+    });
+  });
+</script>
+
+<style>
+  .wl {
+    width: 100%;
+    max-width: 640px;
+  }
+  .wl-row {
+    display: flex;
+    gap: 8px;
+    padding: 6px;
+    border-radius: 999px;
+    border: 1px solid var(--line-2);
+    background: rgba(255, 255, 255, 0.03);
+  }
+  input,
+  select {
+    font: inherit;
+    font-size: 15px;
+    color: var(--ink);
+    background: transparent;
+    border: 0;
+    outline: none;
+    min-width: 0;
+  }
+  input {
+    flex: 1;
+    padding: 0 14px;
+  }
+  input::placeholder {
+    color: var(--faint);
+  }
+  select {
+    padding: 0 8px;
+    color: var(--muted);
+    cursor: pointer;
+  }
+  select option {
+    background: var(--surface);
+    color: var(--ink);
+  }
+  .wl-row:focus-within {
+    border-color: color-mix(in srgb, var(--official) 60%, transparent);
+  }
+  .wl-note {
+    margin: 12px 0 0;
+    font-size: 13px;
+    color: var(--faint);
+  }
+  .wl-note.ok {
+    color: var(--hypothesis-ink);
+  }
+  @media (max-width: 600px) {
+    .wl-row {
+      flex-direction: column;
+      border-radius: 18px;
+      padding: 8px;
+    }
+    input,
+    select {
+      height: 44px;
+    }
+    select {
+      border-top: 1px solid var(--line);
+      padding: 0 14px;
+    }
+  }
+</style>

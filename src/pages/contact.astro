@@ -1,0 +1,15 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHead from "../components/PageHead.astro";
+import { SITE } from "../config";
+---
+<Base title="Contact" description="Écrire à l'équipe Coall.">
+  <PageHead eyebrow="Contact" title="Parlons-en." lead="Une question sur Coall, une démo pour votre équipe, un besoin Entreprise ?">
+    {SITE.contactEmail
+      ? <a class="btn btn-primary" href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>
+      : <p class="todo-box">Adresse de contact à venir.<!-- [à confirmer] renseigner SITE.contactEmail dans src/config.ts --></p>}
+  </PageHead>
+</Base>
+<style>
+  .todo-box { margin: 8px 0 0; padding: 12px 16px; border-radius: 12px; border: 1px dashed color-mix(in srgb, var(--warn) 45%, transparent); color: var(--warn-ink); }
+</style>

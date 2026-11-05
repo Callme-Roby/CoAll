@@ -1,0 +1,286 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHead from "../components/PageHead.astro";
+
+const features = [
+  {
+    id: "voix",
+    k: "01",
+    c: "var(--ai-ink)",
+    t: "Parlez, l'IA dessine",
+    l: "Pendant l'appel, une idée dite à voix haute devient une proposition sur le canvas. Vous n'avez pas besoin de vous adresser à l'IA : elle suit la discussion.",
+    pts: [
+      ["Sous-titres", "Ils montrent exactement ce que l'IA entend. Sous l'indicateur, elle dit ce qu'elle a compris : « Compris : … », « J'attends la suite », « Rien à modifier »."],
+      ["Idée claire ou incertaine", "Une idée claire devient une modification, en hypothèse sur un écran officiel. Une idée incertaine ou une remarque implicite (« en plus sombre ça passerait peut-être mieux ») devient une hypothèse."],
+      ["Désaccords", "Quand deux personnes veulent des versions différentes, l'IA crée une hypothèse par personne : « Version Jean », « Version Arthur »."],
+      ["Décisions", "« On garde ça » devient une proposition de décision, qu'une personne autorisée valide."],
+      ["À l'écrit aussi", "La barre de demande (touche /) accepte les mêmes demandes : « passe le titre en vert », « crée une page tarifs », « la version mobile de l'accueil »."],
+    ],
+    cap: "Capture : panneau d'appel, sous-titres en cours et indicateur « L'IA écoute » allumé",
+    doc: "/docs/appel-et-ecoute",
+  },
+  {
+    id: "non-destructif",
+    k: "02",
+    c: "var(--hypothesis-ink)",
+    t: "Rien n'est perdu, rien n'est imposé",
+    l: "L'IA ne touche jamais directement à un écran validé : elle propose une hypothèse, que l'équipe compare et valide.",
+    pts: [
+      ["Trois états de frame", "Officielle (contour bleu), Hypothèse (contour vert, avec son libellé), Archivée (pointillés gris, masquée par défaut, toujours récupérable)."],
+      ["Promouvoir", "L'hypothèse prend la place de l'officielle, qui est archivée. La décision s'inscrit dans la timeline."],
+      ["Timeline", "Chaque demande, hypothèse, décision, modification et import, avec son auteur, l'heure, le modèle d'IA et la durée. Un clic affiche le canvas tel qu'il était."],
+      ["Versions", "Créées automatiquement, ou enregistrées à la main et épinglées. Restaurer crée un nouvel état sans effacer l'historique."],
+      ["Vos retouches gardées", "Pendant qu'une demande est en cours, vous pouvez modifier la même page : sur le même texte ou la même couleur, la retouche humaine l'emporte."],
+    ],
+    cap: "Capture : une frame officielle et son hypothèse côte à côte, avec la timeline ouverte",
+    doc: "/docs/historique",
+  },
+  {
+    id: "comparer",
+    k: "03",
+    c: "var(--warn-ink)",
+    t: "Voir ce qui a bougé",
+    l: "Chaque hypothèse se compare à l'officielle, différence par différence, sur le rendu réel des pages.",
+    pts: [
+      ["Liste numérotée", "Modifié (ambre, avec l'avant → après : « Couleur du texte : #111111 → #16a34a »), Ajouté (vert), Retiré (rouge), Déplacé."],
+      ["Sur les deux pages", "Survoler une différence l'éclaire sur l'hypothèse et sur l'officielle, avec le détail."],
+      ["Comparer", "Toutes les différences surlignées et numérotées sur le canvas. Sur l'officielle, ce qui a été retiré apparaît en rouge."],
+      ["En direct", "La liste suit les modifications faites à la main, par l'IA ou par un autre participant."],
+    ],
+    cap: "Capture : panneau Comparer, 2 différences surlignées sur les deux pages",
+    doc: "/docs/hypotheses-et-comparaison",
+  },
+  {
+    id: "skills",
+    k: "04",
+    c: "var(--ai-ink)",
+    t: "Votre charte, vos règles",
+    l: "Des skills et des règles appliqués à toutes les demandes de vos projets, à l'écrit comme à la voix, celles des invités comprises.",
+    pts: [
+      ["Skills", "Apprendre à l'IA une façon de faire : charte graphique, « toujours concevoir en mobile d'abord », composants maison. Au format des skills de Claude (un dossier avec un SKILL.md)."],
+      ["Règles", "Une phrase, au niveau Toujours ou Jamais : « Jamais de dégradés »."],
+      ["Assistant IA", "Il pose ses questions, lit votre charte en PDF, vos captures et vos notes, propose le skill avec ses jetons (couleurs, polices, espacements, arrondis)."],
+      ["Essayer (sans et avec)", "La même page d'exemple générée côte à côte, pour voir l'effet avant d'adopter le skill."],
+      ["Priorités claires", "Les règles de base de l'outil d'abord, puis la demande explicite d'une personne, puis vos skills et règles."],
+    ],
+    cap: "Capture : assistant de skill, essai sans et avec côte à côte",
+    doc: "/docs/skills-et-regles",
+  },
+  {
+    id: "figma",
+    k: "05",
+    c: "var(--official-ink)",
+    t: "Jusqu'à Figma",
+    l: "Coall sert à concevoir et décider ensemble. La finition se fait dans Figma, où le plugin Coall ⇄ Figma envoie les écrans validés en calques modifiables.",
+    pts: [
+      ["Écrans officiels", "Ils arrivent dans une page Écrans, rangés par section. Ensuite, seul ce qui a changé revient : Nouvelle, Différence, Archivée."],
+      ["Variables", "Couleurs, typographie, arrondis, espacements, liés aux calques. Les variables CSS de la maquette gardent leur nom."],
+      ["Composants et variantes", "Une page Composants avec les jeux de composants ; dans les écrans, chaque occurrence devient une instance."],
+      ["Rien n'est supprimé dans Figma", "Une retouche faite dans Figma est gardée par défaut : vous choisissez Coall remplace ou Garder Figma."],
+      ["Dans l'autre sens", "Des frames Figma deviennent des pages HTML/CSS (auto layout → flexbox), à importer dans Coall."],
+    ],
+    note: "Le plugin requiert l'application Figma pour ordinateur. Il s'installe pour l'instant en mode développement : il n'est pas encore publié dans la communauté Figma.",
+    cap: "Capture : plugin Coall ⇄ Figma, liste des différences avant application",
+    doc: "/docs/plugin-figma",
+  },
+  {
+    id: "collaborer",
+    k: "06",
+    c: "#ff9a6e",
+    t: "Faits pour travailler à plusieurs",
+    l: "Tout le monde voit les mêmes modifications, au même instant, et chacun a les droits qu'il lui faut.",
+    pts: [
+      ["Présence", "Avatars des personnes connectées et pointeurs de chacun sur le canvas, avec leur prénom."],
+      ["Suivre et faire suivre", "Suivez la vue d'un participant d'un clic ; pendant un appel, faites suivre la vôtre aux autres."],
+      ["Commentaires", "Sur un élément ou sur la page entière, avec réponses, Résoudre et Rouvrir. Tout participant peut commenter."],
+      ["Droits par personne", "Modifier, valider, modifier l'officiel. Un nouvel invité suit le projet et peut demander l'accès ; l'hôte répond d'un clic."],
+      ["Invités sans compte", "Un lien à usage unique, valable 12 heures. L'invité donne son prénom, c'est tout."],
+    ],
+    cap: "Capture : canvas avec trois pointeurs, une bulle de commentaire et le bandeau « Vous suivez … »",
+    doc: "/docs/collaborer",
+  },
+];
+
+const more = [
+  ["Mode Play", "Une frame en plein écran, comme un vrai site : liens entre écrans, survols, formats ordinateur, tablette, mobile.", "/docs/mode-play"],
+  ["Écrans et formats", "« La version mobile » : la page est copiée puis adaptée, et rangée dans la section de l'écran.", "/docs/ecrans-et-formats"],
+  ["Import", "Un .zip (Claude Design, Coall, plugin Figma), un fichier HTML, plusieurs fichiers ou un dossier.", "/docs/importer-et-exporter"],
+  ["Export", "PNG, PDF ou HTML/CSS, à la largeur choisie. Compte rendu en Markdown ou PDF, avec la transcription.", "/docs/importer-et-exporter"],
+  ["Canvas infini", "Frames, sections, magnétisme, alignement, recherche sur tout le canvas, raccourcis à la Figma.", "/docs/canvas"],
+  ["Édition à la main", "Double-clic dans une frame, panneau Design, calques. L'IA n'est jamais obligatoire.", "/docs/modifier-a-la-main"],
+];
+---
+<Base title="Fonctionnalités" description="Les six promesses de Coall, en détail : la voix, les hypothèses, la comparaison, les skills, Figma et la collaboration.">
+  <PageHead
+    eyebrow="Fonctionnalités"
+    title="Tout ce qui se dit en réunion<br /><span class='dim'>arrive sur le canvas.</span>"
+    lead="Une visio intégrée à un canvas infini, une IA qui écoute avec l'accord de chacun, et des maquettes qui sont de vraies pages HTML/CSS."
+  >
+    <nav class="jump" aria-label="Aller à une fonctionnalité">
+      {features.map((f) => <a href={`#${f.id}`} class="chip">{f.k} · {f.t}</a>)}
+    </nav>
+  </PageHead>
+
+  {features.map((f, i) => (
+    <section class="section feat" id={f.id}>
+      <div class:list={["wrap feat-grid", { alt: i % 2 === 1 }]}>
+        <div class="feat-copy reveal">
+          <span class="label" style={`color:${f.c}`}>{f.k}</span>
+          <h2 class="h2">{f.t}</h2>
+          <p class="lead">{f.l}</p>
+          <a href={f.doc} class="doc-link">Lire la documentation <span class="arrow">→</span></a>
+        </div>
+        <div class="feat-body reveal">
+          <div class="capture">{f.cap}</div>
+          <dl class="pts">
+            {f.pts.map(([a, b]) => (
+              <div><dt>{a}</dt><dd>{b}</dd></div>
+            ))}
+          </dl>
+          {f.note && <p class="fnote">{f.note}</p>}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="section more">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="label label-dot">Et aussi</span>
+        <h2 class="h2">Les outils d'un éditeur, sans détour.</h2>
+      </div>
+      <div class="more-grid">
+        {more.map(([t, d, h]) => (
+          <a href={h} class="card mg reveal"><h3 class="h3">{t}</h3><p>{d}</p><span class="arrow">→</span></a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .jump .chip:hover {
+    color: var(--ink);
+    border-color: var(--faint);
+  }
+  .feat + .feat {
+    border-top: 1px solid var(--line);
+  }
+  .feat-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: clamp(32px, 6vw, 96px);
+    align-items: start;
+  }
+  .feat-copy {
+    position: sticky;
+    top: 110px;
+    display: grid;
+    gap: 18px;
+    justify-items: start;
+  }
+  .feat-grid.alt .feat-copy {
+    order: 2;
+  }
+  .doc-link {
+    display: inline-flex;
+    gap: 8px;
+    font-weight: 550;
+    color: var(--ink-2);
+  }
+  .doc-link:hover {
+    color: var(--ink);
+  }
+  .feat-body .capture {
+    margin-top: 0;
+    min-height: 280px;
+  }
+  .pts {
+    margin: 0;
+    display: grid;
+  }
+  .pts div {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 20px;
+    padding: 16px 0;
+    border-top: 1px solid var(--line);
+  }
+  .pts dt {
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 15px;
+  }
+  .pts dd {
+    margin: 0;
+    color: var(--muted);
+    font-size: 15px;
+  }
+  .fnote {
+    margin: 12px 0 0;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid color-mix(in srgb, var(--warn) 35%, transparent);
+    background: color-mix(in srgb, var(--warn) 9%, transparent);
+    color: var(--ink-2);
+    font-size: 14px;
+  }
+  @media (max-width: 900px) {
+    .feat-grid {
+      grid-template-columns: 1fr;
+    }
+    .feat-grid.alt .feat-copy {
+      order: 0;
+    }
+    .feat-copy {
+      position: static;
+    }
+  }
+  @media (max-width: 560px) {
+    .pts div {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+  }
+  .more {
+    border-top: 1px solid var(--line);
+  }
+  .more-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .mg {
+    padding: 24px;
+    display: grid;
+    gap: 10px;
+    transition: border-color 0.2s;
+  }
+  .mg:hover {
+    border-color: var(--line-2);
+  }
+  .mg p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 15px;
+  }
+  .mg .arrow {
+    color: var(--faint);
+  }
+  @media (max-width: 900px) {
+    .more-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 560px) {
+    .more-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

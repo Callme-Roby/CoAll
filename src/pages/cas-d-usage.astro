@@ -1,0 +1,194 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHead from "../components/PageHead.astro";
+import Waitlist from "../components/Waitlist.astro";
+
+const cases = [
+  {
+    id: "atelier",
+    c: "var(--ai-ink)",
+    tag: "Atelier produit",
+    t: "Une équipe produit qui conçoit en réunion",
+    pain: "Le designer partage son écran et applique ce que les autres disent. Il ne réfléchit plus, il exécute. Les idées abandonnées en route sont perdues.",
+    steps: [
+      "**Démarrer l'appel** : chacun accepte l'écoute de l'IA à l'entrée.",
+      "On discute des écrans. Chaque idée devient une hypothèse, à côté de l'officielle.",
+      "Deux avis s'opposent : l'IA crée une version par personne.",
+      "On compare, puis « on garde ça » : une personne autorisée valide.",
+      "Le compte rendu (Markdown ou PDF) garde les décisions et, avec l'accord de chacun, la transcription.",
+    ],
+    doc: ["/docs/appel-et-ecoute", "Appel, écoute de l'IA et transcription"],
+  },
+  {
+    id: "client",
+    c: "var(--hypothesis-ink)",
+    tag: "Revue client",
+    t: "Une revue de maquettes avec un client",
+    pain: "Le client réagit à voix haute, l'agence note, puis renvoie une nouvelle version une semaine plus tard.",
+    steps: [
+      "**Inviter** le client : un lien à usage unique, valable 12 heures, sans création de compte.",
+      "Par défaut, il suit le projet ; l'hôte lui accorde les droits qu'il veut, d'un clic.",
+      "En **mode Play**, on parcourt le parcours ensemble, en partage d'écran.",
+      "Ses remarques arrivent en hypothèses, ou en commentaires posés sur la page.",
+      "Rien ne remplace l'écran validé sans qu'une personne autorisée le décide.",
+    ],
+    doc: ["/docs/collaborer", "Collaborer : invitations, droits, commentaires"],
+  },
+  {
+    id: "agence",
+    c: "var(--warn-ink)",
+    tag: "Agence",
+    t: "Une agence qui itère sur plusieurs versions",
+    pain: "Chaque client a sa charte, chaque projet ses contraintes, et il faut sans cesse les rappeler.",
+    steps: [
+      "Un skill par client : sa charte, ses jetons (couleurs, polices, espacements, arrondis), construits avec l'assistant depuis son PDF.",
+      "Des règles maison : « Toujours concevoir en mobile d'abord », « Jamais de dégradés ».",
+      "Chaque skill s'applique aux projets choisis, à toutes les demandes, même celles des invités.",
+      "Les hypothèses se comparent, se promeuvent ou restent archivées : rien n'est perdu d'une itération à l'autre.",
+    ],
+    doc: ["/docs/skills-et-regles", "Skills et règles"],
+  },
+  {
+    id: "design-system",
+    c: "var(--official-ink)",
+    tag: "Design system",
+    t: "Un design system qui part dans Figma",
+    pain: "Les boutons divergent d'une page à l'autre, et tout est à refaire au passage dans Figma.",
+    steps: [
+      "L'IA travaille en composants : elle réutilise ceux du projet et marque les nouveaux.",
+      "« Unifie les boutons : primaire, secondaire, tertiaire, avec leurs états » : elle crée les variantes et une frame **Composants**.",
+      "Les variantes suivent la syntaxe de Figma : « Type=Primaire, État=Survol ».",
+      "Le plugin envoie les écrans officiels avec leurs variables, leurs jeux de composants et leurs instances.",
+    ],
+    doc: ["/docs/composants-et-ressources", "Composants et ressources"],
+  },
+];
+const md = (s: string) => s.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+---
+<Base title="Cas d'usage" description="Atelier produit, revue client, agence, design system : comment les équipes utilisent Coall.">
+  <PageHead
+    eyebrow="Cas d'usage"
+    title="Quatre façons de concevoir<br /><span class='dim'>sans arrêter la conversation.</span>"
+    lead="Designers, équipes produit, agences et leurs clients : Coall sert partout où des écrans se décident à plusieurs."
+  />
+
+  {cases.map((c, i) => (
+    <section class="section case" id={c.id}>
+      <div class="wrap case-grid">
+        <div class="case-head reveal">
+          <span class="label" style={`color:${c.c}`}>0{i + 1} · {c.tag}</span>
+          <h2 class="h2">{c.t}</h2>
+          <div class="pain">
+            <span class="label">Aujourd'hui</span>
+            <p>{c.pain}</p>
+          </div>
+        </div>
+        <div class="case-body reveal">
+          <span class="label">Avec Coall</span>
+          <ol class="steps">
+            {c.steps.map((s) => <li set:html={md(s)} />)}
+          </ol>
+          <a href={c.doc[0]} class="doc-link">{c.doc[1]} <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="section cta">
+    <div class="wrap cta-inner reveal">
+      <h2 class="h2">Votre cas n'est pas dans la liste&nbsp;?</h2>
+      <p class="lead">Rejoignez la liste d'attente, dites-nous comment vous travaillez.</p>
+      <Waitlist id="wl-cases" />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .case + .case {
+    border-top: 1px solid var(--line);
+  }
+  .case-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(32px, 6vw, 96px);
+  }
+  .case-head {
+    display: grid;
+    gap: 20px;
+    align-content: start;
+  }
+  .pain {
+    margin-top: 8px;
+    padding: 18px 20px;
+    border-radius: 14px;
+    border: 1px dashed var(--line-2);
+    display: grid;
+    gap: 8px;
+  }
+  .pain p {
+    margin: 0;
+    color: var(--muted);
+  }
+  .pain .label {
+    font-size: 10.5px;
+    color: var(--faint);
+  }
+  .case-body {
+    display: grid;
+    gap: 16px;
+    align-content: start;
+  }
+  .case-body > .label {
+    font-size: 11px;
+  }
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: s;
+    display: grid;
+  }
+  .steps li {
+    counter-increment: s;
+    position: relative;
+    padding: 16px 0 16px 48px;
+    border-top: 1px solid var(--line);
+    color: var(--ink-2);
+  }
+  .steps li::before {
+    content: counter(s, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--faint);
+  }
+  .steps :global(strong) {
+    color: var(--ink);
+  }
+  .doc-link {
+    display: inline-flex;
+    gap: 8px;
+    font-weight: 550;
+    color: var(--ink-2);
+    margin-top: 8px;
+  }
+  .doc-link:hover {
+    color: var(--ink);
+  }
+  @media (max-width: 860px) {
+    .case-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .cta {
+    border-top: 1px solid var(--line);
+  }
+  .cta-inner {
+    display: grid;
+    gap: 20px;
+    justify-items: center;
+    text-align: center;
+  }
+</style>

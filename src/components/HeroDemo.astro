@@ -1,0 +1,1234 @@
+---
+/**
+ * Démo animée de l'accueil : une réunion dans Coall, rejouée en boucle.
+ * Une phrase dite pendant l'appel → l'IA prépare une hypothèse (pointillés violets, vagues)
+ * → l'hypothèse arrive (flou → net) → comparaison avec l'officielle → « on garde ça » → promotion.
+ * Reproduit l'interface réelle (couleurs, libellés, animations de components/editor/AiWorking.tsx),
+ * sans en être une capture.
+ */
+import BrandMark from "./BrandMark.astro";
+
+const people = [
+  { id: "jean", name: "Jean", color: "#ff7a45" },
+  { id: "alice", name: "Alice", color: "#e255a1" },
+  { id: "marc", name: "Marc", color: "#f5b700" },
+];
+---
+
+<div class="demo" data-demo aria-label="Démonstration : pendant un appel, une phrase devient une hypothèse sur le canvas, puis l'équipe la valide." role="img">
+  <div class="demo-frame" data-frame>
+    <div class="stage" data-stage data-step="0">
+      <!-- En-tête de l'éditeur -->
+      <div class="topbar">
+        <div class="tb-left">
+          <BrandMark size={16} />
+          <span class="tb-project">Lumen <span class="dim">/</span> Site vitrine</span>
+        </div>
+        <div class="tb-center">
+          <span class="tb-zoom">−</span><span class="tb-zoom-v">62 %</span><span class="tb-zoom">+</span>
+        </div>
+        <div class="tb-right">
+          <div class="avatars">
+            {people.map((p) => <span class="av" style={`--c:${p.color}`}>{p.name[0]}</span>)}
+          </div>
+          <span class="tb-btn">Inviter</span>
+          <span class="tb-btn tb-btn-solid">Exporter</span>
+        </div>
+      </div>
+
+      <!-- Barre d'outils -->
+      <div class="tools">
+        <span class="tool on" title="Sélection (V)"><svg viewBox="0 0 16 16"><path d="M3 2l9 5-4 1.2L6.6 13z" fill="currentColor"/></svg></span>
+        <span class="tool" title="Main (H)"><svg viewBox="0 0 16 16"><path d="M5 8V4.5a1 1 0 012 0V7m0-3.5V3a1 1 0 012 0v4m0-3a1 1 0 012 0v4m0-2a1 1 0 012 0v3.5A4.5 4.5 0 018.5 14h-.7a4 4 0 01-3.3-1.8L2.8 9.6a1 1 0 011.6-1.2L5 9" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></span>
+        <span class="tool" title="Frame (F)"><svg viewBox="0 0 16 16"><path d="M5 2v12M11 2v12M2 5h12M2 11h12" stroke="currentColor" stroke-width="1.3"/></svg></span>
+        <span class="tool" title="Section (Maj+S)"><svg viewBox="0 0 16 16"><rect x="2.5" y="3.5" width="11" height="9" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="2 1.5"/></svg></span>
+        <span class="tool" title="Commentaire (C)"><svg viewBox="0 0 16 16"><path d="M3 3h10v7H7l-3 3v-3H3z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg></span>
+      </div>
+
+      <!-- Canvas -->
+      <div class="canvas dotgrid">
+        <div class="toast" data-toast>
+          <span class="toast-ico">✓</span>
+          <span><b>Décision</b> · Alice · « Version Jean » promue, l'ancienne archivée</span>
+        </div>
+
+        <!-- Frame officielle -->
+        <div class="frame f-official" data-official>
+          <div class="f-tag">
+            <span class="f-name">Accueil</span>
+            <span class="f-arch">Archivée</span>
+          </div>
+          <div class="f-body">
+            <div class="scan" aria-hidden="true"></div>
+            <div class="site">
+              <div class="s-nav"><b>Lumen</b><span>Collection</span><span>Atelier</span><span>Tarifs</span></div>
+              <div class="s-hero">
+                <p class="s-eyebrow">Nouvelle collection</p>
+                <h4 class="s-title">Des lampes qui suivent votre journée</h4>
+                <p class="s-text">Une lumière douce le matin, franche l'après-midi, chaude le soir.</p>
+                <span class="s-btn">Voir la collection</span>
+              </div>
+              <div class="s-img"><i></i></div>
+              <div class="s-cards"><span></span><span></span><span></span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fantôme : l'IA prépare l'hypothèse -->
+        <div class="frame f-ghost" data-ghost>
+          <div class="f-tag"><span class="spark">✦</span><span>L'IA prépare une hypothèse…</span><span class="timer" data-timer>0:00</span></div>
+          <div class="f-body ghost-body">
+            <div class="g-sketch">
+              <i style="width:30%"></i><i style="width:80%;height:22px"></i><i style="width:64%"></i><i style="width:36%;height:16px;border-radius:99px"></i><i style="height:90px"></i>
+            </div>
+            <div class="g-fill" data-fill>
+              <span class="ai-wave ai-wave-1"></span><span class="ai-wave ai-wave-2"></span><span class="ai-wave ai-wave-3"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hypothèse -->
+        <div class="frame f-hyp" data-hyp>
+          <div class="f-tag">
+            <span class="f-name">Accueil</span>
+            <span class="f-label">— Version Jean</span>
+            <span class="f-chip">Hypothèse</span>
+            <span class="f-promote">✓ Promouvoir</span>
+          </div>
+          <div class="f-body">
+            <div class="sweep" aria-hidden="true"></div>
+            <div class="site">
+              <div class="s-nav"><b>Lumen</b><span>Collection</span><span>Atelier</span><span>Tarifs</span></div>
+              <div class="s-hero">
+                <p class="s-eyebrow">Nouvelle collection</p>
+                <h4 class="s-title s-title-new"><span class="mark">1</span><span class="mark mark-2">2</span>La lumière qui vous suit.</h4>
+                <p class="s-text">Une lumière douce le matin, franche l'après-midi, chaude le soir.</p>
+                <span class="s-btn">Voir la collection</span>
+              </div>
+              <div class="s-img"><i></i></div>
+              <div class="s-cards"><span></span><span></span><span></span></div>
+            </div>
+          </div>
+          <div class="diff" data-diff>
+            <p class="diff-h">2 différences avec l'officielle</p>
+            <div class="diff-row"><span class="n">1</span><div><b class="t-warn">Modifié</b> · Texte<br /><s>Des lampes qui suivent votre journée</s> → La lumière qui vous suit.</div></div>
+            <div class="diff-row"><span class="n">2</span><div><b class="t-warn">Modifié</b> · Couleur du texte<br /><code>#111111</code> → <code class="g">#16a34a</code></div></div>
+          </div>
+        </div>
+
+        <!-- Proposition de l'IA -->
+        <div class="proposal" data-proposal>
+          <span class="spark">✦</span>
+          <div><b>L'IA propose :</b> promouvoir « Version Jean »</div>
+          <span class="p-btn p-ok" data-ok>Valider</span>
+          <span class="p-btn">Annuler</span>
+        </div>
+
+        <!-- Barre de demande -->
+        <div class="prompt">
+          <span class="spark">✦</span>
+          <span class="pr-ph">Demandez une modification à l'IA…</span>
+          <span class="pr-modes"><i class="on">Auto</i><i>Officielle</i><i>Hypothèse</i></span>
+          <kbd>/</kbd>
+        </div>
+
+        {people.map((p) => (
+          <div class="cursor" data-cursor={p.id}>
+            <svg viewBox="0 0 18 18"><path d="M2 1.5l13 6.2-5.6 1.6L6.9 15z" fill={p.color} stroke="#fff" stroke-width="1.2" stroke-linejoin="round" /></svg>
+            <span class="name" style={`background:${p.color}`}>{p.name}</span>
+          </div>
+        ))}
+      </div>
+
+      <!-- Panneau d'appel -->
+      <aside class="call">
+        <div class="call-h">
+          <span class="rec"></span><span>Appel</span><span class="dim" data-clock>12:41</span>
+          <span class="call-n">3</span>
+        </div>
+        <div class="tiles">
+          {people.map((p) => (
+            <div class="tile" data-tile={p.id} style={`--c:${p.color}`}>
+              <span class="tile-av">{p.name[0]}</span>
+              <span class="tile-name">{p.name}</span>
+              <span class="bars"><i></i><i></i><i></i></span>
+            </div>
+          ))}
+        </div>
+        <div class="listen">
+          <span class="live-dot"></span>
+          <b>L'IA écoute</b>
+        </div>
+        <p class="understood" data-understood>J'attends la suite</p>
+        <div class="subs" data-subs aria-live="off"></div>
+        <div class="controls">
+          <span class="ctl"><svg viewBox="0 0 16 16"><rect x="6" y="2" width="4" height="8" rx="2" fill="currentColor"/><path d="M4 8a4 4 0 008 0M8 12v2" stroke="currentColor" stroke-width="1.2" fill="none"/></svg></span>
+          <span class="ctl"><svg viewBox="0 0 16 16"><rect x="2" y="4.5" width="8.5" height="7" rx="1.5" fill="currentColor"/><path d="M11 7l3-2v6l-3-2z" fill="currentColor"/></svg></span>
+          <span class="ctl on">CC</span>
+          <span class="ctl on ai">✦</span>
+          <span class="ctl">✋</span>
+          <span class="ctl quit">Quitter</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Sous-titres lisibles sur petit écran -->
+  <div class="demo-caption" aria-hidden="true">
+    <span class="live-dot"></span>
+    <div>
+      <p class="cap-subs" data-cap-subs>…</p>
+      <p class="cap-und" data-cap-und>J'attends la suite</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  type Line = { who: string; text: string };
+
+  function setup(root: HTMLElement) {
+    const frame = root.querySelector<HTMLElement>("[data-frame]")!;
+    const stage = root.querySelector<HTMLElement>("[data-stage]")!;
+    const subs = root.querySelector<HTMLElement>("[data-subs]")!;
+    const und = root.querySelector<HTMLElement>("[data-understood]")!;
+    const capSubs = root.querySelector<HTMLElement>("[data-cap-subs]")!;
+    const capUnd = root.querySelector<HTMLElement>("[data-cap-und]")!;
+    const timer = root.querySelector<HTMLElement>("[data-timer]")!;
+    const fill = root.querySelector<HTMLElement>("[data-fill]")!;
+    const cursors = Object.fromEntries(
+      [...root.querySelectorAll<HTMLElement>("[data-cursor]")].map((c) => [c.dataset.cursor!, c]),
+    );
+    const tiles = Object.fromEntries(
+      [...root.querySelectorAll<HTMLElement>("[data-tile]")].map((t) => [t.dataset.tile!, t]),
+    );
+    const names: Record<string, string> = { jean: "Jean", alice: "Alice", marc: "Marc" };
+
+    // Mise à l'échelle : la scène est dessinée à 1200 × 700 (820 × 640 en compact).
+    const fit = () => {
+      const w = frame.clientWidth;
+      const compact = w < 720;
+      stage.classList.toggle("compact", compact);
+      root.classList.toggle("is-compact", compact);
+      const base = compact ? 820 : 1200;
+      const h = compact ? 600 : 700;
+      const s = w / base;
+      stage.style.transform = `scale(${s})`;
+      frame.style.height = `${h * s}px`;
+    };
+    new ResizeObserver(fit).observe(frame);
+    fit();
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let running = false;
+    let generation = 0;
+
+    const wait = (ms: number, gen: number) =>
+      new Promise<void>((res, rej) => setTimeout(() => (gen === generation ? res() : rej("stop")), ms));
+
+    const move = (id: string, x: number, y: number) => {
+      const c = cursors[id];
+      if (c) c.style.transform = `translate(${x}px, ${y}px)`;
+    };
+
+    const speak = (id: string | null) => {
+      Object.entries(tiles).forEach(([k, t]) => t.classList.toggle("speaking", k === id));
+    };
+
+    const setUnd = (t: string, ai = false) => {
+      und.textContent = t;
+      capUnd.textContent = t;
+      und.classList.toggle("on", ai);
+      capUnd.classList.toggle("on", ai);
+    };
+
+    const say = async (line: Line, gen: number) => {
+      speak(line.who);
+      const row = document.createElement("p");
+      row.innerHTML = `<b style="color:var(--who)">${names[line.who]}</b> <span></span>`;
+      row.style.setProperty("--who", (tiles[line.who] as HTMLElement).style.getPropertyValue("--c"));
+      const span = row.querySelector("span")!;
+      subs.appendChild(row);
+      while (subs.children.length > 3) subs.firstElementChild?.remove();
+      const words = line.text.split(" ");
+      for (let i = 1; i <= words.length; i++) {
+        const t = words.slice(0, i).join(" ");
+        span.textContent = t;
+        capSubs.innerHTML = `<b>${names[line.who]}</b> ${t}`;
+        await wait(110, gen);
+      }
+      speak(null);
+    };
+
+    const reset = () => {
+      stage.dataset.step = "0";
+      subs.innerHTML = "";
+      capSubs.textContent = "…";
+      setUnd("J'attends la suite");
+      timer.textContent = "0:00";
+      fill.style.height = "0%";
+      move("jean", 900, 560);
+      move("alice", 260, 600);
+      move("marc", 640, 40);
+    };
+
+    const showFinal = () => {
+      reset();
+      stage.dataset.step = "4";
+      subs.innerHTML =
+        '<p><b style="color:#ff7a45">Jean</b> <span>« La lumière qui vous suit », ce serait plus direct.</span></p><p><b style="color:#f5b700">Marc</b> <span>Et en vert, ça passerait peut-être mieux.</span></p>';
+      capSubs.innerHTML = "<b>Marc</b> Et en vert, ça passerait peut-être mieux.";
+      setUnd("Compris : titre plus court, en vert → hypothèse", true);
+    };
+
+    const play = async () => {
+      const gen = ++generation;
+      try {
+        while (gen === generation) {
+          reset();
+          await wait(900, gen);
+          move("jean", 250, 150);
+          await say({ who: "jean", text: "Le titre est un peu long. « La lumière qui vous suit », ce serait plus direct." }, gen);
+          await wait(400, gen);
+          move("marc", 330, 210);
+          await say({ who: "marc", text: "Et en vert, ça passerait peut-être mieux." }, gen);
+          await wait(300, gen);
+          setUnd("Compris : titre plus court, en vert → hypothèse", true);
+          stage.dataset.step = "1"; // fantôme + balayage
+          for (let i = 1; i <= 8; i++) {
+            timer.textContent = `0:0${Math.min(i, 9)}`;
+            fill.style.height = `${Math.round(100 * (1 - Math.pow(0.78, i)))}%`;
+            await wait(420, gen);
+          }
+          stage.dataset.step = "2"; // arrivée de l'hypothèse
+          move("jean", 610, 170);
+          await wait(1500, gen);
+          stage.dataset.step = "3"; // comparaison
+          move("marc", 700, 330);
+          await wait(2600, gen);
+          move("alice", 520, 470);
+          await say({ who: "alice", text: "Ok, on garde ça." }, gen);
+          setUnd("Compris : décision → proposition à valider", true);
+          stage.dataset.step = "4"; // proposition
+          await wait(900, gen);
+          move("alice", 640, 568);
+          await wait(1300, gen);
+          stage.dataset.step = "5"; // clic
+          await wait(350, gen);
+          stage.dataset.step = "6"; // promue
+          setUnd("Rien à modifier");
+          move("alice", 560, 600);
+          await wait(4200, gen);
+        }
+      } catch {
+        /* boucle arrêtée */
+      }
+    };
+
+    if (reduce) {
+      showFinal();
+      stage.dataset.step = "3";
+      return;
+    }
+
+    // Ne joue que lorsque la démo est visible.
+    new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting && !running) {
+          running = true;
+          play();
+        } else if (!e.isIntersecting && running) {
+          running = false;
+          generation++;
+        }
+      },
+      { threshold: 0.25 },
+    ).observe(root);
+  }
+
+  document.querySelectorAll<HTMLElement>("[data-demo]").forEach(setup);
+</script>
+
+<style>
+  .demo {
+    position: relative;
+  }
+  .demo-frame {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 14px;
+    border: 1px solid var(--line-2);
+    background: #121213;
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.6),
+      0 40px 120px -20px rgba(0, 0, 0, 0.8),
+      0 0 120px -30px color-mix(in srgb, var(--ai) 40%, transparent);
+  }
+  .stage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1200px;
+    height: 700px;
+    transform-origin: 0 0;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    color: #ececec;
+    display: grid;
+    grid-template-columns: 44px 1fr 280px;
+    grid-template-rows: 44px 1fr;
+    letter-spacing: 0;
+    line-height: 1.4;
+  }
+  .stage.compact {
+    width: 820px;
+    height: 600px;
+    grid-template-columns: 1fr;
+  }
+  .stage.compact .tools,
+  .stage.compact .call,
+  .stage.compact .tb-center,
+  .stage.compact .tb-btn {
+    display: none;
+  }
+
+  /* En-tête */
+  .topbar {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    background: #1c1c1e;
+    border-bottom: 1px solid #2f2f31;
+  }
+  .tb-left,
+  .tb-right,
+  .tb-center {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tb-project {
+    font-weight: 550;
+  }
+  .tb-zoom,
+  .tb-zoom-v {
+    color: #a6a6a6;
+    padding: 2px 6px;
+  }
+  .avatars {
+    display: flex;
+    margin-right: 6px;
+  }
+  .av {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--c);
+    color: #111;
+    font-size: 11px;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+    border: 2px solid #1c1c1e;
+    margin-left: -5px;
+  }
+  .tb-btn {
+    height: 26px;
+    padding: 0 10px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #2f2f31;
+    color: #ececec;
+  }
+  .tb-btn-solid {
+    background: #0a6ccf;
+    border-color: #0a6ccf;
+    color: #fff;
+  }
+
+  /* Outils */
+  .tools {
+    background: #1c1c1e;
+    border-right: 1px solid #2f2f31;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding-top: 10px;
+  }
+  .tool {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    display: grid;
+    place-items: center;
+    color: #a6a6a6;
+  }
+  .tool svg {
+    width: 16px;
+    height: 16px;
+  }
+  .tool.on {
+    background: #0a6ccf;
+    color: #fff;
+  }
+
+  /* Canvas */
+  .canvas {
+    position: relative;
+    overflow: hidden;
+    background-color: #121213;
+    background-image: radial-gradient(#333336 1px, transparent 1.2px);
+    background-size: 20px 20px;
+  }
+
+  .frame {
+    position: absolute;
+    top: 64px;
+    width: 340px;
+    height: 430px;
+    transition:
+      opacity 0.6s var(--ease),
+      transform 0.6s var(--ease);
+  }
+  .f-official {
+    left: 64px;
+  }
+  .f-ghost,
+  .f-hyp {
+    left: 452px;
+  }
+  .f-tag {
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    font-size: 12px;
+    color: #a6a6a6;
+  }
+  .f-name {
+    font-weight: 550;
+    color: #4cb0ff;
+  }
+  .f-body {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 2px;
+  }
+  .f-official .f-body {
+    outline: 2px solid #0d99ff;
+  }
+  .f-arch {
+    display: none;
+    color: #9a9a9a;
+  }
+
+  /* Petite page « Lumen » */
+  .site {
+    color: #111;
+    font-size: 9px;
+    padding: 14px 18px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    font-family: var(--font-sans);
+  }
+  .s-nav {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    color: #555;
+  }
+  .s-nav b {
+    color: #111;
+    font-size: 11px;
+    margin-right: auto;
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+  .s-hero {
+    display: grid;
+    gap: 7px;
+    padding-top: 6px;
+  }
+  .s-eyebrow {
+    margin: 0;
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #8a6d3b;
+  }
+  .s-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 25px;
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    font-weight: 650;
+    color: #111111;
+    position: relative;
+  }
+  .s-title-new {
+    color: #16a34a;
+  }
+  .s-text {
+    margin: 0;
+    color: #555;
+    font-size: 9.5px;
+    max-width: 85%;
+  }
+  .s-btn {
+    justify-self: start;
+    background: #111;
+    color: #fff;
+    border-radius: 99px;
+    padding: 5px 10px;
+    font-size: 8.5px;
+    font-weight: 600;
+  }
+  .s-img {
+    flex: 1;
+    min-height: 90px;
+    border-radius: 6px;
+    background: linear-gradient(160deg, #f4ede2, #e8dccb);
+    position: relative;
+    overflow: hidden;
+  }
+  .s-img i {
+    position: absolute;
+    left: 50%;
+    top: 22%;
+    width: 46px;
+    height: 46px;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff7d6 0 30%, #ffd77a 45%, transparent 72%);
+    box-shadow: 0 0 60px 20px rgba(255, 210, 120, 0.5);
+  }
+  .s-img i::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 40px;
+    width: 2px;
+    height: 70px;
+    background: #6b5a45;
+    transform: translateX(-50%);
+  }
+  .s-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .s-cards span {
+    height: 44px;
+    border-radius: 5px;
+    background: #f3f1ee;
+  }
+
+  /* Balayage de lecture sur l'officielle */
+  .scan {
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 28%;
+    z-index: 2;
+    opacity: 0;
+    background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--ai) 22%, transparent));
+    border-bottom: 2px solid color-mix(in srgb, var(--ai) 70%, transparent);
+  }
+  [data-step="1"] .scan {
+    opacity: 1;
+    animation: scan 2.4s ease-in-out infinite;
+  }
+  @keyframes scan {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(360%);
+    }
+  }
+
+  /* Fantôme */
+  .f-ghost {
+    opacity: 0;
+  }
+  .f-ghost .f-tag {
+    color: #c4a3ff;
+    font-weight: 550;
+  }
+  .ghost-body {
+    background: color-mix(in srgb, var(--ai) 6%, #1c1c1e);
+    outline: 2px dashed color-mix(in srgb, var(--ai) 80%, transparent);
+  }
+  .g-sketch {
+    position: absolute;
+    inset: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .g-sketch i {
+    display: block;
+    height: 10px;
+    border-radius: 4px;
+    background: color-mix(in srgb, var(--ai) 16%, transparent);
+  }
+  .g-fill {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 0%;
+    transition: height 0.45s linear;
+    background: linear-gradient(to bottom, color-mix(in srgb, var(--ai) 20%, transparent), color-mix(in srgb, var(--official) 28%, transparent));
+  }
+  .timer {
+    color: #a6a6a6;
+    font-family: var(--font-mono);
+    font-weight: 400;
+  }
+  .spark {
+    color: var(--ai);
+    display: inline-block;
+    animation: twinkle 1.6s ease-in-out infinite;
+  }
+  @keyframes twinkle {
+    50% {
+      opacity: 0.45;
+      transform: scale(0.85) rotate(12deg);
+    }
+  }
+  [data-step="1"] .f-ghost {
+    opacity: 1;
+  }
+
+  /* Hypothèse */
+  .f-hyp {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .f-hyp .f-body {
+    outline: 2px solid #14ae5c;
+  }
+  .f-hyp .f-name {
+    color: #5ee08f;
+  }
+  .f-label {
+    color: #5ee08f;
+  }
+  .f-chip {
+    background: #0b7a3e;
+    color: #fff;
+    border-radius: 3px;
+    padding: 1px 5px;
+    font-weight: 550;
+    font-size: 11px;
+  }
+  .f-promote {
+    margin-left: 4px;
+    color: #5ee08f;
+    border: 1px solid color-mix(in srgb, #14ae5c 50%, transparent);
+    border-radius: 4px;
+    padding: 1px 6px;
+  }
+  .stage:is([data-step="2"], [data-step="3"], [data-step="4"], [data-step="5"], [data-step="6"]) .f-hyp {
+    opacity: 1;
+  }
+  [data-step="2"] .f-hyp .f-body {
+    animation: reveal 1.4s var(--ease) both;
+  }
+  @keyframes reveal {
+    from {
+      filter: blur(16px) saturate(0.4);
+      opacity: 0.4;
+      clip-path: inset(0 0 100% 0);
+    }
+    55% {
+      clip-path: inset(0 0 0 0);
+    }
+    to {
+      filter: none;
+      opacity: 1;
+      clip-path: inset(0 0 0 0);
+    }
+  }
+  .sweep {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 40%;
+    z-index: 2;
+    opacity: 0;
+    background: linear-gradient(100deg, transparent, color-mix(in srgb, var(--ai) 26%, transparent), transparent);
+  }
+  [data-step="2"] .sweep {
+    opacity: 1;
+    animation: sweep 1.4s 0.6s ease-out both;
+  }
+  @keyframes sweep {
+    from {
+      transform: translateX(-110%);
+    }
+    to {
+      transform: translateX(260%);
+    }
+  }
+
+  /* Comparaison */
+  .mark {
+    position: absolute;
+    left: -14px;
+    top: -6px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--warn);
+    color: #111;
+    font-size: 9px;
+    font-weight: 700;
+    font-family: var(--font-sans);
+    letter-spacing: 0;
+    display: grid;
+    place-items: center;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.35s var(--ease);
+  }
+  .mark-2 {
+    left: auto;
+    right: 4px;
+    top: auto;
+    bottom: -4px;
+  }
+  .stage:is([data-step="3"], [data-step="4"], [data-step="5"]) .mark {
+    opacity: 1;
+    transform: none;
+  }
+  .stage:is([data-step="3"], [data-step="4"], [data-step="5"]) .s-title-new {
+    outline: 1.5px solid var(--warn);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  .diff {
+    position: absolute;
+    top: 110px;
+    left: 200px;
+    width: 250px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: #1c1c1e;
+    border: 1px solid #2f2f31;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+    font-size: 11px;
+    color: #ccc;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.4s var(--ease);
+    z-index: 5;
+  }
+  .stage:is([data-step="3"]) .diff {
+    opacity: 1;
+    transform: none;
+  }
+  .diff-h {
+    margin: 0 0 8px;
+    font-weight: 600;
+    color: #ececec;
+  }
+  .diff-row {
+    display: flex;
+    gap: 8px;
+    padding: 6px 0;
+    border-top: 1px solid #2a2a2d;
+    line-height: 1.45;
+  }
+  .diff-row .n {
+    flex: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--warn);
+    color: #111;
+    font-size: 10px;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+  }
+  .diff s {
+    color: #8a8a8a;
+  }
+  .diff code {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: #ececec;
+  }
+  .diff code.g {
+    color: #5ee08f;
+  }
+
+  /* Proposition */
+  .proposal {
+    position: absolute;
+    left: 50%;
+    bottom: 76px;
+    transform: translate(-50%, 12px);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px 9px 14px;
+    border-radius: 12px;
+    background: #1c1c1e;
+    border: 1px solid color-mix(in srgb, var(--ai) 50%, transparent);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+    white-space: nowrap;
+    opacity: 0;
+    transition: all 0.4s var(--ease);
+    z-index: 6;
+  }
+  .stage:is([data-step="4"], [data-step="5"]) .proposal {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  .p-btn {
+    height: 26px;
+    padding: 0 10px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #2f2f31;
+  }
+  .p-ok {
+    background: #7c3aed;
+    border-color: #7c3aed;
+    color: #fff;
+    transition: transform 0.15s;
+  }
+  [data-step="5"] .p-ok {
+    transform: scale(0.94);
+    filter: brightness(1.2);
+  }
+
+  /* Promotion : l'hypothèse devient l'officielle, l'ancienne est archivée */
+  [data-step="6"] .f-official {
+    opacity: 0.45;
+  }
+  [data-step="6"] .f-official .f-body {
+    outline: 2px dashed #8a8a8a;
+  }
+  [data-step="6"] .f-official .f-name {
+    color: #9a9a9a;
+  }
+  [data-step="6"] .f-official .f-arch {
+    display: inline;
+  }
+  [data-step="6"] .f-hyp .f-body {
+    outline-color: #0d99ff;
+  }
+  [data-step="6"] .f-hyp .f-name {
+    color: #4cb0ff;
+  }
+  [data-step="6"] .f-hyp :is(.f-label, .f-chip, .f-promote) {
+    display: none;
+  }
+
+  /* Toast de timeline */
+  .toast {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translate(-50%, -8px);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: #000;
+    border: 1px solid #2f2f31;
+    white-space: nowrap;
+    opacity: 0;
+    transition: all 0.4s var(--ease);
+    z-index: 6;
+  }
+  .toast-ico {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #0a6ccf;
+    color: #fff;
+    font-size: 10px;
+    display: grid;
+    place-items: center;
+  }
+  [data-step="6"] .toast {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  /* Barre de demande */
+  .prompt {
+    position: absolute;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    width: min(520px, 86%);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    border-radius: 12px;
+    background: #1c1c1e;
+    border: 1px solid #2f2f31;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  }
+  .pr-ph {
+    flex: 1;
+    color: #8a8a8a;
+    font-size: 13px;
+  }
+  .pr-modes {
+    display: flex;
+    background: #121213;
+    border-radius: 6px;
+    padding: 2px;
+  }
+  .pr-modes i {
+    font-style: normal;
+    padding: 2px 7px;
+    border-radius: 4px;
+    color: #a6a6a6;
+    font-size: 11px;
+  }
+  .pr-modes i.on {
+    background: #3a3a3f;
+    color: #ececec;
+  }
+  kbd {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: #a6a6a6;
+    border: 1px solid #2f2f31;
+    border-radius: 4px;
+    padding: 0 5px;
+  }
+  .stage.compact .diff {
+    left: -40px;
+    top: 150px;
+  }
+  .stage.compact .pr-modes {
+    display: none;
+  }
+
+  .cursor {
+    left: 0;
+    top: 0;
+  }
+
+  /* Panneau d'appel */
+  .call {
+    background: #1c1c1e;
+    border-left: 1px solid #2f2f31;
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    gap: 10px;
+    min-height: 0;
+  }
+  .call-h {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+  }
+  .call-h .dim {
+    font-weight: 400;
+    font-family: var(--font-mono);
+    color: #a6a6a6;
+  }
+  .rec {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #ff6369;
+  }
+  .call-n {
+    margin-left: auto;
+    background: #2a2a2d;
+    border-radius: 99px;
+    padding: 0 7px;
+    font-size: 11px;
+  }
+  .tiles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .tile {
+    position: relative;
+    height: 74px;
+    border-radius: 8px;
+    background: #0b0b0c;
+    display: grid;
+    place-items: center;
+    outline: 2px solid transparent;
+    transition: outline-color 0.2s;
+  }
+  .tile:first-child {
+    grid-column: 1 / -1;
+    height: 96px;
+  }
+  .tile.speaking {
+    outline-color: var(--c);
+  }
+  .tile-av {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--c);
+    color: #111;
+    font-weight: 700;
+    font-size: 14px;
+    display: grid;
+    place-items: center;
+  }
+  .tile-name {
+    position: absolute;
+    left: 7px;
+    bottom: 5px;
+    font-size: 11px;
+    color: #ddd;
+  }
+  .bars {
+    position: absolute;
+    right: 8px;
+    bottom: 7px;
+    display: flex;
+    gap: 2px;
+    align-items: end;
+    height: 10px;
+  }
+  .bars i {
+    width: 2.5px;
+    height: 10px;
+    border-radius: 2px;
+    background: var(--c);
+    transform: scaleY(0.3);
+    transform-origin: bottom;
+  }
+  .tile.speaking .bars i {
+    animation: speak 0.7s ease-in-out infinite;
+  }
+  .tile.speaking .bars i:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  .tile.speaking .bars i:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  .listen {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: #2a1c45;
+    color: #c4a3ff;
+  }
+  .understood {
+    margin: -4px 0 0;
+    font-size: 11.5px;
+    color: #a6a6a6;
+    min-height: 16px;
+    transition: color 0.2s;
+  }
+  .understood.on {
+    color: #c4a3ff;
+  }
+  .subs {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 10px;
+    border-radius: 8px;
+    background: #121213;
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+  .subs :global(p) {
+    margin: 0;
+    color: #ececec;
+  }
+  .controls {
+    display: flex;
+    gap: 5px;
+  }
+  .ctl {
+    height: 28px;
+    min-width: 28px;
+    padding: 0 6px;
+    border-radius: 7px;
+    background: #2a2a2d;
+    display: grid;
+    place-items: center;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: #ececec;
+  }
+  .ctl svg {
+    width: 14px;
+    height: 14px;
+  }
+  .ctl.on {
+    background: #3a3a3f;
+  }
+  .ctl.ai {
+    background: #7c3aed;
+    color: #fff;
+  }
+  .ctl.quit {
+    margin-left: auto;
+    background: #c9252c;
+    padding: 0 9px;
+  }
+
+  /* Légende sous la démo, en compact */
+  .demo-caption {
+    display: none;
+    margin-top: 12px;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    font-size: 14px;
+  }
+  .demo-caption .live-dot {
+    margin-top: 7px;
+  }
+  .demo-caption p {
+    margin: 0;
+  }
+  .cap-und {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 2px !important;
+  }
+  .cap-und.on {
+    color: var(--ai-ink);
+  }
+  .is-compact .demo-caption {
+    display: flex;
+  }
+</style>

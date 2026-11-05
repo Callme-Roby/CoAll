@@ -1,0 +1,9 @@
+---
+/** Signe de Coall, repris de l'outil : l'officiel (bleu) et l'hypothèse (vert) qui se chevauchent. */
+interface Props { size?: number }
+const { size = 22 } = Astro.props;
+---
+<svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true" class="brandmark">
+  <rect x="2.5" y="2.5" width="13" height="13" rx="3" fill="none" stroke="var(--official)" stroke-width="2.5" />
+  <rect x="8.5" y="8.5" width="13" height="13" rx="3" fill="var(--hypothesis)" fill-opacity="0.18" stroke="var(--hypothesis)" stroke-width="2.5" />
+</svg>

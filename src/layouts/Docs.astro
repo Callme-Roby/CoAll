@@ -1,0 +1,418 @@
+---
+import Base from "./Base.astro";
+import { getCollection } from "astro:content";
+
+interface Props {
+  title: string;
+  description: string;
+  slug?: string;
+  headings?: { depth: number; slug: string; text: string }[];
+}
+const { title, description, slug, headings = [] } = Astro.props;
+
+const GROUPS = ["Démarrer", "Concevoir", "IA et voix", "Collaborer", "Aller plus loin", "Référence"] as const;
+const docs = (await getCollection("docs")).sort((a, b) => a.data.order - b.data.order);
+const idx = docs.findIndex((d) => d.id === slug);
+const prev = idx > 0 ? docs[idx - 1] : null;
+const next = idx >= 0 && idx < docs.length - 1 ? docs[idx + 1] : null;
+const current = idx >= 0 ? docs[idx] : null;
+const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+<Base title={`${title} — Documentation`} description={description}>
+  <link slot="head" href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+  <div class="wrap docs">
+    <aside class="side" aria-label="Sommaire de la documentation">
+      <div class="search" id="search"></div>
+      <details class="side-mobile" open>
+        <summary>Sommaire</summary>
+        <nav>
+          <a href="/docs" class:list={["side-home", { active: !slug }]}>Vue d'ensemble</a>
+          {GROUPS.map((g) => (
+            <div class="grp">
+              <p class="label">{g}</p>
+              {docs.filter((d) => d.data.group === g).map((d) => (
+                <a href={`/docs/${d.id}`} class:list={[{ active: d.id === slug }]}>{d.data.title}</a>
+              ))}
+            </div>
+          ))}
+        </nav>
+      </details>
+    </aside>
+
+    <article class="content" data-pagefind-body>
+      <p class="crumbs label">
+        <a href="/docs">Documentation</a>{current && <> <span>/</span> {current.data.group}</>}
+      </p>
+      <h1 class="h1 doc-title">{title}</h1>
+      <p class="lead doc-lead">{description}</p>
+      <div class="prose">
+        <slot />
+      </div>
+      {(prev || next) && (
+        <nav class="pager" aria-label="Chapitres voisins" data-pagefind-ignore>
+          {prev ? <a href={`/docs/${prev.id}`} class="card"><span class="label">← Précédent</span>{prev.data.title}</a> : <span></span>}
+          {next ? <a href={`/docs/${next.id}`} class="card nx"><span class="label">Suivant →</span>{next.data.title}</a> : <span></span>}
+        </nav>
+      )}
+    </article>
+
+    <aside class="toc" aria-label="Sur cette page" data-pagefind-ignore>
+      {toc.length > 0 && (
+        <>
+          <p class="label">Sur cette page</p>
+          {toc.map((h) => <a href={`#${h.slug}`} class={`d${h.depth}`}>{h.text}</a>)}
+        </>
+      )}
+    </aside>
+  </div>
+
+  <script>
+    // Recherche plein texte (index généré au build par Pagefind).
+    const el = document.getElementById("search");
+    if (el) {
+      const s = document.createElement("script");
+      s.src = "/pagefind/pagefind-ui.js";
+      s.onload = () => {
+        // @ts-ignore
+        new window.PagefindUI({
+          element: "#search",
+          showSubResults: true,
+          showImages: false,
+          translations: { placeholder: "Rechercher…", zero_results: "Aucun résultat pour [SEARCH_TERM]" },
+        });
+      };
+      s.onerror = () => {
+        el.innerHTML = '<p class="search-off">La recherche est disponible sur la version construite du site.</p>';
+      };
+      document.head.appendChild(s);
+    }
+    // Sommaire replié par défaut sur mobile.
+    const det = document.querySelector<HTMLDetailsElement>(".side-mobile");
+    if (det && window.matchMedia("(max-width: 900px)").matches) det.open = false;
+  </script>
+
+  <style>
+    .docs {
+      display: grid;
+      grid-template-columns: 240px minmax(0, 1fr) 200px;
+      gap: 48px;
+      padding-top: 40px;
+      padding-bottom: 120px;
+      max-width: 1320px;
+    }
+    .side {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      max-height: calc(100vh - 110px);
+      overflow-y: auto;
+      padding-right: 6px;
+      scrollbar-width: thin;
+    }
+    .side summary {
+      display: none;
+    }
+    .side nav {
+      display: grid;
+      gap: 2px;
+    }
+    .side a {
+      display: block;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .side a:hover {
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .side a.active {
+      color: var(--ink);
+      background: var(--official-soft);
+      box-shadow: inset 2px 0 0 var(--official);
+    }
+    .grp {
+      margin-top: 18px;
+    }
+    .grp .label {
+      font-size: 10.5px;
+      margin: 0 0 6px 10px;
+      color: var(--faint);
+    }
+    .search {
+      margin-bottom: 18px;
+      --pagefind-ui-scale: 0.78;
+      --pagefind-ui-primary: var(--official-ink);
+      --pagefind-ui-text: var(--ink);
+      --pagefind-ui-background: var(--surface);
+      --pagefind-ui-border: var(--line-2);
+      --pagefind-ui-tag: var(--surface-2);
+      --pagefind-ui-border-width: 1px;
+      --pagefind-ui-border-radius: 10px;
+      --pagefind-ui-font: var(--font-sans);
+    }
+    .search :global(.search-off) {
+      font-size: 12.5px;
+      color: var(--faint);
+      margin: 0;
+    }
+    .content {
+      min-width: 0;
+      max-width: 760px;
+    }
+    .crumbs {
+      margin: 0 0 18px;
+      font-size: 11px;
+    }
+    .crumbs a:hover {
+      color: var(--ink);
+    }
+    .crumbs span {
+      margin: 0 6px;
+      color: var(--faint);
+    }
+    .doc-title {
+      font-size: clamp(34px, 4.4vw, 52px);
+    }
+    .doc-lead {
+      margin-top: 16px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--line);
+    }
+    .toc {
+      position: sticky;
+      top: 88px;
+      align-self: start;
+      display: grid;
+      gap: 4px;
+      max-height: calc(100vh - 110px);
+      overflow-y: auto;
+    }
+    .toc .label {
+      font-size: 10.5px;
+      margin: 0 0 8px;
+    }
+    .toc a {
+      font-size: 13px;
+      color: var(--muted);
+      padding: 3px 0;
+      line-height: 1.35;
+    }
+    .toc a:hover {
+      color: var(--ink);
+    }
+    .toc a.d3 {
+      padding-left: 12px;
+      font-size: 12.5px;
+      color: var(--faint);
+    }
+    .pager {
+      margin-top: 72px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .pager a {
+      display: grid;
+      gap: 6px;
+      padding: 18px 20px;
+      font-weight: 550;
+      transition: border-color 0.2s;
+    }
+    .pager a:hover {
+      border-color: var(--line-2);
+    }
+    .pager .nx {
+      text-align: right;
+    }
+    .pager .label {
+      font-size: 10.5px;
+    }
+    @media (max-width: 1180px) {
+      .docs {
+        grid-template-columns: 220px minmax(0, 1fr);
+      }
+      .toc {
+        display: none;
+      }
+    }
+    @media (max-width: 900px) {
+      .docs {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding-top: 20px;
+      }
+      .side {
+        position: static;
+        max-height: none;
+        overflow: visible;
+      }
+      .side summary {
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+        padding: 12px 14px;
+        border: 1px solid var(--line-2);
+        border-radius: 10px;
+        font-weight: 550;
+        list-style: none;
+      }
+      .side summary::after {
+        content: "▾";
+        color: var(--muted);
+      }
+      .side details[open] summary {
+        margin-bottom: 8px;
+      }
+      .pager {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ---------- Prose ---------- */
+    .prose {
+      padding-top: 8px;
+      color: var(--ink-2);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    .prose :global(h2) {
+      font-family: var(--font-display);
+      font-size: 26px;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      color: var(--ink);
+      margin: 56px 0 14px;
+      font-weight: 600;
+    }
+    .prose :global(h3) {
+      font-family: var(--font-display);
+      font-size: 19px;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      margin: 36px 0 10px;
+      font-weight: 600;
+    }
+    .prose :global(h4) {
+      color: var(--ink);
+      margin: 28px 0 8px;
+      font-size: 16px;
+    }
+    .prose :global(p) {
+      margin: 0 0 16px;
+    }
+    .prose :global(a) {
+      color: var(--official-ink);
+      text-decoration: underline;
+      text-decoration-color: color-mix(in srgb, var(--official) 40%, transparent);
+      text-underline-offset: 3px;
+    }
+    .prose :global(a:hover) {
+      text-decoration-color: currentColor;
+    }
+    .prose :global(strong) {
+      color: var(--ink);
+      font-weight: 600;
+    }
+    .prose :global(ul),
+    .prose :global(ol) {
+      padding-left: 22px;
+      margin: 0 0 18px;
+    }
+    .prose :global(li) {
+      margin: 6px 0;
+    }
+    .prose :global(li::marker) {
+      color: var(--faint);
+    }
+    .prose :global(ol > li::marker) {
+      font-family: var(--font-mono);
+      font-size: 0.85em;
+      color: var(--official-ink);
+    }
+    .prose :global(code) {
+      font-family: var(--font-mono);
+      font-size: 0.86em;
+      padding: 1px 6px;
+      border-radius: 5px;
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      color: var(--ink);
+    }
+    .prose :global(pre) {
+      padding: 16px 18px;
+      border-radius: 12px;
+      background: var(--bg-2) !important;
+      border: 1px solid var(--line);
+      overflow-x: auto;
+      font-size: 13.5px;
+      line-height: 1.6;
+      margin: 0 0 20px;
+    }
+    .prose :global(pre code) {
+      padding: 0;
+      background: none;
+      border: 0;
+    }
+    .prose :global(kbd) {
+      font-family: var(--font-mono);
+      font-size: 0.82em;
+      padding: 1px 6px;
+      border-radius: 5px;
+      border: 1px solid var(--line-2);
+      border-bottom-width: 2px;
+    }
+    .prose :global(blockquote) {
+      margin: 20px 0;
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: 1px solid color-mix(in srgb, var(--official) 30%, transparent);
+      background: var(--official-soft);
+      color: var(--ink-2);
+    }
+    .prose :global(blockquote p:last-child) {
+      margin-bottom: 0;
+    }
+    .prose :global(blockquote.warn) {
+      border-color: color-mix(in srgb, var(--warn) 35%, transparent);
+      background: color-mix(in srgb, var(--warn) 10%, transparent);
+    }
+    .prose :global(table) {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0 24px;
+      font-size: 14.5px;
+      display: block;
+      overflow-x: auto;
+    }
+    .prose :global(th),
+    .prose :global(td) {
+      text-align: left;
+      padding: 10px 14px 10px 0;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+    .prose :global(th) {
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .prose :global(hr) {
+      border: 0;
+      border-top: 1px solid var(--line);
+      margin: 40px 0;
+    }
+    .prose :global(.todo) {
+      font-family: var(--font-mono);
+      font-size: 0.78em;
+      padding: 1px 6px;
+      border-radius: 5px;
+      color: var(--warn-ink);
+      background: color-mix(in srgb, var(--warn) 12%, transparent);
+      border: 1px dashed color-mix(in srgb, var(--warn) 45%, transparent);
+      overflow-wrap: anywhere;
+    }
+  </style>
+</Base>

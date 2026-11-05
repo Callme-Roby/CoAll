@@ -1,0 +1,85 @@
+---
+import { getCollection } from "astro:content";
+import Docs from "../../layouts/Docs.astro";
+
+const GROUPS = [
+  { g: "Démarrer", c: "var(--official)", d: "Le vocabulaire de base et un premier projet en cinq minutes." },
+  { g: "Concevoir", c: "var(--hypothesis)", d: "Canvas, édition à la main, hypothèses, formats, mode Play, composants." },
+  { g: "IA et voix", c: "var(--ai)", d: "La barre de demande, l'appel, l'écoute de l'IA, les skills et les règles." },
+  { g: "Collaborer", c: "#ff7a45", d: "Invitations, droits, présence, commentaires et historique." },
+  { g: "Aller plus loin", c: "var(--warn)", d: "Import et export, plugin Figma, réglages, mobile, confidentialité." },
+  { g: "Référence", c: "var(--muted)", d: "Raccourcis, glossaire, FAQ, limites connues et nouveautés." },
+] as const;
+const docs = (await getCollection("docs")).sort((a, b) => a.data.order - b.data.order);
+---
+<Docs title="Documentation" description="Tout ce qu'il faut pour prendre Coall en main sans aide : chaque fonction, pas à pas.">
+  <p>
+    Nouveau sur Coall&nbsp;? Commencez par <a href="/docs/bienvenue">Bienvenue</a>, puis suivez la
+    <a href="/docs/prise-en-main">prise en main en 5 minutes</a>. Les noms de boutons et de menus sont écrits en
+    <strong>gras</strong>, exactement comme dans l'interface.
+  </p>
+  <div class="groups not-prose">
+    {GROUPS.map(({ g, c, d }) => (
+      <section class="grp card" style={`--c:${c}`}>
+        <h2 class="gh"><i></i>{g}</h2>
+        <p class="gd">{d}</p>
+        <ul>
+          {docs.filter((x) => x.data.group === g).map((x) => (
+            <li><a href={`/docs/${x.id}`}>{x.data.title}</a></li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+</Docs>
+
+<style>
+  .groups {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 28px;
+  }
+  .grp {
+    padding: 22px;
+  }
+  .grp .gh {
+    margin: 0 0 6px !important;
+    font-size: 18px !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .gh i {
+    width: 9px;
+    height: 9px;
+    border-radius: 2px;
+    background: var(--c);
+  }
+  .gd {
+    font-size: 14px;
+    color: var(--muted);
+    margin: 0 0 12px !important;
+  }
+  .grp ul {
+    list-style: none;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .grp li {
+    margin: 4px 0 !important;
+  }
+  .grp a {
+    text-decoration: none !important;
+    color: var(--ink-2) !important;
+    font-size: 15px;
+  }
+  .grp a:hover {
+    color: var(--ink) !important;
+  }
+  @media (max-width: 640px) {
+    .groups {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

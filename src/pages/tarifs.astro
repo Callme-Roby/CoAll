@@ -1,0 +1,262 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHead from "../components/PageHead.astro";
+
+/* Grille PROVISOIRE (docs/COUTS-ET-TARIFS.md du dépôt co-design). Ne pas publier sans accord explicite :
+   la page est en noindex et porte un bandeau « provisoire ». */
+const plans = [
+  { n: "Gratuit", m: "0 €", y: "0 €", d: "Pour découvrir Coall.", cta: "Rejoindre la liste d'attente" },
+  { n: "Pro", m: "15 €", y: "12 €", d: "Pour les designers qui conçoivent en réunion.", cta: "Rejoindre la liste d'attente", hi: true },
+  { n: "Équipe", m: "30 €", y: "25 €", d: "Pour les équipes et les agences.", cta: "Rejoindre la liste d'attente" },
+  { n: "Entreprise", m: "Sur devis", y: "Sur devis", d: "Pour les besoins sur mesure.", cta: "Nous contacter", href: "/contact" },
+];
+const rows: [string, string[]][] = [
+  ["Projets", ["3", "Illimités", "Illimités", "Illimités"]],
+  ["Appels", ["3 personnes, 45 min", "10 personnes", "25 personnes", "Sur mesure"]],
+  ["Crédits d'IA par mois", ["40", "600", "1 500, mis en commun", "Négociés"]],
+  ["Transcription", ["Navigateur (Chrome, Edge)", "Serveur, tous navigateurs", "Serveur", "Serveur"]],
+  ["Droits par personne, historique complet", ["—", "✓", "✓", "✓"]],
+  ["Facture unique, gestion des membres, support prioritaire", ["—", "—", "✓", "✓ (SSO, contrat)"]],
+  ["Crédits supplémentaires", ["—", "12 € les 1 000", "12 € les 1 000", "—"]],
+];
+const credits = [
+  ["Une retouche", "1 crédit"],
+  ["Un changement de structure", "15 crédits"],
+  ["Une page entière ou une refonte", "50 crédits"],
+  ["Une heure d'écoute, par participant", "12 crédits"],
+];
+---
+<Base title="Tarifs" description="Les formules de Coall : prix par éditeur, crédits d'IA, invités gratuits. Grille provisoire." noindex>
+  <div class="banner" role="note">
+    <div class="wrap"><b>Grille provisoire.</b> Ces prix sont à l'étude et ne sont pas encore définitifs. Coall n'est pas encore en ligne : aucun paiement n'est possible.</div>
+  </div>
+  <PageHead
+    eyebrow="Tarifs"
+    color="var(--official-ink)"
+    title="Payez pour ceux qui conçoivent.<br /><span class='dim'>Les invités sont gratuits.</span>"
+    lead="Prix hors taxes, par éditeur. Les invités en lecture seule et les participants aux appels sans droit de modifier ne paient pas. L'IA est comptée en crédits, qui reflètent son coût réel."
+  >
+    <div class="period" role="group" aria-label="Facturation">
+      <button type="button" class="on" data-period="y" aria-pressed="true">Annuel</button>
+      <button type="button" data-period="m" aria-pressed="false">Mensuel</button>
+    </div>
+  </PageHead>
+
+  <section class="section plans-sec">
+    <div class="wrap">
+      <div class="plans">
+        {plans.map((p) => (
+          <article class:list={["card plan", { hi: p.hi }]}>
+            <h2 class="h3">{p.n}</h2>
+            <p class="pd">{p.d}</p>
+            <p class="price">
+              <span data-m hidden>{p.m}</span><span data-y>{p.y}</span>
+              {p.m.endsWith("€") && <small>HT / éditeur / mois</small>}
+            </p>
+            <p class="py" data-y>{p.m.endsWith("€") && p.m !== "0 €" ? `Facturé à l'année · ${p.m} au mois` : " "}</p>
+            <p class="py" data-m hidden>{p.m.endsWith("€") && p.m !== "0 €" ? `${p.y} par mois en annuel` : " "}</p>
+            <a href={p.href ?? "/liste-d-attente"} class:list={["btn", p.hi ? "btn-primary" : "btn-ghost"]}>{p.cta}</a>
+          </article>
+        ))}
+      </div>
+
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <caption class="sr-only">Comparaison des formules</caption>
+          <thead><tr><th scope="col"></th>{plans.map((p) => <th scope="col">{p.n}</th>)}</tr></thead>
+          <tbody>
+            {rows.map(([k, v]) => (
+              <tr><th scope="row">{k}</th>{v.map((x) => <td class:list={[{ no: x === "—" }]}>{x}</td>)}</tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section credits">
+    <div class="wrap cr-grid">
+      <div class="section-head" style="margin:0">
+        <span class="label label-dot t-ai">Crédits d'IA</span>
+        <h2 class="h2">Ce que coûte une demande.</h2>
+        <p class="lead">Ce qui coûte, ce n'est pas le nombre de personnes : c'est l'IA. Les crédits suivent l'effort réel de chaque demande.</p>
+      </div>
+      <dl class="cr">
+        {credits.map(([a, b]) => <div><dt>{a}</dt><dd>{b}</dd></div>)}
+      </dl>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const btns = document.querySelectorAll<HTMLButtonElement>("[data-period]");
+  btns.forEach((b) =>
+    b.addEventListener("click", () => {
+      const p = b.dataset.period;
+      btns.forEach((x) => {
+        x.classList.toggle("on", x === b);
+        x.setAttribute("aria-pressed", String(x === b));
+      });
+      document.querySelectorAll<HTMLElement>("[data-m]").forEach((e) => (e.hidden = p !== "m"));
+      document.querySelectorAll<HTMLElement>("[data-y]").forEach((e) => (e.hidden = p !== "y"));
+    }),
+  );
+</script>
+
+<style>
+  .banner {
+    background: color-mix(in srgb, var(--warn) 14%, var(--bg));
+    border-bottom: 1px solid color-mix(in srgb, var(--warn) 35%, transparent);
+    color: var(--ink-2);
+    font-size: 14px;
+    padding: 10px 0;
+  }
+  .banner b {
+    color: var(--warn-ink);
+  }
+  .period {
+    display: inline-flex;
+    padding: 4px;
+    border-radius: 999px;
+    border: 1px solid var(--line-2);
+    margin-top: 8px;
+  }
+  .period button {
+    border: 0;
+    background: transparent;
+    padding: 6px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    color: var(--muted);
+    font-weight: 550;
+    font-size: 14px;
+  }
+  .period button.on {
+    background: var(--surface-3);
+    color: var(--ink);
+  }
+  .plans {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .plan {
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .plan.hi {
+    border-color: color-mix(in srgb, var(--official) 55%, transparent);
+    background: linear-gradient(180deg, var(--official-soft), transparent 60%);
+    position: relative;
+  }
+  .pd {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14.5px;
+    min-height: 44px;
+  }
+  .price {
+    margin: 12px 0 0;
+    font-family: var(--font-display);
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    display: grid;
+  }
+  .price small {
+    font-family: var(--font-sans);
+    font-size: 12.5px;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--faint);
+    margin-top: 6px;
+  }
+  .py {
+    margin: 0 0 14px;
+    font-size: 13px;
+    color: var(--muted);
+    min-height: 20px;
+  }
+  .plan .btn {
+    margin-top: auto;
+    width: 100%;
+  }
+  .tbl-wrap {
+    margin-top: 56px;
+    overflow-x: auto;
+  }
+  .tbl {
+    width: 100%;
+    min-width: 720px;
+    border-collapse: collapse;
+    font-size: 14.5px;
+  }
+  .tbl th,
+  .tbl td {
+    padding: 14px 12px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+  }
+  .tbl thead th {
+    font-family: var(--font-display);
+    font-size: 16px;
+  }
+  .tbl tbody th {
+    font-weight: 500;
+    color: var(--ink-2);
+    width: 28%;
+  }
+  .tbl td {
+    color: var(--ink);
+  }
+  .tbl td.no {
+    color: var(--faint);
+  }
+  @media (max-width: 1000px) {
+    .plans {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 560px) {
+    .plans {
+      grid-template-columns: 1fr;
+    }
+  }
+  .credits {
+    border-top: 1px solid var(--line);
+  }
+  .cr-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .cr {
+    margin: 0;
+  }
+  .cr div {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 0;
+    border-top: 1px solid var(--line);
+  }
+  .cr dt {
+    color: var(--ink-2);
+  }
+  .cr dd {
+    margin: 0;
+    font-family: var(--font-mono);
+    color: var(--ai-ink);
+    white-space: nowrap;
+  }
+  @media (max-width: 860px) {
+    .cr-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,37 @@
+---
+interface Props { eyebrow: string; title: string; lead?: string; color?: string }
+const { eyebrow, title, lead, color = "var(--ai-ink)" } = Astro.props;
+---
+<header class="ph">
+  <div class="ph-bg dotgrid" aria-hidden="true"></div>
+  <div class="wrap ph-inner">
+    <span class="label label-dot" style={`color:${color}`}>{eyebrow}</span>
+    <h1 class="h1" set:html={title} />
+    {lead && <p class="lead">{lead}</p>}
+    <slot />
+  </div>
+</header>
+
+<style>
+  .ph {
+    position: relative;
+    padding: clamp(64px, 9vw, 120px) 0 clamp(48px, 6vw, 80px);
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+  }
+  .ph-bg {
+    position: absolute;
+    inset: 0;
+    -webkit-mask: radial-gradient(ellipse 60% 80% at 30% 0%, #000 20%, transparent 70%);
+    mask: radial-gradient(ellipse 60% 80% at 30% 0%, #000 20%, transparent 70%);
+  }
+  .ph-inner {
+    position: relative;
+    display: grid;
+    gap: 20px;
+    justify-items: start;
+  }
+  .ph-inner :global(.lead) {
+    max-width: 680px;
+  }
+</style>
