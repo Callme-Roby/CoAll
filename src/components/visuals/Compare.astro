@@ -13,8 +13,8 @@ import Icon from "../Icon.astro";
           <p class="h">Des formules simples</p>
           <p class="t">Changez de formule à tout moment.</p>
           <div class="plans">
-            <div class="pl"><b>Studio</b><span>19 €</span><em class="mk d chg">1</em><span class="btn">Choisir</span></div>
-            <div class="pl"><b>Agence</b><span>49 €</span><span class="btn">Choisir</span></div>
+            <div class="pl"><b>Studio</b><span>19 €</span><em class="mk d chg">1</em><span class="sbtn">Choisir</span></div>
+            <div class="pl"><b>Agence</b><span>49 €</span><span class="sbtn">Choisir</span></div>
           </div>
           <div class="faq rem"><em class="mk d rm">3</em>En savoir plus</div>
         </div>
@@ -26,8 +26,8 @@ import Icon from "../Icon.astro";
           <p class="h">Des formules simples</p>
           <p class="t">Changez de formule à tout moment.</p>
           <div class="plans">
-            <div class="pl"><b>Studio</b><span class="chg-box"><em class="mk chg">1</em>15 €</span><span class="btn">Choisir</span></div>
-            <div class="pl"><b>Agence</b><span>49 €</span><span class="btn">Choisir</span></div>
+            <div class="pl"><b>Studio</b><span class="chg-box"><em class="mk chg">1</em>15 €</span><span class="sbtn">Choisir</span></div>
+            <div class="pl"><b>Agence</b><span>49 €</span><span class="sbtn">Choisir</span></div>
           </div>
           <div class="testi add"><em class="mk ad">2</em>« On a validé l'accueil en une réunion. »</div>
         </div>
@@ -153,11 +153,11 @@ import Icon from "../Icon.astro";
     display: grid;
     gap: 6px;
   }
-  .pl span:not(.btn) {
+  .pl span:not(.sbtn) {
     font-size: 18px;
     font-weight: 650;
   }
-  .btn {
+  .sbtn {
     justify-self: start;
     background: #111;
     color: #fff;

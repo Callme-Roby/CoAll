@@ -1,0 +1,61 @@
+---
+/** Vue d'ensemble d'un projet ouvert : frames officielles et hypothèse sur le canvas, panneau d'appel, barre de demande. */
+import Scaled from "../Scaled.astro";
+import Editor from "./_a/Editor.astro";
+import Frame from "./_kit/Frame.astro";
+import Site from "./_a/Site.astro";
+---
+<Scaled w={1280} h={760} label="Un projet ouvert dans Coall : les frames officielles en bleu et une hypothèse en vert sur le canvas, le panneau d'appel à droite, la barre de demande à l'IA en bas.">
+  <div class="q">
+    <Editor left={false} right={false} call prompt="Sur tout le canvas">
+      <div class="listen"><span class="lpill"><span class="ldot"></span>L'IA écoute<span class="lpause">Pause</span></span></div>
+      <Frame x={90} y={130} w={250} h={360} name="Accueil"><Site scale={0.8} /></Frame>
+      <Frame x={380} y={130} w={250} h={360} name="Accueil" label="Version Jean" kind="hyp"><Site scale={0.8} title="La lumière qui vous suit." titleColor="#16a34a" /></Frame>
+      <Frame x={670} y={130} w={250} h={360} name="Tarifs"><Site page="tarifs" scale={0.8} /></Frame>
+    </Editor>
+  </div>
+</Scaled>
+<style>
+  .q {
+    width: 100%;
+    height: 100%;
+  }
+  .q :global(.kfr .kt) {
+    color: var(--muted);
+  }
+  .q :global(.k-hyp .kb) {
+    opacity: 0.96;
+  }
+  .listen {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+  }
+  .lpill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--ai-strong);
+    color: #fff;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .ldot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+  }
+  .lpause {
+    margin-left: 4px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+  }
+</style>

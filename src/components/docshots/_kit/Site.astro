@@ -30,10 +30,10 @@ const mobile = size === "mobile";
       {!mobile && <div><b>Équipe</b><span>89 €</span><em>Choisir</em></div>}
     </div>
   ) : page === "contact" ? (
-    <div class="form" data-el="cards"><i></i><i></i><i class="big"></i><span class="btn" data-el="btn">{T.b}</span></div>
+    <div class="form" data-el="cards"><i></i><i></i><i class="big"></i><span class="sbtn" data-el="btn">{T.b}</span></div>
   ) : (
     <>
-      <span class="btn" data-el="btn">{T.b}</span>
+      <span class="sbtn" data-el="btn">{T.b}</span>
       <div class="img" data-el="img"><i></i></div>
       <div class="cards" data-el="cards"><span></span><span></span>{!mobile && <span></span>}</div>
     </>
@@ -104,7 +104,7 @@ const mobile = size === "mobile";
     font-size: calc(9px * var(--s));
     max-width: 88%;
   }
-  .btn {
+  .sbtn {
     position: relative;
     align-self: flex-start;
     background: #111;
@@ -189,7 +189,7 @@ const mobile = size === "mobile";
     border: 1px solid #e3e0dc;
     border-radius: 4px;
   }
-  .form .btn {
+  .form .sbtn {
     justify-self: start;
   }
   .form i.big {

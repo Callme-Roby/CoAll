@@ -1,0 +1,612 @@
+---
+/**
+ * Coquille de l'éditeur de Coall (thème sombre), pour les visuels de la doc.
+ * Relevé dans apps/web/components/editor (Toolbar, LayersPanel, CanvasTools, PromptBar, PropertiesPanel)
+ * et components/call (panneau d'appel) : en-tête 44 px, panneau gauche 240 px, droite 320 px, appel 264 px.
+ * Slots : défaut = contenu du canvas (positions absolues) ; "left" = lignes de frames ; "tree" = calques ;
+ * "right" = contenu du panneau de droite.
+ */
+import Icon from "../../Icon.astro";
+
+interface Props {
+  left?: boolean;
+  right?: boolean;
+  rightTab?: "Design" | "Timeline" | "Versions";
+  call?: boolean;
+  prompt?: string | false;
+  mode?: "Auto" | "Officielle" | "Hypothèse";
+  archives?: boolean;
+  zoom?: string;
+  tool?: number;
+}
+const { left = true, right = true, rightTab = "Design", call = false, prompt = false, mode = "Auto", archives = false, zoom = "50 %", tool = 0 } = Astro.props;
+const people = [
+  { ini: "JM", color: "#c25100", first: "Jean" },
+  { ini: "AB", color: "#9334e6", first: "Alice" },
+  { ini: "MD", color: "#007b83", first: "Marc" },
+];
+const cols = [left && "240px", "1fr", right && "320px", call && "264px"].filter(Boolean).join(" ");
+---
+<div class="ed" style={`grid-template-columns:${cols}`}>
+  <header class="tb">
+    <span class="back"><Icon name="ChevronLeft" size={14} />Projets</span>
+    <i class="div"></i>
+    <span class="name">Lumen · Site vitrine</span>
+    <span class="tools-h">
+      <span class="ib"><Icon name="SquarePlus" /></span>
+      <span class="ib"><Icon name="FileUp" /></span>
+      <span class="ib"><Icon name="Download" /></span>
+      <span class="ib"><Icon name="Search" /></span>
+      <i class="div"></i>
+      <span class="ib dis"><Icon name="Undo2" /></span>
+      <span class="ib dis"><Icon name="Redo2" /></span>
+    </span>
+    <span class="rt">
+      <span class="ib"><Icon name="Minus" size={14} /></span>
+      <span class="zoom">{zoom}</span>
+      <span class="ib"><Icon name="Plus" size={14} /></span>
+      <span class="ib"><Icon name="Maximize" size={14} /></span>
+      <i class="div"></i>
+      <span class="avs">
+        {people.map((p) => (
+          <span class="av" style={`background:${p.color}`}>{p.ini}{call && <span class="incall"><Icon name="Video" size={8} /></span>}</span>
+        ))}
+      </span>
+      <span class="invite"><Icon name="UserPlus" size={14} />Inviter</span>
+      {!call && <span class="startcall"><Icon name="Video" size={14} />Démarrer l’appel</span>}
+    </span>
+  </header>
+
+  {left && (
+    <aside class="lp">
+      <div class="tabs"><span class="tab on">Calques</span><span class="tab">Ressources</span><span class="tab-x"><Icon name="PanelLeftClose" size={14} /></span></div>
+      <div class="st"><span>Frames</span><label class="arch"><i class:list={[{ on: archives }]}>{archives && <Icon name="Check" size={9} stroke={3} />}</i>Archives</label></div>
+      <div class="search"><Icon name="Search" size={12} /><span>Rechercher dans les calques</span></div>
+      <div class="rows"><slot name="left" /></div>
+      <div class="tree">
+        <div class="st"><span>Calques</span></div>
+        <slot name="tree" />
+      </div>
+    </aside>
+  )}
+
+  <main class="cv">
+    <slot />
+    <div class="tools">
+      {["MousePointer2", "Hand", "Frame", "SquareDashed", "MessageCircle"].map((n, i) => <span class:list={["tl", { on: i === tool }]}><Icon name={n} /></span>)}
+    </div>
+    {prompt !== false && (
+      <div class="pb">
+        <div class="pb-1">
+          <span class="pb-s"><Icon name="Sparkles" size={12} /></span>
+          <span set:html={prompt} />
+          <span class="modes">{["Auto", "Officielle", "Hypothèse"].map((m) => <i class:list={[{ on: m === mode }]}>{m}</i>)}</span>
+        </div>
+        <div class="pb-2">
+          <span class="ph">Demandez une modification… (ex. « passe le titre en vert »)</span>
+          <span class="send"><Icon name="ArrowUp" size={14} /></span>
+        </div>
+      </div>
+    )}
+  </main>
+
+  {right && (
+    <aside class="rp">
+      <div class="tabs">
+        {["Design", "Timeline", "Versions"].map((t) => <span class:list={["tab", { on: t === rightTab }]}>{t}</span>)}
+        <span class="tab"><Icon name="MessageCircle" size={14} /></span>
+        <span class="tab"><Icon name="Users" size={14} /></span>
+        <span class="tab-x"><Icon name="PanelRightClose" size={14} /></span>
+      </div>
+      <slot name="right" />
+    </aside>
+  )}
+
+  {call && (
+    <aside class="call">
+      <div class="ch-h">
+        <span class="live"><span class="ld"></span>En appel · 12:41</span>
+        <span class="ch-n"><Icon name="Users" size={14} />3</span>
+        <span class="ch-x"><Icon name="PanelRightClose" size={15} /></span>
+      </div>
+      <div class="tiles">
+        {people.map((p, i) => (
+          <div class:list={["tile", { speaking: i === 0 }]}>
+            <span class="ini" style={`background:${p.color}`}>{p.ini}</span>
+            <span class="tn">{i === 2 ? "Vous" : p.first}</span>
+            <span class="bars"><i></i><i></i><i></i></span>
+          </div>
+        ))}
+      </div>
+      <div class="ctl">
+        <div class="ctl-r">
+          <span class="bb"><Icon name="Mic" size={18} /></span><span class="chev"><Icon name="ChevronUp" size={14} /></span>
+          <span class="bb"><Icon name="Video" size={18} /></span><span class="chev"><Icon name="ChevronUp" size={14} /></span>
+          <span class="bb a-off"><Icon name="Captions" size={18} /></span>
+          <span class="bb a-ai"><Icon name="AudioLines" size={18} /></span>
+          <span class="bb"><Icon name="Hand" size={18} /></span>
+        </div>
+        <span class="quit"><Icon name="PhoneOff" size={16} />Quitter</span>
+      </div>
+    </aside>
+  )}
+</div>
+
+<style>
+  .ed {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 44px 1fr;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .tb {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 8px;
+    background: var(--panel);
+    border-bottom: 1px solid var(--line);
+    min-width: 0;
+  }
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    height: 32px;
+    padding: 0 8px;
+    color: var(--muted);
+  }
+  .div {
+    width: 1px;
+    height: 20px;
+    background: var(--line);
+    margin: 0 4px;
+    flex: none;
+  }
+  .name {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 0 8px;
+    white-space: nowrap;
+  }
+  .tools-h,
+  .rt {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+  .tools-h {
+    margin-left: 16px;
+  }
+  .rt {
+    margin-left: auto;
+  }
+  .ib {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: grid;
+    place-items: center;
+    color: var(--ink);
+    flex: none;
+  }
+  .ib.dis {
+    opacity: 0.3;
+  }
+  .zoom {
+    width: 48px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+  .avs {
+    display: flex;
+    padding: 0 4px 0 10px;
+  }
+  .av {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 0 0 2px var(--panel);
+    margin-left: -6px;
+  }
+  .incall {
+    position: absolute;
+    right: -3px;
+    bottom: -3px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--hyp-strong);
+    box-shadow: 0 0 0 2px var(--panel);
+    display: grid;
+    place-items: center;
+    color: #fff;
+  }
+  .invite,
+  .startcall {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 32px;
+    padding: 0 12px;
+    font-weight: 500;
+    margin-left: 4px;
+    white-space: nowrap;
+  }
+  .invite {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+  }
+  .startcall {
+    border-radius: 8px;
+    background: var(--ink);
+    color: var(--panel);
+  }
+  .tabs {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 0 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .tab {
+    height: 28px;
+    padding: 0 8px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+  .tab.on {
+    background: var(--hover);
+    color: var(--ink);
+  }
+  .tab-x {
+    margin-left: auto;
+    width: 24px;
+    height: 24px;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+  }
+  .st {
+    height: 32px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .lp,
+  .rp {
+    background: var(--panel);
+    min-height: 0;
+    overflow: hidden;
+  }
+  .lp {
+    border-right: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+  }
+  .rp {
+    border-left: 1px solid var(--line);
+  }
+  .arch {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 400;
+    color: var(--muted);
+  }
+  .arch i {
+    width: 12px;
+    height: 12px;
+    border: 1px solid var(--faint);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+  }
+  .arch i.on {
+    background: var(--off);
+    border-color: var(--off);
+  }
+  .search {
+    margin: 0 8px 6px;
+    height: 28px;
+    border-radius: 6px;
+    background: var(--hover);
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  .rows {
+    padding-bottom: 8px;
+  }
+  .tree {
+    border-top: 1px solid var(--line);
+    flex: 1;
+  }
+  .cv {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--canvas);
+    background-image: radial-gradient(#333336 1px, transparent 1.3px);
+    background-size: 24px 24px;
+  }
+  .tools {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 4px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    z-index: 4;
+  }
+  .tl {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+  }
+  .tl.on {
+    background: var(--off-strong);
+    color: #fff;
+  }
+  .pb {
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    width: 600px;
+    max-width: calc(100% - 32px);
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    z-index: 5;
+  }
+  .pb-1 {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px 0;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .pb-1 :global(b) {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .pb-s {
+    display: grid;
+    color: var(--ai);
+  }
+  .modes {
+    margin-left: auto;
+    display: flex;
+    padding: 2px;
+    border-radius: 6px;
+    background: var(--hover);
+  }
+  .modes i {
+    font-style: normal;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .modes i.on {
+    background: var(--raised);
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .pb-2 {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    padding: 4px 12px 8px;
+  }
+  .ph {
+    flex: 1;
+    font-size: 13px;
+    color: var(--muted);
+    padding: 4px 0;
+  }
+  .send {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--hover);
+    color: var(--faint);
+    display: grid;
+    place-items: center;
+  }
+  .call {
+    display: flex;
+    flex-direction: column;
+    background: var(--panel);
+    border-left: 1px solid var(--line);
+    min-height: 0;
+  }
+  .ch-h {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .live {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--hyp-soft);
+    color: var(--hyp-ink);
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .ld {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--hyp);
+  }
+  .ch-n {
+    margin-left: auto;
+    height: 28px;
+    padding: 0 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .ch-x {
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+  }
+  .tiles {
+    flex: 1;
+    min-height: 0;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: var(--canvas);
+  }
+  .tile {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    background: #0b0b0c;
+    display: grid;
+    place-items: center;
+  }
+  .tile.speaking {
+    box-shadow: 0 0 0 2px var(--hyp);
+  }
+  .ini {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    display: grid;
+    place-items: center;
+  }
+  .tile.speaking .ini {
+    box-shadow: 0 0 0 4px rgba(20, 174, 92, 0.4);
+  }
+  .tn {
+    position: absolute;
+    left: 6px;
+    bottom: 6px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .bars {
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background: var(--hyp-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+  }
+  .bars i {
+    width: 3px;
+    height: 3px;
+    border-radius: 2px;
+    background: #fff;
+  }
+  .tile.speaking .bars i {
+    height: 10px;
+  }
+  .tile.speaking .bars i:nth-child(2) {
+    height: 6px;
+  }
+  .ctl {
+    padding: 8px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .ctl-r {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+  }
+  .bb {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+  }
+  .a-off {
+    background: var(--off-soft);
+    color: var(--off-ink);
+  }
+  .a-ai {
+    background: var(--ai-soft);
+    color: var(--ai);
+  }
+  .chev {
+    width: 20px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+    margin-left: -4px;
+  }
+  .quit {
+    height: 36px;
+    border-radius: 8px;
+    background: var(--danger-strong);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+</style>

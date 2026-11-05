@@ -24,7 +24,7 @@ const states = ["Repos", "Survol", "Désactivé"];
                 <span class="rowh">{t}</span>
                 {states.map((s) => (
                   <div class="cell">
-                    <span class:list={["btn", t.toLowerCase(), s === "Survol" && "hov", s === "Désactivé" && "dis"]}>Voir la collection</span>
+                    <span class:list={["sbtn", t.toLowerCase(), s === "Survol" && "hov", s === "Désactivé" && "dis"]}>Voir la collection</span>
                     <small>Type={t}, État={s}</small>
                   </div>
                 ))}
@@ -84,7 +84,7 @@ const states = ["Repos", "Survol", "Désactivé"];
     color: #999;
     white-space: nowrap;
   }
-  .btn {
+  .sbtn {
     display: inline-block;
     border-radius: 99px;
     padding: 6px 12px;
@@ -136,7 +136,7 @@ const states = ["Repos", "Survol", "Désactivé"];
     border-radius: 3px;
     background: #e9e6e2;
   }
-  .mini .btn {
+  .mini .sbtn {
     align-self: flex-start;
     padding: 4px 8px;
     font-size: 7.5px;

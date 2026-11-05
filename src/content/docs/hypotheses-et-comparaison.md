@@ -31,7 +31,7 @@ Voir [Travailler avec l'IA](/docs/travailler-avec-l-ia) et [Appel, écoute de l'
 
 Sélectionnez plusieurs frames, puis choisissez de créer une hypothèse de toutes ces pages dans le panneau de droite. Quand l'IA crée une hypothèse sur plusieurs pages, elle les range ensemble dans une section « Hypothèse — Version … », sous le reste du canvas.
 
-<div class="capture">Capture : une section « Hypothèse — Version Jean » contenant trois hypothèses vertes, sous les frames officielles du projet</div>
+<div class="capture" data-shot="section-hypotheses">Une hypothèse sur trois pages : la section « Hypothèse — Version Jean » se range sous les frames officielles.</div>
 
 ## Comparer avec l'officielle
 
@@ -48,7 +48,7 @@ Sélectionnez une hypothèse : le panneau **Design** liste ses différences avec
 
 Survolez une différence dans la liste : l'élément s'éclaire sur les deux pages, l'hypothèse et l'officielle, avec le détail sous l'élément.
 
-<div class="capture">Capture : panneau Design d'une hypothèse avec la liste numérotée des différences (Modifié en ambre avec « Couleur du texte : #111111 → #16a34a », Ajouté en vert, Retiré en rouge) et une différence survolée éclairée sur les deux pages</div>
+<div class="capture" data-shot="differences">Dans le panneau <strong>Design</strong> de l'hypothèse, chaque différence est numérotée : <strong>Modifié</strong> en ambre, avec l'avant et l'après, <strong>Ajouté</strong> en vert, <strong>Retiré</strong> en rouge.</div>
 
 ### Surligner sur le canvas
 
@@ -61,7 +61,7 @@ Pour voir toutes les différences d'un coup :
 
 La comparaison reste affichée quand vous cliquez ailleurs. Un nouveau clic sur le bouton la masque. Elle se ferme d'elle-même quand l'hypothèse est promue.
 
-<div class="capture">Capture : comparaison active sur le canvas, avec les numéros sur l'hypothèse et sur l'officielle, un élément retiré en rouge et l'ancienne place d'un élément modifié en pointillés</div>
+<div class="capture" data-shot="compare">La comparaison sur le canvas : les mêmes numéros sur l'hypothèse et sur l'officielle, ce qui a été retiré en rouge, et le détail d'une différence au survol.</div>
 
 ### Comment les différences sont comptées
 

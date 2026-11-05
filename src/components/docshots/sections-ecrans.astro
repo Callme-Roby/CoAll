@@ -1,0 +1,69 @@
+---
+/** Sections d'écrans empilées : une section par écran, ses formats en ligne du plus large au plus étroit. */
+import Scaled from "../Scaled.astro";
+import Canvas from "./_kit/Canvas.astro";
+import Frame from "./_kit/Frame.astro";
+import Site from "./_a/Site.astro";
+import Section from "./_a/Section.astro";
+
+// Zoom 15 % ; écart 120, marges de section 80, en-tête 160, 240 entre deux sections (sections.ts, screens.ts).
+const z = 0.14, X = 40;
+const screens = [
+  { name: "Accueil", page: "accueil", formats: [[1440, 1150], [768, 1400], [390, 1700]] },
+  { name: "Tarifs", page: "tarifs", formats: [[1440, 900], [768, 1100], [390, 1450]] },
+  { name: "Contact", page: "contact", formats: [[1440, 750], [390, 1150]] },
+] as const;
+const suffix = (w: number) => (w >= 1024 ? "" : w >= 600 ? " · tablette" : " · mobile");
+const scale = (w: number) => (w >= 1024 ? 0.62 : w >= 600 ? 0.38 : 0.2);
+const size = (w: number) => (w >= 1024 ? "desktop" : w >= 600 ? "tablet" : "mobile");
+let y = 60;
+const blocks = screens.map((s) => {
+  let x = X + 80 * z;
+  const top = y + 160 * z;
+  const frames = s.formats.map(([w, h]) => {
+    const f = { name: s.name + suffix(w), x, y: top, w: w * z, h: h * z, size: size(w), s: scale(w) };
+    x += w * z + 120 * z;
+    return f;
+  });
+  const sh = 160 * z + Math.max(...frames.map((f) => f.h)) + 80 * z;
+  const b = { name: s.name, page: s.page, x: X, y, w: x - 120 * z + 80 * z - X, h: sh, frames };
+  y += sh + 240 * z;
+  return b;
+});
+const H = Math.ceil(y - 240 * z + 40);
+const W = Math.ceil(Math.max(...blocks.map((b) => b.x + b.w)) + 40);
+---
+<Scaled w={W} h={H} label="Trois sections d'écrans empilées, Accueil, Tarifs et Contact, chacune avec ses formats rangés en ligne du plus large au plus étroit.">
+  <div class="q">
+    <Canvas>
+      {blocks.map((b) => (
+        <>
+          <Section x={b.x} y={b.y} w={b.w} h={b.h} name={b.name} />
+          {b.frames.map((f) => (
+            <Frame x={f.x} y={f.y} w={f.w} h={f.h} name={f.name}><Site page={b.page} size={f.size} scale={f.s} /></Frame>
+          ))}
+        </>
+      ))}
+    </Canvas>
+  </div>
+</Scaled>
+<style>
+  .q {
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .q :global(.kfr .kt) {
+    color: var(--muted);
+    overflow: hidden;
+    font-size: 11px;
+  }
+  .q :global(.kfr .kt b) {
+    flex: 0 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+</style>

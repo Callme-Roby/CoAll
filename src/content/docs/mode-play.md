@@ -13,7 +13,7 @@ Le mode Play ouvre une page en plein écran, comme un vrai site. Les liens et le
 2. Cliquez sur le bouton **▶**, en haut à droite de la frame.
 3. La page s'ouvre en plein écran, à sa largeur.
 
-<div class="capture">Capture : une frame survolée sur le canvas, avec le bouton ▶ visible en haut à droite</div>
+<div class="capture" data-shot="play-survol">Au survol d'une frame, le bouton <strong>▶</strong> apparaît en haut à droite.</div>
 
 ## Ce que vous pouvez faire dans la page
 
@@ -45,7 +45,7 @@ Cliquez **à côté** d'un lien : tout ce qui est cliquable s'affiche en violet.
 - Un lien qui ne mène à aucun écran le dit (par exemple « Aucun écran ne correspond à « Contact » »).
 - Un lien externe n'est pas suivi.
 
-<div class="capture">Capture : une page en mode Play avec tous les éléments cliquables surlignés en violet après un clic à côté d'un lien</div>
+<div class="capture" data-shot="play-bar">Après un clic à côté d'un lien, tout ce qui se clique sur la page est entouré de violet.</div>
 
 ## La barre du haut
 
@@ -59,7 +59,7 @@ Cliquez **à côté** d'un lien : tout ce qui est cliquable s'affiche en violet.
 
 D'un format à l'autre, les liens restent dans le même format : depuis la version mobile de l'accueil, « Tarifs » ouvre la version mobile des tarifs si elle existe. Voir [Écrans et formats](/docs/ecrans-et-formats).
 
-<div class="capture">Capture : barre du haut du mode Play avec les boutons retour, liste des écrans, formats (ordinateur, tablette, mobile), Recommencer et Quitter</div>
+<div class="capture" data-shot="play-barre">La barre du mode Play : <strong>Quitter</strong>, retour, formats de l'écran, liste des écrans et <strong>Recommencer</strong>.</div>
 
 ## Lecture seule
 

@@ -1,0 +1,51 @@
+---
+/** Archives : case « Archives » cochée, frame archivée en pointillés gris, bouton « Désarchiver » dans le panneau Design. */
+import Scaled from "../Scaled.astro";
+import Editor from "./_a/Editor.astro";
+import Row from "./_a/Row.astro";
+import Tr from "./_a/Tr.astro";
+import FramePanel from "./_a/FramePanel.astro";
+import Frame from "./_kit/Frame.astro";
+import Site from "./_a/Site.astro";
+---
+<Scaled w={1440} h={760} label="Avec la case Archives cochée, la frame archivée réapparaît en pointillés gris sur le canvas ; le panneau Design propose Désarchiver.">
+  <div class="q">
+    <Editor archives zoom="50 %">
+      <Fragment slot="left">
+        <Row name="Accueil" />
+        <Row name="Accueil" kind="arch" sel />
+        <Row name="Tarifs" />
+        <Row name="Atelier" />
+      </Fragment>
+      <Fragment slot="tree">
+        <Tr d={0} open>Page</Tr>
+        <Tr d={1} open={false}>En-tête</Tr>
+        <Tr d={1} open={false}>Hero</Tr>
+        <Tr d={1} open={false} icon="Image">Image</Tr>
+        <Tr d={1} open={false}>Collection</Tr>
+      </Fragment>
+      <Frame x={80} y={110} w={220} h={330} name="Accueil"><Site scale={0.72} title="La lumière qui vous suit." titleColor="#16a34a" /></Frame>
+      <Frame x={340} y={110} w={220} h={330} name="Accueil" kind="arch" selected><Site scale={0.72} /></Frame>
+      <Frame x={600} y={110} w={220} h={330} name="Tarifs"><Site page="tarifs" scale={0.72} /></Frame>
+      <Frame x={860} y={110} w={220} h={330} name="Atelier"><Site page="atelier" scale={0.72} /></Frame>
+      <FramePanel slot="right" name="Accueil" status="archived" x={1840} y={0} w={1440} h={2310} hl="unarchive" />
+    </Editor>
+  </div>
+</Scaled>
+<style>
+  .q {
+    width: 100%;
+    height: 100%;
+  }
+  .q :global(.kfr:not(.sel) .kt) {
+    color: var(--muted);
+  }
+  .q :global(.k-arch .kb) {
+    filter: none;
+    opacity: 0.6;
+    outline: 2px dashed var(--arch);
+  }
+  .q :global(.k-arch .kh) {
+    border-color: var(--off);
+  }
+</style>

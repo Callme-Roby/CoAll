@@ -1,0 +1,66 @@
+---
+/** Magnétisme (SnapGuides.tsx) : une frame glissée au bout d'une rangée s'aligne et reprend l'écart de 120. */
+import Scaled from "../Scaled.astro";
+import Canvas from "./_kit/Canvas.astro";
+import Frame from "./_kit/Frame.astro";
+import Site from "./_a/Site.astro";
+
+// Zoom 50 % : frames mobiles de 390 px → 195 px, écart de 120 → 60 px.
+const W = 195, H = 400, TOP = 70, GAP = 60, X0 = 40;
+const xs = [0, 1, 2, 3].map((i) => X0 + i * (W + GAP));
+const pages = [["Accueil", "accueil"], ["Tarifs", "tarifs"], ["Atelier", "atelier"], ["Contact", "contact"]] as const;
+const G = "#e11d48";
+const cy = TOP + H / 2;
+---
+<Scaled w={1060} h={520} label="Une frame glissée au bout d'une rangée : les repères rouges montrent l'alignement des bords et l'écart de 120 répété entre chaque frame.">
+  <div class="q">
+    <Canvas>
+      {pages.map(([n, p], i) => (
+        <Frame x={xs[i]} y={TOP} w={W} h={H} name={n} selected={i === 3}><Site page={p} size="mobile" scale={0.72} /></Frame>
+      ))}
+      <svg class="g" width="1060" height="520" viewBox="0 0 1060 520" aria-hidden="true">
+        <line x1={X0} x2={xs[3] + W} y1={TOP} y2={TOP} stroke={G} stroke-width="1" />
+        <line x1={X0} x2={xs[3] + W} y1={TOP + H} y2={TOP + H} stroke={G} stroke-width="1" />
+        {[0, 1, 2].map((i) => {
+          const s = xs[i] + W, e = xs[i + 1], m = (s + e) / 2;
+          return (
+            <g>
+              <line x1={s} x2={e} y1={cy} y2={cy} stroke={G} />
+              <line x1={s} x2={s} y1={cy - 4} y2={cy + 4} stroke={G} />
+              <line x1={e} x2={e} y1={cy - 4} y2={cy + 4} stroke={G} />
+              <rect x={m - 16} y={cy + 6} width="32" height="16" rx="4" fill={G} />
+              <text x={m} y={cy + 17.5} text-anchor="middle" font-size="10" font-weight="600" fill="#fff">120</text>
+            </g>
+          );
+        })}
+      </svg>
+      <svg class="cur" width="18" height="18" viewBox="0 0 18 18" style={`left:${xs[3] + 120}px;top:${TOP - 16}px`} aria-hidden="true">
+        <path d="M2 1.5 L15.5 8.2 L9.2 9.6 L6.4 15.8 Z" fill="#fff" stroke="#000" stroke-width="1.2" stroke-linejoin="round" />
+      </svg>
+    </Canvas>
+  </div>
+</Scaled>
+<style>
+  .q {
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .q :global(.kfr:not(.sel) .kt) {
+    color: var(--muted);
+  }
+  .g {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    font-family: inherit;
+    z-index: 3;
+  }
+  .cur {
+    position: absolute;
+    z-index: 4;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+  }
+</style>

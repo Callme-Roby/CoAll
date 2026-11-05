@@ -1,0 +1,26 @@
+---
+/** Ligne de l'arbre des calques (LayersPanel.tsx : ElementTree). */
+import Icon from "../../Icon.astro";
+interface Props { d: number; icon?: string; open?: boolean | null; sel?: boolean; comp?: boolean }
+const { d, icon = "Square", open = null, sel = false, comp = false } = Astro.props;
+---
+<div class:list={["tr", { sel }]} style={`--d:${d}`}>
+  {open === null ? <span class="sp"></span> : <Icon name={open ? "ChevronDown" : "ChevronRight"} size={12} />}
+  <span class:list={["ic", { comp }]}><Icon name={comp ? "Component" : icon} size={12} /></span><slot />
+</div>
+<style>
+  .tr {
+    height: 24px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding-left: calc(8px + var(--d) * 12px);
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .tr :global(svg) { color: var(--muted); }
+  .sp { width: 12px; }
+  .ic { display: grid; }
+  .ic.comp :global(svg) { color: var(--ai); }
+  .sel { background: var(--off-soft); color: var(--off-ink); }
+</style>

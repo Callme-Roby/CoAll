@@ -1,0 +1,195 @@
+---
+/** Copie locale (balises neutres, à l’abri des styles de la doc) de _kit/Site. Petite page du projet d'exemple « Lumen » (la maquette garde ses couleurs claires).
+    page : accueil · tarifs · atelier · contact — size : desktop · tablet · mobile.
+    Chaque élément porte un data-el (nav, eyebrow, title, text, btn, img, cards) pour être ciblé par le parent (:global). */
+interface Props {
+  page?: "accueil" | "tarifs" | "atelier" | "contact";
+  size?: "desktop" | "tablet" | "mobile";
+  title?: string;
+  titleColor?: string;
+  scale?: number;
+}
+const { page = "accueil", size = "desktop", title, titleColor, scale = 1 } = Astro.props;
+const T = {
+  accueil: { eye: "Nouvelle collection", t: "Des lampes qui suivent votre journée", x: "Une lumière douce le matin, franche l'après-midi, chaude le soir.", b: "Voir la collection" },
+  tarifs: { eye: "Tarifs", t: "Des formules simples", x: "Changez de formule à tout moment.", b: "Choisir" },
+  atelier: { eye: "L'atelier", t: "Fabriquées à Lyon, à la main", x: "Chaque lampe est montée et testée dans notre atelier.", b: "Visiter l'atelier" },
+  contact: { eye: "Contact", t: "Parlons de votre projet", x: "Réponse sous 48 heures, du lundi au vendredi.", b: "Envoyer" },
+}[page];
+const mobile = size === "mobile";
+---
+<div class:list={["site", size]} style={`--s:${scale}`}>
+  <div class="nav" data-el="nav"><b>Lumen</b>{mobile ? <span class="burger"><i></i><i></i></span> : <><span>Collection</span><span>Atelier</span><span>Tarifs</span></>}</div>
+  <div class="eye" data-el="eyebrow">{T.eye}</div>
+  <div class="title" data-el="title" style={titleColor ? `color:${titleColor}` : undefined}>{title ?? T.t}</div>
+  <div class="text" data-el="text">{T.x}</div>
+  {page === "tarifs" ? (
+    <div class="plans" data-el="cards">
+      <div><b>Studio</b><span>19 €</span><em>Choisir</em></div>
+      <div><b>Agence</b><span>49 €</span><em>Choisir</em></div>
+      {!mobile && <div><b>Équipe</b><span>89 €</span><em>Choisir</em></div>}
+    </div>
+  ) : page === "contact" ? (
+    <div class="form" data-el="cards"><i></i><i></i><i class="big"></i><span class="sbtn" data-el="btn">{T.b}</span></div>
+  ) : (
+    <>
+      <span class="sbtn" data-el="btn">{T.b}</span>
+      <div class="img" data-el="img"><i></i></div>
+      <div class="cards" data-el="cards"><span></span><span></span>{!mobile && <span></span>}</div>
+    </>
+  )}
+  <slot />
+</div>
+
+<style>
+  .site {
+    position: relative;
+    color: #111;
+    font-size: calc(8.5px * var(--s));
+    padding: calc(14px * var(--s)) calc(16px * var(--s));
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: calc(7px * var(--s));
+    font-family: Inter, system-ui, sans-serif;
+    background: #fff;
+  }
+  .nav {
+    display: flex;
+    gap: calc(11px * var(--s));
+    align-items: center;
+    color: #555;
+    margin-bottom: calc(10px * var(--s));
+  }
+  .nav b {
+    color: #111;
+    font-size: calc(11px * var(--s));
+    margin-right: auto;
+  }
+  .burger {
+    display: grid;
+    gap: 2px;
+  }
+  .burger i {
+    display: block;
+    width: calc(11px * var(--s));
+    height: 1.5px;
+    background: #111;
+  }
+  .eye {
+    margin: 0;
+    font-size: calc(7.5px * var(--s));
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #8a6d3b;
+  }
+  .title {
+    position: relative;
+    margin: 0;
+    font-size: calc(23px * var(--s));
+    line-height: 1.03;
+    letter-spacing: -0.03em;
+    font-weight: 650;
+    color: #111;
+  }
+  .mobile .title {
+    font-size: calc(17px * var(--s));
+  }
+  .tablet .title {
+    font-size: calc(20px * var(--s));
+  }
+  .text {
+    margin: 0;
+    color: #555;
+    font-size: calc(9px * var(--s));
+    max-width: 88%;
+  }
+  .sbtn {
+    position: relative;
+    align-self: flex-start;
+    background: #111;
+    color: #fff;
+    border-radius: 99px;
+    padding: calc(4px * var(--s)) calc(9px * var(--s));
+    font-size: calc(8px * var(--s));
+    font-weight: 600;
+  }
+  .img {
+    position: relative;
+    flex: 1;
+    min-height: calc(60px * var(--s));
+    border-radius: 5px;
+    background: linear-gradient(160deg, #f4ede2, #e8dccb);
+    overflow: hidden;
+    margin-top: calc(6px * var(--s));
+  }
+  .img i {
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    width: calc(42px * var(--s));
+    height: calc(42px * var(--s));
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff7d6 0 30%, #ffd77a 45%, transparent 72%);
+    box-shadow: 0 0 50px 18px rgba(255, 210, 120, 0.5);
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: calc(7px * var(--s));
+  }
+  .mobile .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cards span {
+    height: calc(40px * var(--s));
+    border-radius: 4px;
+    background: #f3f1ee;
+  }
+  .plans {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: calc(7px * var(--s));
+    margin-top: calc(6px * var(--s));
+  }
+  .mobile .plans {
+    grid-template-columns: 1fr;
+  }
+  .plans div {
+    position: relative;
+    border: 1px solid #e6e3df;
+    border-radius: 5px;
+    padding: calc(8px * var(--s));
+    display: grid;
+    gap: calc(4px * var(--s));
+  }
+  .plans span {
+    font-size: calc(14px * var(--s));
+    font-weight: 650;
+  }
+  .plans em {
+    font-style: normal;
+    justify-self: start;
+    background: #111;
+    color: #fff;
+    border-radius: 99px;
+    padding: calc(3px * var(--s)) calc(8px * var(--s));
+    font-size: calc(7.5px * var(--s));
+    font-weight: 600;
+  }
+  .form {
+    display: grid;
+    gap: calc(6px * var(--s));
+    margin-top: calc(6px * var(--s));
+  }
+  .form i {
+    display: block;
+    height: calc(18px * var(--s));
+    border: 1px solid #e3e0dc;
+    border-radius: 4px;
+  }
+  .form i.big {
+    height: calc(54px * var(--s));
+  }
+</style>

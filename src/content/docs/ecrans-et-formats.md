@@ -18,7 +18,7 @@ Un même écran existe souvent en plusieurs formats : ordinateur, tablette, mobi
 | Tablette | 768 px | « Accueil · tablette » |
 | Mobile | 390 px | « Accueil · mobile » |
 
-<div class="capture">Capture : une section « Accueil » avec, en ligne, la frame ordinateur, la frame « Accueil · tablette » et la frame « Accueil · mobile »</div>
+<div class="capture" data-shot="section-formats">La section « Accueil » : la frame ordinateur, puis « Accueil · tablette » et « Accueil · mobile », du plus large au plus étroit.</div>
 
 ### Comment l'adaptation se fait
 
@@ -42,7 +42,7 @@ C'est une règle de base de l'outil. Dès qu'un écran officiel a plusieurs form
 
 Cette règle fait partie du socle de l'outil : elle ne se désactive pas.
 
-<div class="capture">Capture : plusieurs sections d'écrans empilées (« Accueil », « Tarifs », « Contact »), chacune avec ses formats rangés du plus large au plus étroit</div>
+<div class="capture" data-shot="sections-ecrans">Une section par écran, empilées les unes sous les autres ; dans chacune, les formats vont du plus large au plus étroit.</div>
 
 ## Hypothèses et formats
 

@@ -1,0 +1,159 @@
+---
+/** Panneau Design d'une frame sélectionnée (PropertiesPanel.tsx : FrameProperties + ExportBlock). */
+import Icon from "../../Icon.astro";
+interface Props {
+  name: string;
+  label?: string;
+  status?: "official" | "hypothesis" | "archived";
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  source?: "import" | "duplication" | "création";
+  hl?: string;
+}
+const { name, label, status = "official", x, y, w, h, source = "import", hl } = Astro.props;
+---
+<div class="fp">
+  <div class="st">Frame</div>
+  <div class="fields">
+    <div class="fl"><span>Nom</span><i>{name}</i></div>
+    {status !== "official" && <div class="fl"><span>Libellé</span><i>{label ?? ""}</i></div>}
+    <div class="g2">
+      <div class="fs"><span>X</span><i>{x}</i></div>
+      <div class="fs"><span>Y</span><i>{y}</i></div>
+      <div class="fs"><span>L</span><i>{w}</i></div>
+      <div class="fs dis"><span>H</span><i>{h}</i></div>
+    </div>
+  </div>
+  <div class="acts">
+    {status === "official" && <span class:list={["bt", "hyp", { hl: hl === "hyp" }]}><Icon name="GitBranch" size={13} />Créer une hypothèse</span>}
+    {status === "hypothesis" && <span class="bt pri"><Icon name="Star" size={13} />Promouvoir : remplace l’officielle</span>}
+    <span class="bt"><Icon name="Copy" size={13} />Dupliquer la frame</span>
+    {status === "archived" ? (
+      <span class:list={["bt", { hl: hl === "unarchive" }]}><Icon name="ArchiveRestore" size={13} />Désarchiver</span>
+    ) : (
+      <span class="bt dng"><Icon name="Archive" size={13} />Archiver</span>
+    )}
+  </div>
+  <slot />
+  <div class="meta">
+    <div>Statut : <b>{status === "official" ? "Officielle" : status === "hypothesis" ? "Hypothèse" : "Archivée"}</b></div>
+    <div>Origine : {source}</div>
+    <div class="hint">Double-cliquez dans la frame pour sélectionner ses éléments. Les frames archivées ne sont jamais supprimées.</div>
+  </div>
+  <div class="exp">
+    <div class="st">Exporter</div>
+    <span class="bt"><Icon name="Download" size={13} />PNG, PDF, HTML/CSS…</span>
+  </div>
+</div>
+
+<style>
+  .st {
+    height: 32px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .fields {
+    padding: 0 12px;
+    display: grid;
+    gap: 8px;
+  }
+  .fl,
+  .fs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .fl span {
+    width: 64px;
+    color: var(--muted);
+  }
+  .fs span {
+    width: 20px;
+    color: var(--muted);
+  }
+  .fl i,
+  .fs i {
+    flex: 1;
+    font-style: normal;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 8px;
+    border-radius: 5px;
+    background: var(--hover);
+    font-size: 11px;
+  }
+  .fs.dis i {
+    opacity: 0.5;
+  }
+  .g2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .acts {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 0 12px;
+    margin-top: 12px;
+  }
+  .bt {
+    height: 28px;
+    padding: 0 8px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    white-space: nowrap;
+  }
+  .bt.pri {
+    background: var(--off-strong);
+    border-color: var(--off-strong);
+    color: #fff;
+  }
+  .bt.hyp {
+    border-color: color-mix(in srgb, var(--hyp) 40%, transparent);
+    color: var(--hyp-ink);
+  }
+  .bt.dng {
+    color: var(--danger);
+  }
+  .bt.hl {
+    background: var(--hover);
+    box-shadow: 0 0 0 2px var(--off);
+  }
+  .meta {
+    margin-top: 16px;
+    padding: 12px 12px 0;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    display: grid;
+    gap: 4px;
+  }
+  .meta b {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .hint {
+    padding-top: 8px !important;
+    line-height: 1.6;
+  }
+  .exp {
+    margin-top: 24px;
+    border-top: 1px solid var(--line);
+    padding-bottom: 16px;
+  }
+  .exp .bt {
+    margin: 0 12px;
+  }
+</style>

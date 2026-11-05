@@ -1,0 +1,110 @@
+---
+/** Barre du haut du mode Play (Play.tsx) : Quitter, écran précédent, nom, formats, liste des écrans, Recommencer. */
+import Scaled from "../Scaled.astro";
+import Icon from "../Icon.astro";
+---
+<Scaled w={900} h={130} label="La barre du mode Play : Quitter, écran précédent, nom de l'écran, formats (1440, 768, 390), liste des écrans et Recommencer.">
+  <div class="play">
+    <div class="bar">
+      <span class="q"><Icon name="X" size={16} />Quitter</span>
+      <span class="bk"><Icon name="ArrowLeft" size={16} /></span>
+      <span class="nm">Accueil</span>
+      <span class="dev"><i class="on"><Icon name="Monitor" size={14} />1440</i><i><Icon name="Tablet" size={14} />768</i><i><Icon name="Smartphone" size={14} />390</i></span>
+      <span class="sel">Accueil <Icon name="ChevronDown" size={12} /></span>
+      <span class="bk"><Icon name="RotateCcw" size={15} /></span>
+    </div>
+    <div class="page"><b>Lumen</b><span>Collection</span><span>Atelier</span><span>Tarifs</span></div>
+  </div>
+</Scaled>
+<style>
+  .play {
+    position: relative;
+    width: 900px;
+    height: 130px;
+    background: #0b0b0c;
+    color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #2f2f31;
+  }
+  .bar {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 13px;
+  }
+  .q {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 32px;
+    padding: 0 8px;
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .bk {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .nm {
+    flex: 1;
+    font-weight: 500;
+  }
+  .dev {
+    display: flex;
+    padding: 2px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+  .dev i {
+    font-style: normal;
+    height: 28px;
+    padding: 0 8px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .dev i.on {
+    background: #fff;
+    color: #000;
+  }
+  .sel {
+    height: 32px;
+    padding: 0 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.1);
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .page {
+    position: absolute;
+    left: 48px;
+    right: 48px;
+    top: 60px;
+    bottom: -10px;
+    background: #fbfaf8;
+    border-radius: 6px;
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 22px 36px;
+    font-family: Inter, system-ui, sans-serif;
+    font-size: 12px;
+    color: #555;
+  }
+  .page b {
+    color: #111;
+    font-size: 15px;
+    margin-right: auto;
+  }
+</style>

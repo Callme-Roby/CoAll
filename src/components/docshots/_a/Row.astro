@@ -1,0 +1,45 @@
+---
+/** Ligne du panneau Calques › Frames (LayersPanel.tsx : FrameRow et ligne de section). */
+import Icon from "../../Icon.astro";
+interface Props { name: string; kind?: "off" | "hyp" | "arch" | "section" | "hsection"; label?: string; sel?: boolean; nested?: boolean }
+const { name, kind = "off", label, sel = false, nested = false } = Astro.props;
+const section = kind === "section" || kind === "hsection";
+---
+<div class:list={["row", kind, { sel, nested, section }]}>
+  <span class="ri"><Icon name={section ? "SquareDashed" : "Frame"} size={13} /></span>
+  <span class="n">{name}</span>
+  {label && <span class="lb">{label}</span>}
+</div>
+<style>
+  .row {
+    height: 28px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .nested {
+    padding-left: 28px;
+  }
+  .section {
+    font-weight: 500;
+  }
+  .sel {
+    background: var(--off-soft);
+  }
+  .ri {
+    display: grid;
+  }
+  .off .ri { color: var(--off); }
+  .hyp .ri, .hsection .ri { color: var(--hyp); }
+  .arch .ri { color: var(--arch); }
+  .section .ri { color: var(--muted); }
+  .arch .n { color: var(--muted); }
+  .lb {
+    color: var(--muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+</style>

@@ -16,7 +16,7 @@ Un projet ouvert se compose de quatre zones :
 - **le canvas**, au centre, avec la barre d'outils verticale à gauche et la barre de demande à l'IA en bas ;
 - **le panneau de droite** : onglets **Design**, **Timeline**, **Versions**, **Commentaires** et **Personnes**.
 
-<div class="capture">Capture : éditeur complet avec l'en-tête, le panneau de gauche (Calques), la barre d'outils verticale, le canvas et ses frames, la barre de demande en bas et le panneau de droite (Design)</div>
+<div class="capture" data-shot="editeur">Un projet ouvert : l'en-tête, le panneau <strong>Calques</strong>, le canvas avec sa barre d'outils et la barre de demande, et le panneau <strong>Design</strong> de la frame sélectionnée.</div>
 
 ## Se déplacer et zoomer
 
@@ -80,7 +80,7 @@ Une frame est une page web montrée en entier, de l'en-tête au pied de page. Sa
 
 > **À savoir** Une frame n'est jamais supprimée. Supprimer, couper ou archiver une frame la range dans les archives, d'où vous pouvez toujours la récupérer.
 
-<div class="capture">Capture : panneau de gauche avec la case « Archives » cochée, une frame archivée en pointillés gris sur le canvas et le bouton « Désarchiver »</div>
+<div class="capture" data-shot="archives">Avec <strong>Archives</strong> cochée, la frame archivée réapparaît en pointillés gris ; sélectionnée, elle se récupère avec <strong>Désarchiver</strong>.</div>
 
 ### Sélectionner plusieurs frames
 
@@ -132,7 +132,7 @@ Des repères rouges montrent les alignements et les écarts. Le magnétisme est 
 
 Maintenez **Ctrl/⌘** pendant le déplacement pour l'ignorer.
 
-<div class="capture">Capture : une frame en cours de déplacement au bout d'une rangée, avec les repères rouges d'alignement et l'écart « 120 » affiché</div>
+<div class="capture" data-shot="alignement">Glissée au bout de la rangée, la frame s'aligne sur ses voisines et reprend leur écart : les repères rouges affichent <strong>120</strong> entre chaque frame.</div>
 
 ## Aligner et répartir
 

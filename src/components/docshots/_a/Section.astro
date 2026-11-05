@@ -1,0 +1,47 @@
+---
+/** Section du canvas (SectionNode.tsx) : cadre arrondi derrière les frames, titre au-dessus à gauche. */
+interface Props { x: number; y: number; w: number; h: number; name: string; kind?: "default" | "hypothesis"; selected?: boolean }
+const { x, y, w, h, name, kind = "default", selected = false } = Astro.props;
+---
+<div class:list={["sec", { hyp: kind === "hypothesis", sel: selected }]} style={`left:${x}px;top:${y}px;width:${w}px;height:${h}px`}>
+  <span class="st">{name}</span>
+</div>
+<style>
+  .sec {
+    position: absolute;
+    border-radius: 18px;
+    border: 2px solid var(--line);
+    background: color-mix(in srgb, var(--hover) 60%, transparent);
+  }
+  .sec.hyp {
+    border-color: color-mix(in srgb, var(--hyp) 40%, transparent);
+    background: color-mix(in srgb, var(--hyp-soft) 55%, transparent);
+  }
+  .sec.sel {
+    border-color: var(--off);
+  }
+  .st {
+    position: absolute;
+    left: 2px;
+    top: -6px;
+    transform: translateY(-100%);
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--ink);
+    padding: 2px 6px;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .hyp .st {
+    border-color: color-mix(in srgb, var(--hyp) 40%, transparent);
+    background: var(--hyp-soft);
+    color: var(--hyp-ink);
+  }
+  .sel .st {
+    border-color: var(--off-strong);
+    background: var(--off-strong);
+    color: #fff;
+  }
+</style>

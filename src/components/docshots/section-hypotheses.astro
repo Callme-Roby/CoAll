@@ -1,0 +1,41 @@
+---
+/** Une hypothèse sur plusieurs pages : la section « Hypothèse — Version Jean » sous les frames officielles. */
+import Scaled from "../Scaled.astro";
+import Canvas from "./_kit/Canvas.astro";
+import Frame from "./_kit/Frame.astro";
+import Site from "./_a/Site.astro";
+import Section from "./_a/Section.astro";
+
+// Zoom 1/6 : 1440 → 240 ; écart 120 → 20 ; marges de section 80 → 13, en-tête 160 → 27 ; 240 → 40 sous le reste.
+const W = 240, H = 260, xs = [60, 320, 580];
+const pages = [["Accueil", "accueil"], ["Tarifs", "tarifs"], ["Atelier", "atelier"]] as const;
+const secY = 60 + H + 40;
+---
+<Scaled w={880} h={700} label="Trois frames officielles en haut ; en dessous, la section Hypothèse — Version Jean réunit leurs trois hypothèses, en vert.">
+  <div class="q">
+    <Canvas>
+      {pages.map(([n, p], i) => <Frame x={xs[i]} y={60} w={W} h={H} name={n}><Site page={p} scale={0.78} /></Frame>)}
+      <Section x={47} y={secY} w={786} h={27 + H + 13} name="Hypothèse — Version Jean" kind="hypothesis" />
+      {pages.map(([n, p], i) => (
+        <Frame x={xs[i]} y={secY + 27} w={W} h={H} name={n} label="Version Jean" kind="hyp">
+          <Site page={p} scale={0.78} titleColor="#16a34a" />
+        </Frame>
+      ))}
+    </Canvas>
+  </div>
+</Scaled>
+<style>
+  .q {
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .q :global(.kfr .kt) {
+    color: var(--muted);
+  }
+  .q :global(.k-hyp .kb) {
+    opacity: 0.96;
+  }
+</style>

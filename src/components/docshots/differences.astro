@@ -1,0 +1,160 @@
+---
+/** Panneau Design d'une hypothèse sélectionnée : ses différences avec l'officielle (Compare.tsx : CompareSection). */
+import Scaled from "../Scaled.astro";
+import Icon from "../Icon.astro";
+import FramePanel from "./_a/FramePanel.astro";
+const changes = [
+  { k: "changed", name: "Titre « La lumière qui vous suit. »", d: [["Texte", "« Des lampes qui suivent votre journée »", "« La lumière qui vous suit. »"], ["Couleur du texte", "#111111", "#16a34a"]] },
+  { k: "added", name: "Texte « Livraison offerte dès 80 € »" },
+  { k: "removed", name: "Lien « En savoir plus »" },
+] as const;
+const label = { changed: "Modifié", added: "Ajouté", removed: "Retiré" };
+---
+<Scaled w={340} h={890} label="Le panneau Design d'une hypothèse liste ses différences avec l'officielle : numérotées, en ambre (modifié), vert (ajouté) ou rouge (retiré), avec l'avant et l'après.">
+  <div class="rp">
+    <div class="tabs">
+      <span class="tab on">Design</span><span class="tab">Timeline</span><span class="tab">Versions</span>
+      <span class="tab"><Icon name="MessageCircle" size={14} /></span><span class="tab"><Icon name="Users" size={14} /></span>
+    </div>
+    <FramePanel name="Accueil" label="Version Jean" status="hypothesis" x={1840} y={0} w={1440} h={2310} source="duplication">
+      <div class="cs">
+        <div class="ch"><b>Différences avec l’officielle</b><span>3</span></div>
+        <span class="bt"><Icon name="GitCompareArrows" size={13} />Surligner sur le canvas</span>
+        <div class="legend">{(["changed", "added", "removed"] as const).map((k) => <span><i class={k}></i>{label[k]}</span>)}</div>
+        <div class="list">
+          {changes.map((c, i) => (
+            <div class:list={["it", { hov: i === 0 }]}>
+              <div class="hd"><span class:list={["nb", c.k]}>{i + 1}</span><span class="nm">{c.name}</span></div>
+              {"d" in c ? c.d.map(([l, b, a]) => <div class="dl"><span class="lb">{l}</span> : <s>{b}</s> → <span class="lb">{a}</span></div>) : <div class="dl">{label[c.k]}</div>}
+            </div>
+          ))}
+        </div>
+        <div class="foot">Survolez une différence pour la voir sur les deux pages.</div>
+      </div>
+    </FramePanel>
+  </div>
+</Scaled>
+<style>
+  .rp {
+    position: relative;
+    width: 340px;
+    height: 890px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .tabs {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 0 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .tab {
+    height: 28px;
+    padding: 0 8px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    font-weight: 500;
+    color: var(--muted);
+  }
+  .tab.on {
+    background: var(--hover);
+    color: var(--ink);
+  }
+  .cs {
+    margin-top: 16px;
+    border-top: 1px solid var(--line);
+    padding-top: 12px;
+  }
+  .ch {
+    padding: 0 12px;
+  }
+  .ch b {
+    font-weight: 600;
+  }
+  .ch span {
+    margin-left: 6px;
+    color: var(--muted);
+  }
+  .bt {
+    margin: 8px 12px 0;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    border: 1px solid var(--line);
+  }
+  .legend {
+    margin-top: 8px;
+    padding: 0 12px;
+    display: flex;
+    gap: 12px;
+    color: var(--muted);
+  }
+  .legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .legend i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  .changed { background: var(--warn); color: #000; }
+  .added { background: var(--hyp); color: #fff; }
+  .removed { background: var(--danger); color: #fff; }
+  .list {
+    margin-top: 6px;
+  }
+  .it {
+    padding: 6px 12px;
+  }
+  .it.hov {
+    background: var(--hover);
+  }
+  .hd {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .nb {
+    min-width: 16px;
+    padding: 0 4px;
+    border-radius: 99px;
+    font-size: 10px;
+    line-height: 16px;
+    font-weight: 600;
+    text-align: center;
+  }
+  .nm {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .dl {
+    margin-top: 2px;
+    color: var(--muted);
+  }
+  .lb {
+    color: var(--ink);
+  }
+  s {
+    opacity: 0.8;
+  }
+  .foot {
+    margin-top: 4px;
+    padding: 0 12px;
+    color: var(--faint);
+    line-height: 1.6;
+  }
+</style>

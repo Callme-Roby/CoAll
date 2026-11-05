@@ -21,7 +21,7 @@ Coall sert à **concevoir et décider ensemble**. La finition se fait ensuite da
 
 Les maquettes sont de vraies pages **HTML/CSS**, affichées telles quelles. Elles peuvent être importées, dessinées à la main ou générées par l'IA.
 
-<div class="capture">Capture : vue d'ensemble d'un projet ouvert, avec le canvas au centre, quelques frames officielles (contour bleu) et une hypothèse (contour vert), le panneau d'appel à droite et la barre de demande en bas</div>
+<div class="capture" data-shot="apercu">Un projet pendant un appel : les frames sur le canvas, le panneau d'appel à droite et la barre de demande à l'IA en bas.</div>
 
 ## Ce que Coall vous permet de faire
 
@@ -52,7 +52,7 @@ Chaque frame a un état, reconnaissable à sa couleur.
 | **Hypothèse** | Contour vert, étiquette « Hypothèse », libellé (ex. « Version Jean ») | Une proposition : copie d'une officielle, ou nouvelle page à l'essai. |
 | **Archivée** | Pointillés gris, masquée par défaut | Jamais supprimée, toujours récupérable. |
 
-<div class="capture">Capture : trois frames côte à côte, une officielle (contour bleu), une hypothèse (contour vert avec l'étiquette « Hypothèse » et le libellé « Version Jean ») et une archivée (pointillés gris)</div>
+<div class="capture" data-shot="frames-statuts">Une officielle (contour bleu), une hypothèse (contour vert, étiquette <strong>Hypothèse</strong> et libellé « Version Jean ») et une archivée (pointillés gris).</div>
 
 ### Section
 

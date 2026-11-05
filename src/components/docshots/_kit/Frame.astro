@@ -30,7 +30,7 @@ const { x, y, w, h, name, kind = "off", label, selected = false, play = false, p
   </div>
   {play && <span class="kplay"><Icon name="Play" size={10} /></span>}
   <div class="kb"><slot /></div>
-  {selected && <><span class="kh a"></span><span class="kh b"></span><span class="kh c"></span><span class="kh d"></span></>}
+  {selected && <><span class="kh ha"></span><span class="kh hb"></span><span class="kh hc"></span><span class="kh hd"></span></>}
   <slot name="over" />
 </div>
 
@@ -69,7 +69,7 @@ const { x, y, w, h, name, kind = "off", label, selected = false, play = false, p
     background: #fff;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   }
-  .k-off .kt {
+  .k-off.sel .kt {
     color: var(--off-ink);
   }
   .k-off .kb {
@@ -78,7 +78,7 @@ const { x, y, w, h, name, kind = "off", label, selected = false, play = false, p
   .k-off.sel .kb {
     outline-width: 2px;
   }
-  .k-hyp .kt {
+  .k-hyp.sel .kt {
     color: var(--hyp-ink);
   }
   .k-hyp .kb {
@@ -86,8 +86,7 @@ const { x, y, w, h, name, kind = "off", label, selected = false, play = false, p
   }
   .k-arch .kb {
     outline: 1.5px dashed var(--arch);
-    opacity: 0.55;
-    filter: grayscale(1);
+    opacity: 0.6;
   }
   .k-plain .kb {
     outline: 0;
@@ -162,8 +161,8 @@ const { x, y, w, h, name, kind = "off", label, selected = false, play = false, p
   .k-hyp .kh {
     border-color: var(--hyp);
   }
-  .kh.a { left: -5px; top: -5px; }
-  .kh.b { right: -5px; top: -5px; }
-  .kh.c { left: -5px; bottom: -5px; }
-  .kh.d { right: -5px; bottom: -5px; }
+  .kh.ha { left: -5px; top: -5px; }
+  .kh.hb { right: -5px; top: -5px; }
+  .kh.hc { left: -5px; bottom: -5px; }
+  .kh.hd { right: -5px; bottom: -5px; }
 </style>

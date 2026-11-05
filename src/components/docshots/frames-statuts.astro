@@ -1,0 +1,36 @@
+---
+/** Les trois états d'une frame sur le canvas : officielle (bleu), hypothèse (vert, étiquette et libellé), archivée (pointillés gris). */
+import Scaled from "../Scaled.astro";
+import Canvas from "./_kit/Canvas.astro";
+import Frame from "./_kit/Frame.astro";
+import Site from "./_a/Site.astro";
+---
+<Scaled w={900} h={460} label="Trois frames côte à côte : une officielle au contour bleu, une hypothèse au contour vert avec l'étiquette Hypothèse et le libellé Version Jean, une archivée en pointillés gris.">
+  <div class="q">
+    <Canvas>
+      <Frame x={40} y={60} w={260} h={350} name="Accueil" selected><Site scale={0.82} /></Frame>
+      <Frame x={320} y={60} w={260} h={350} name="Accueil" label="Version Jean" kind="hyp"><Site scale={0.82} title="La lumière qui vous suit." titleColor="#16a34a" /></Frame>
+      <Frame x={600} y={60} w={260} h={350} name="Atelier" kind="arch"><Site page="atelier" scale={0.82} /></Frame>
+    </Canvas>
+  </div>
+</Scaled>
+<style>
+  .q {
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .q :global(.k-hyp .kb) {
+    opacity: 0.96;
+  }
+  .q :global(.k-arch .kb) {
+    filter: none;
+    opacity: 0.6;
+    outline: 1px dashed var(--arch);
+  }
+  .q :global(.kfr:not(.sel) .kt) {
+    color: var(--muted);
+  }
+</style>
