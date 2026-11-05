@@ -1,9 +1,10 @@
 ---
-/** Signe de Coall, repris de l'outil : l'officiel (bleu) et l'hypothèse (vert) qui se chevauchent. */
+/** Signe de Coall : un C fait de deux ondes qui convergent vers un point, la voix captée par l'IA (point violet). */
 interface Props { size?: number }
 const { size = 22 } = Astro.props;
 ---
-<svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true" class="brandmark">
-  <rect x="2.5" y="2.5" width="13" height="13" rx="3" fill="none" stroke="var(--official)" stroke-width="2.5" />
-  <rect x="8.5" y="8.5" width="13" height="13" rx="3" fill="var(--hypothesis)" fill-opacity="0.18" stroke="var(--hypothesis)" stroke-width="2.5" />
+<svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true" class="brandmark" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+  <path d="M18.2 5.6A8.5 8.5 0 1 0 18.2 18.4" />
+  <path d="M15.4 8.9A4.2 4.2 0 1 0 15.4 15.1" />
+  <circle class="bm-dot" cx="16.2" cy="12" r="1.6" fill="#a979ff" stroke="none" />
 </svg>

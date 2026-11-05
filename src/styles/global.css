@@ -646,3 +646,22 @@ a:hover .arrow {
 .cc.down svg {
   transform: scale(0.8);
 }
+
+/* Signe : au survol, le point « écoute » pulse doucement. */
+.brandmark .bm-dot {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+a:hover > .brandmark .bm-dot {
+  animation: bm-listen 1.4s ease-in-out infinite;
+}
+@keyframes bm-listen {
+  50% {
+    transform: scale(1.45);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  a:hover > .brandmark .bm-dot {
+    animation: none;
+  }
+}
